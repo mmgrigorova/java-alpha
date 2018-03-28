@@ -1,0 +1,28 @@
+package MockExam1;
+
+import java.util.Scanner;
+
+public class BalancedNumbers {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		boolean isBalanced = true;
+		int sum = 0;
+		
+		while(isBalanced) {
+			String num = in.nextLine();
+			char[] digits = num.toCharArray();
+			int m = digits[1]-'0';
+			int l = digits[0]-'0';
+			int r = digits[2]-'0';
+			if(m == l+r) {
+				sum = sum + Integer.parseInt(num);
+			} else {
+				break;
+			}
+		}
+		System.out.println(sum);
+		in.close();
+	}
+
+}
