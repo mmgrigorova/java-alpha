@@ -1,4 +1,4 @@
-package MockExam3;
+package com.mmgrigorova.MockExam3;
 
 import java.util.Scanner;
 

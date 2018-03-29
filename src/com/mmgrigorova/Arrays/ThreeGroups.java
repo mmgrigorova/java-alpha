@@ -1,4 +1,4 @@
-package Arrays;
+package com.mmgrigorova.Arrays;
 
 import java.util.Scanner;
 
@@ -8,16 +8,40 @@ import java.util.Scanner;
  */
 
 public class ThreeGroups {
-    public static void threeGroups(){
+    public static void threeGroups() {
         Scanner in = new Scanner(System.in);
-        String array  = in.nextLine();
-        int[] arr = new int[array.length()];
-      //  String[] arraySplit = intString.split(" ");
+        String array = in.nextLine();
+        String[] arraySplit = array.split(" ");
 
-        for (int i = 0; i<array.length(); i++){
-       //     arr[i] = Integer.parseInt(arraySplit[i]);
+        int[] numbers = new int[array.length()];
+        int n = arraySplit.length;
+
+
+        for (int i = 0; i < n; i++) {
+            numbers[i] = Integer.parseInt(arraySplit[i]);
         }
 
+        // Print group which divides by 3
+        for (int i = 0; i < n; i++) {
+            if (numbers[i] % 3 == 0) {
+                System.out.print(numbers[i] + " ");
+            }
+        }
+        System.out.println();
 
+        // Print group with remainder 1
+        for (int i = 0; i < n; i++) {
+            if (numbers[i] % 3 == 1) {
+                System.out.print(numbers[i] + " ");
+            }
+        }
+        System.out.println();
+
+        // Print group with remainder 2
+        for (int i = 0; i < n; i++) {
+            if (numbers[i] % 3 == 2) {
+                System.out.print(numbers[i] + " ");
+            }
+        }
     }
 }

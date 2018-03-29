@@ -1,4 +1,4 @@
-package Strings;
+package com.mmgrigorova.Strings;
 
 import java.util.Scanner;
 

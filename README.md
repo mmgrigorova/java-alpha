@@ -7,4 +7,4 @@ This repository holds all exercises and problems that I solved during the Java A
 * If-statements
 * etc.
 
-The problem definitions are available in [Judge System](http://judge.telerikacademy.com/problems/) . The classes match the names of the problems.
+The problem definitions are available in [Judge System](http://judge.telerikacademy.com/problems/) . The classes match the names of the problems. A brief problem description is available in every class file.

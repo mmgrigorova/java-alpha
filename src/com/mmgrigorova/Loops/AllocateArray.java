@@ -1,4 +1,4 @@
-package src;
+package com.mmgrigorova.Loops;
 
 import java.util.Scanner;
 

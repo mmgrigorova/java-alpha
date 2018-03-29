@@ -1,4 +1,4 @@
-package Loops;
+package com.mmgrigorova.Loops;
 
 import java.math.BigInteger;
 import java.util.Scanner;

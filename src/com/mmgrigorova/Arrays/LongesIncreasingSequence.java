@@ -1,4 +1,4 @@
-package Arrays;
+package com.mmgrigorova.Arrays;
 import java.util.Scanner;
 
 /**

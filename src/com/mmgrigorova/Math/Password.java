@@ -1,4 +1,4 @@
-package Math;
+package com.mmgrigorova.Math;
 
 import java.util.Scanner;
 /*

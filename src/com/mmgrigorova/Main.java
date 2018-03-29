@@ -1,14 +1,14 @@
 package com.mmgrigorova;
-import Arrays.PrimesofN;
-import Arrays.ThreeGroups;
-import Loops.NumbersTriangle;
+import com.mmgrigorova.Arrays.PrimesofN;
+import com.mmgrigorova.Arrays.ThreeGroups;
+import com.mmgrigorova.Loops.NumbersTriangle;
 
 public class Main {
     public static void main(String[] args){
        // PrimesofN.primesN();
        // NumbersTriangle.printNums();
-        // ThreeGroups.threeGroups();
-        src.AllocateArray.allocateArray();
+        ThreeGroups.threeGroups();
+        // src.AllocateArray.allocateArray();
 
     }
 }

@@ -1,4 +1,4 @@
-package Arrays;
+package com.mmgrigorova.Arrays;
 /**
  * Most Frequent
  * Write a program that finds the most frequent number in an array of N elements.
