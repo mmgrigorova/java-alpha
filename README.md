@@ -1,7 +1,7 @@
 # Telerik Academy Alpha - Java Exercises
 ### java-alpha 
 
-This repository holds all exercises and problems solved during the Java Academy. The problems solved during my preparation for the academy exam are grouped by problem type:
+This repository holds all exercises and problems that I solved during the Java Alpha Academy. The problems solved during my preparation for the academy exam are grouped by problem type:
 * Arrays
 * Loops
 * If-statements
