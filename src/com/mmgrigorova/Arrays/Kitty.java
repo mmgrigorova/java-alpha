@@ -4,10 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Kitty
- * http://judge.telerikacademy.com/problem/30kitty
- */
 public class Kitty {
     static void fakeInput(){
         String test = "@@@xx@*\n" +
@@ -41,11 +37,11 @@ public class Kitty {
 
         for (int direction = 0; direction < array.size(); direction++) {
             //for (int direction = 0; direction < path.size(); direction++) {
-                if (treat == '@'){
-                    ++souls;
-                } else if (treat == '*'){
+            if (treat == '@'){
+                ++souls;
+            } else if (treat == '*'){
 
-                }
+            }
             //}
         }
 

@@ -1,6 +1,7 @@
 package com.mmgrigorova.Arrays;
 
 /**
+ * UNRESOLVED
  * Subset of Sum S
  * We are given an array of integers and a number S. Write a program to find if there exists a subset of the elements
  * of the array that has a sum S.
@@ -8,19 +9,19 @@ package com.mmgrigorova.Arrays;
 
 import java.util.Scanner;
 
-public class SubsetofSumS {
+	public class SubsetofSumS {
 
-	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
+	public static void subsetS() {
+//		Scanner in = new Scanner(System.in);
 //		int s = in.nextInt();
 //		in.nextLine();
 //		String input = in.nextLine();
-		in.close();
+//		in.close();
 		String isSum = "no";
-		
+
 		int s = 216;
 		String input = "12 20 21 14 2 31 5 27 28 11 24 26 11 4 14 27 14";
-		
+
 		String[] dataArray = input.split(" ");
 		int[] arrayInt = new int[dataArray.length];
 		

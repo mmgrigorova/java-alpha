@@ -1,10 +1,13 @@
 package com.mmgrigorova.Arrays;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 
 /**
  * Three Groups
  * You are given an array of numbers. You task is to group the numbers by remainder of 3.
+ * Using for loops
  */
 
 public class ThreeGroups {
@@ -43,5 +46,9 @@ public class ThreeGroups {
                 System.out.print(numbers[i] + " ");
             }
         }
+
+        ArrayList<String> listVar = new ArrayList<String>();
+        listVar
+                .add("Sofia");
     }
 }
