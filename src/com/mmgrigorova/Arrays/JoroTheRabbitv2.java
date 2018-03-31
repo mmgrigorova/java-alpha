@@ -1,13 +1,13 @@
-package com.mmgrigorova.Arrays;
+//package com.mmgrigorova.Arrays;
 
 import java.util.*;
 
 public class JoroTheRabbitv2 {
     public static void rabbitV2() {
         Scanner in = new Scanner(System.in);
-        ArrayList<Integer> array = new ArrayList<>();
 
         String[] path = in.nextLine().split(", ");
+        ArrayList<Integer> array = new ArrayList<>(path.length);
 
         for (String elem : path) {
             array.add(Integer.parseInt(elem));
@@ -17,21 +17,23 @@ public class JoroTheRabbitv2 {
         int maxRoute = 0;
         int route = 1;
 
+
         for (int startIndex = 0; startIndex < n; startIndex++) {
-            for (int step = 1; step <= n; step++) {
+            for (int step = 1; step < n; step++) {
                 int currentIndex = startIndex;
                 route = 1;
+                boolean hasNext = true;
 
-                HashSet<Integer> used = new HashSet<>();
-
-                while (!used.contains(currentIndex)) {
-                    used.add(currentIndex);
+                while (hasNext) {
                     int nextIndex = (currentIndex + step) % n;
                     if (array.get(currentIndex) >= array.get(nextIndex)) {
+                        hasNext = false;
                         break;
+                    } else {
+                        route++;
+                        currentIndex = nextIndex;
                     }
-                    route++;
-                    currentIndex = nextIndex;
+
                 }
                 maxRoute = Math.max(maxRoute, route);
             }
@@ -40,5 +42,9 @@ public class JoroTheRabbitv2 {
         }
 
         System.out.println(maxRoute);
+    }
+    public static void main(String[] args) {
+        JoroTheRabbitv2.rabbitV2();
+        //Indices.indices();
     }
 }
