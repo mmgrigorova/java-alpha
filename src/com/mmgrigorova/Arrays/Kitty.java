@@ -1,4 +1,4 @@
 package com.mmgrigorova.Arrays;
 
-public class JoroTheRabbit {
+public class Kitty {
 }
