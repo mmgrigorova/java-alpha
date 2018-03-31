@@ -1,6 +1,11 @@
-//package com.mmgrigorova.Arrays;
+package com.mmgrigorova.Arrays;
 
 import java.util.*;
+
+/**
+ * Joro The Rabbit
+ * http://judge.telerikacademy.com/problem/22jorotherabbit
+ */
 
 public class JoroTheRabbitv2 {
     public static void rabbitV2() {
