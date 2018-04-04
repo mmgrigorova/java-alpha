@@ -8,10 +8,14 @@ import java.util.Scanner;
 public class BitShiftMatrixMethod {
 
     static void fakeInput() {
-        String test = "5\n" +
+//        String test = "5\n" +
+//                "4\n" +
+//                "4\n" +
+//                "2 22 16 10";
+        String test = "5 \n" +
+                "6\n" +
                 "4\n" +
-                "4\n" +
-                "2 22 16 10";
+                "14 27 1 5";
         System.setIn(new ByteArrayInputStream(test.getBytes()));
     }
 
@@ -19,23 +23,16 @@ public class BitShiftMatrixMethod {
             matrix) {
         BigInteger sum = BigInteger.valueOf(0);
         if (start <= end) {
-            while (start <= end) {
+            while (start < end) {
                 if (type == 'h') {
-                    if (!visited[position][start]) {
-                        sum = matrix[position][start].add(sum);
-                        matrix[position][start] = BigInteger.valueOf(0);
-                        visited[position][start] = true;
-                        System.out.print(position + ", " + start + ": " + sum);
-                    }
+                    sum = matrix[position][start].add(sum);
+                    matrix[position][start] = BigInteger.valueOf(0);
+                    System.out.print(position + ", " + start + ": " + sum);
                     start++;
                 } else if (type == 'v') {
-                    if (!visited[start][position]) {
-                        sum = matrix[start][position].add(sum);
-                        matrix[position][start] = BigInteger.valueOf(0);
-                        visited[start][position] = true;
-                        System.out.print(start + ", " + position + ": " + sum);
-
-                    }
+                    sum = matrix[start][position].add(sum);
+                    matrix[position][start] = BigInteger.valueOf(0);
+                    System.out.print(start + ", " + position + ": " + sum);
                     start++;
                 }
                 System.out.println();
@@ -69,17 +66,16 @@ public class BitShiftMatrixMethod {
             moves.add(Integer.parseInt(moveElem));
         }
 
-        int countRows = c;
         BigInteger[][] matrix = new BigInteger[r][c];
         boolean[][] visited = new boolean[r][c];
         for (int rows = 0; rows < r; rows++) {
             for (int cols = 0; cols < c; cols++) {
-                matrix[rows][cols] = BigInteger.valueOf(1).shiftLeft(cols + countRows - 2);//cols+countRows-2
+                matrix[rows][cols] = BigInteger.valueOf(1).shiftLeft(r - rows - 1 + cols);
+                //cols+countRows-2
                 visited[rows][cols] = false;
-//                System.out.printf("%4d", matrix[rows][cols]);
+                System.out.printf("%4d", matrix[rows][cols]);
             }
-//            System.out.println();
-            countRows--;
+            System.out.println();
         }
 
 
@@ -92,21 +88,22 @@ public class BitShiftMatrixMethod {
             int targetRow = moves.get(move) / coef;
             int targetCol = moves.get(move) % coef;
 
+            System.out.println(targetRow +", " +targetCol);
             BigInteger nextMove = getTempSum('h', currentRow, currentCol, targetCol, visited, matrix);
             totalSum = totalSum.add(nextMove);
             currentCol = targetCol;
+            System.out.println("total sum of move: " + totalSum);
 
             nextMove = getTempSum('v', currentCol, currentRow, targetRow, visited, matrix);
             totalSum = totalSum.add(nextMove);
             currentRow = targetRow;
 
-//            System.out.println(totalSum);
+            System.out.println("total sum of move: " + totalSum);
         }
         System.out.println(totalSum);
     }
 
     public static void main(String[] args) {
-
 
 
         bitMatrixSum();
