@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 /**
  * Permutations
  * http://judge.telerikacademy.com/problem/01permutations
+ * Print all permutations for numbers 1 to N
  */
 public class Permutations {
 
@@ -25,7 +26,6 @@ public class Permutations {
         }
 
         for (int value = 1; value < n + 1; value++) {
-            //   System.out.println("index: " + index + " value: " + value);
             if (used.contains(value)) {
                 continue;
             }
@@ -33,9 +33,7 @@ public class Permutations {
             currentPermutation.set(index, value);
             getPermutation(index + 1, n, currentPermutation, used);
             used.remove(value);
-            //allPermutations.add(currentPermutation);
         }
-        // System.out.println("current permutation: " + currentPermutation);
         return;
     }
 
