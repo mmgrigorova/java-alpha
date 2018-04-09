@@ -1,4 +1,4 @@
-package com.mmgrigorova.Arrays;
+package com.mmgrigorova.Recursion;
 
 import java.util.Arrays;
 import java.util.Scanner;
