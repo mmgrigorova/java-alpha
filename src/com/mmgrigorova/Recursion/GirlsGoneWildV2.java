@@ -2,6 +2,13 @@ package com.mmgrigorova.Recursion;
 
 import java.util.ArrayList;
 
+
+/**
+ * Girls Gone Wild
+ * http://judge.telerikacademy.com/problem/04girlsgonewild
+ */
+
+
 public class GirlsGoneWildV2 {
     public static void generateCombos(int n,
                                       ArrayList<Integer> tShirts,

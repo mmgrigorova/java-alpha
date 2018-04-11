@@ -5,6 +5,13 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Bit Shift Matrix
+ * http://judge.telerikacademy.com/problem/31bitshiftmatrix
+ *
+ * This is a solution with zaro-ing out visited cells.
+ */
+
 public class BitShiftMatrixMethod {
 
     static void fakeInput() {
@@ -43,13 +50,6 @@ public class BitShiftMatrixMethod {
         return sum;
     }
 
-//    static BigInteger getTempSumofRow(int row,  int start, int end, boolean[][] visited, BigInteger[][] matrix){
-//        return getTempSum(row,start, end ,visited,matrix);
-//    }
-//
-//    static BigInteger getTempSumofCol(int col,  int start, int end, boolean[][] visited, BigInteger[][] matrix){
-//        return getTempSum(col,start, end,visited,matrix);
-//    }
 
     public static void bitMatrixSum() {
         fakeInput();
