@@ -102,8 +102,6 @@ public class GirlsGoneWildClass {
             if (used.contains(value)) {
                 continue;
             }
-//            if (combinationSkirts.get(index) != null &&
-//                    combinationSkirts.get(index).equals(skirts.charAt(value))) {
             if (value > 0 && skirts.charAt(value) == skirts.charAt(value - 1) && !used.contains(value - 1)) {
                 continue;
             }

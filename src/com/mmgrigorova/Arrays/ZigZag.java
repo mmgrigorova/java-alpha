@@ -6,13 +6,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Bounce
- * http://judge.telerikacademy.com/problem/05bounce
+ * Zig Zag
+ * http://judge.telerikacademy.com/problem/06zigzag
  */
 
-public class Bounce {
+public class ZigZag {
     static void fakeInput() {
-        String test = "1 2";
+        String test = "3 4";
         System.setIn(new ByteArrayInputStream(test.getBytes()));
     }
 
@@ -41,47 +41,41 @@ public class Bounce {
 
         int row = 1;
         int col = 1;
-
-        int dRow = +1;
+        int nextCol = 1;
+        int dRow = +1; //we are starting from [1,1] because of the isCorner check
         int dCol = +1;
-        int nextRow = 0;
-        int nextCol = 0;
 
         long result = getValue(0, 0);
-        if (rows == 1 || cols == 1) {
-            System.out.println(getValue(0,0));
+
+        if (rows <= 1 || cols <= 1) {
+            System.out.println(result);
             return;
         }
 
         while (!isCorner(row, col, rows, cols)) {
             result += getValue(row, col);
+            dRow *= -1;
+            nextCol = col + dCol;
 
-            nextRow = nextRow + dRow;
-            nextCol = nextCol + dCol;
+            row = row + dRow;
+            col = col + dCol;
 
-            if (nextRow >= rows - 1 || nextRow <= 0) {
-                dRow *= -1;
-            }
             if (nextCol >= cols - 1 || nextCol <= 0) {
                 dCol *= -1;
+                dRow *= -1;
             }
-
-            row += dRow;
-            col += dCol;
         }
         result += getValue(row, col);
         System.out.println(result);
     }
 
-    private static long getValue(int rows, int cols) {
-        int power = rows + cols;
-        return (long) Math.pow(2, power);
+    private static long getValue(int row, int col) {
+        long result = 1 + (3 * (row + col));
+        return result;
     }
 
     private static boolean isCorner(int row, int col, int rows, int cols) {
-        return ((row <= 0 || row >= rows-1) &&
-                ((col <= 0 || col >= cols-1)));
+        return ((row <= 0 || row >= rows - 1) &&
+                ((col <= 0 || col >= cols - 1)));
     }
-
-
 }

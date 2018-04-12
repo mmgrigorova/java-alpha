@@ -1,94 +1,83 @@
 package com.mmgrigorova;
-        import com.mmgrigorova.Arrays.PrimesofN;
-        import com.mmgrigorova.Arrays.ThreeGroups;
-        import com.mmgrigorova.Loops.NumbersTriangle;
 
-        import javax.sound.midi.Soundbank;
-        import java.io.IOException;
-        import java.io.InputStream;
-        import java.text.MessageFormat;
+import com.mmgrigorova.Arrays.PrimesofN;
+import com.mmgrigorova.Arrays.ThreeGroups;
+import com.mmgrigorova.Loops.NumbersTriangle;
 
-        import java.util.Scanner;
+import javax.sound.midi.Soundbank;
+import java.io.*;
+import java.text.MessageFormat;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FakeMain {
-//    public static void main(String[] args) {
-//
-//        // Jagged arrays
-//
-//        int[][] matrix  = {
-//                {1,2,3,4,5},
-//                {1,2,3}
-//        };
+    /**
+     * The fakeInput() function is mimicking user input through the console. Useful for testing the problems.
+     */
+    static void fakeInput() {
+        String test = "3\n" +
+                "aabc\n" +
+                "2";
+        System.setIn(new ByteArrayInputStream(test.getBytes()));
+    }
 
-//        //Reverse array - http://judge.telerikacademy.com/problem/03reversearr
-//        Scanner in = new Scanner(System.in);
-//        String[] numbers = in.nextLine().split(" ");
-//
-//        for (int i = numbers.length - 1; i > 0; i--) {
-//            System.out.print(numbers[i] + ", ");
-//        }
-//        System.out.println(numbers[0]);
-//        // Reverse array - end
+    /**
+     * Converts line read from Buffer into a number
+     * @param s - string read from line
+     * @return - integer
+     */
+    private static int convert(String s) {
+        int value = 0;
+        int flag = 1;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '-') {
+                flag = -1;
+            } else {
+                value = value * 10 + (s.charAt(i) - '0');
+            }
+        }
+        if (flag == -1) {
+            return -value;
+        }
+        return value;
+    }
 
-        //Symmetric arrays - http://judge.telerikacademy.com/problem/07symmetricarr
-//        Scanner in = new Scanner(System.in);
-//
-//        int n = in.nextInt();
-//        in.nextLine();
-//
-//        for (int test = 0; test < n; test++) {
-//            String[] elements = in.nextLine().split(" ");
-//            boolean isSymmetric = true;
-//            for (int i = 0; i < elements.length; i++) {
-//                if (!elements[i].equals(elements[elements.length - i - 1])) {
-//                    isSymmetric = false;
-//                    break;
-//                }
-//            }
-//            System.out.println(
-//                    isSymmetric ? "Yes" : "No"
-//            );
-//
-// Symmetric arrays end
-//    }
+    public static void main(String[] args) throws IOException {
+        /**
+         * Print an ArrayList
+         */
+        ArrayList<String> result = new ArrayList<>();
+        result.forEach(System.out::println);
+
+        /**
+         * Sort an ArrayList
+         */
+        result.sort(String::compareTo);
+
+        /**
+         * Scanner replacement - StringBuilder
+         */
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String[] input = reader.readLine().split(" "); // readLine() requires adding exception.
+        int n = convert(input[0]); // convert(String s) added above
+        int k = convert(input[1]);
+
+        /**
+         * Initialize ArrayList with values through Stream. Much slower approach than using loops.
+         */
+        List<Boolean> isPrime = Stream.generate(() -> true).limit(n+1).collect(Collectors.toList());
+
+        /**
+         * Navigate through a Matrix
+         * Define a coefficient to add to the Rows and Cols. To iterate - add it to row/col depending on the direction.
+         * If direction needs to be changed, multiply the coefficient by -1 so that it starts decreasing/increasing
+         * the rows/cols
+         */
+
+
+    }
 }
-// PrimesofN.primesN();
-// NumbersTriangle.printNums();
-// ThreeGroups.threeGroups();
-// src.AllocateArray.allocateArray();
-
-// Arrays
-
-// int[] numbers = {1,2,3};
-
-//literal - gives a value to variable
-
-//        Main[] mains;
-//
-//        // prints elems of array
-//        for (int x : numbers){
-//            System.out.println(x);
-//        }
-//
-//
-//        int[][] matrix = {
-//                {1,2,3},
-//                {4,5,6}
-//        };
-//
-//        //prints matrix
-//        // % d - int, %f - float, %lf - double, %b  boolean, %c - char, %s - anything else (not working for primitives)
-//        for (int[] row : matrix){
-//            for (int cell : row){
-//                System.out.printf("| %4d |", cell);
-////                String toPrint = MessageFormat.format(
-////                        "| {0} |", cell
-////                );
-////                System.out.println(toPrint);
-//            }
-//            System.out.println();
-//        }
-//
-//    }
-//}
-
