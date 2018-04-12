@@ -11,7 +11,7 @@ import java.util.*;
  * Combinations
  * http://judge.telerikacademy.com/problem/01combinations
  * <p>
- * Solved using recursion, alternate approach.
+ * Solved using recursion, alternate approach. This approach iterates on N and does not initialize an array upfront.
  */
 
 public class CombinationsV2{

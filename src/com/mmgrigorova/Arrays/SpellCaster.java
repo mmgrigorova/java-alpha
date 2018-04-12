@@ -1,4 +1,4 @@
-package com.mmgrigorova.MockExam3;
+package com.mmgrigorova.Arrays;
 
 import java.util.Arrays;
 import java.util.Scanner;

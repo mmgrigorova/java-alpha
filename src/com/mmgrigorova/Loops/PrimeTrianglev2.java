@@ -1,4 +1,4 @@
-package com.mmgrigorova.MockExam1;
+package com.mmgrigorova.Loops;
 
 import java.util.Scanner;
 

@@ -3,6 +3,12 @@ package com.mmgrigorova.Arrays;
 import java.math.BigInteger;
 import java.util.Scanner;
 
+/**
+ * Above the main diagonal
+ *
+ * http://judge.telerikacademy.com/problem/14abovemaindiag
+ */
+
 public class AboveTheMainDiagonal {
     public static void aboveDiagonal() {
         Scanner in = new Scanner(System.in);
