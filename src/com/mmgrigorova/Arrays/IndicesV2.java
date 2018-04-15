@@ -29,7 +29,7 @@ public class IndicesV2 {
     }
 
     public static void printSequence() {
- //       fakeInput();
+        fakeInput();
 
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
@@ -96,5 +96,9 @@ public class IndicesV2 {
             }
         }
 
+    }
+
+    public static void main(String[] args) {
+        printSequence();
     }
 }

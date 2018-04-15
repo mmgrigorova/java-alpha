@@ -1,4 +1,4 @@
-package com.mmgrigorova.Arrays;
+package com.mmgrigorova.Combinatorics;
 
 import java.util.HashSet;
 import java.util.List;

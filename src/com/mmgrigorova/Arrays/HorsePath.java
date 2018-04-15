@@ -69,9 +69,8 @@ public class HorsePath {
 						j = j+1;
 					} else {
 						outerloop:
-						for(int a=0; a<n; a++) {
+						for (int a = 0; a < n; a++) {
 								for(int b=0; b<n; b++ ) {
-												
 									if(matrix[a][b]==0) {
 										kociMove++;
 										matrix[a][b] = kociMove;

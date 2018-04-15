@@ -1,5 +1,6 @@
 package com.mmgrigorova.Arrays;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
  * Max sum of 3x3
@@ -10,10 +11,12 @@ public class MaxSum3x3v2 {
 
 	public static void main(String[] args) {
 			Scanner in = new Scanner(System.in);
-			String input = in.nextLine();
-			String[] digs = input.split(" ");
-			int n = Integer.parseInt(digs[0]);
-			int m = Integer.parseInt(digs[1]);
+//			String input = in.nextLine();
+//			String[] digs = input.split(" ");
+//			int n = Integer.parseInt(digs[0]);
+//			int m = Integer.parseInt(digs[1]);
+			int n = in.nextInt();
+			int m = in.nextInt();
 
 			int[][] matrix = new int[n][m];
 
