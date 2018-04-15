@@ -136,15 +136,6 @@ public class DigitsUgly {
 
         }
         System.out.println(result);
-//        System.out.println(result);
-//        for (int i = 0; i < counter.length; i++) {
-//            System.out.printf("%d ", i);
-//
-//        }
-//        System.out.println();
-//        for (int i = 0; i < counter.length; i++) {
-//            System.out.printf("%d ", counter[i]);
-//        }
     }
 
     static void fakeInput() {
