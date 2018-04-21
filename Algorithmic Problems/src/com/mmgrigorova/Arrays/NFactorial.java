@@ -1,7 +1,5 @@
 package com.mmgrigorova.Arrays;
 
-import java.math.BigInteger;
-
 public class NFactorial {
     public static long nFactorial(int n){
         long result;

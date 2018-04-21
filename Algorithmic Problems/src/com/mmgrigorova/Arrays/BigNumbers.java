@@ -2,7 +2,6 @@ package com.mmgrigorova.Arrays;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class BigNumbers {

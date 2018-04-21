@@ -1,6 +1,7 @@
 package com.mmgrigorova.Arrays;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Joro The Rabbit

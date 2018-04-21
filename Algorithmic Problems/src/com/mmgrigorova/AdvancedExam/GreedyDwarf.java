@@ -1,7 +1,6 @@
 package com.mmgrigorova.AdvancedExam;
 
 import java.io.ByteArrayInputStream;
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class GreedyDwarf {

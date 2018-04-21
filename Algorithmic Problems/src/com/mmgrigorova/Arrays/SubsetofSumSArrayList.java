@@ -1,7 +1,9 @@
 package com.mmgrigorova.Arrays;
 
 import java.io.ByteArrayInputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
 
 /**
  * Subset of Sum S

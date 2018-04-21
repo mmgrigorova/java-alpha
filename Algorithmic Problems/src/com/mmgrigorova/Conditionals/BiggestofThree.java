@@ -1,6 +1,6 @@
 package com.mmgrigorova.Conditionals;
+
 import java.util.Scanner;
-import java.lang.Math;
 
 /**
  * Biggest of Three

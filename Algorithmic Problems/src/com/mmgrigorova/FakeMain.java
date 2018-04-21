@@ -1,16 +1,11 @@
 package com.mmgrigorova;
 
-import com.mmgrigorova.Arrays.PrimesofN;
-import com.mmgrigorova.Arrays.ThreeGroups;
-import com.mmgrigorova.Loops.NumbersTriangle;
-
-import javax.sound.midi.Soundbank;
-import java.io.*;
-import java.text.MessageFormat;
-
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

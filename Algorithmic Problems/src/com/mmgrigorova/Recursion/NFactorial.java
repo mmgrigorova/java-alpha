@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
-import java.util.Scanner;
 
 public class NFactorial {
     public static BigInteger nFactorial(int n){

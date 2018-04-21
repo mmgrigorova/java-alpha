@@ -4,9 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 /**
  * Tribonacci

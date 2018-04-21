@@ -1,6 +1,5 @@
 package com.mmgrigorova.Arrays;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
  * Max sum of 3x3

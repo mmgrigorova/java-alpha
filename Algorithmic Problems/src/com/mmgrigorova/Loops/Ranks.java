@@ -1,7 +1,6 @@
 package com.mmgrigorova.Loops;
 
 import java.util.Arrays;
-
 import java.util.Scanner;
 
 /**
