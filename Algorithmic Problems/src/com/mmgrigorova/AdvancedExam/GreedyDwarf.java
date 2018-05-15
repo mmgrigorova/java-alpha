@@ -5,22 +5,22 @@ import java.util.Scanner;
 
 public class GreedyDwarf {
     static void fakeInput() {
-        String test = "4 3\n" +
-                "3 2 4\n" +
-                "2 0 3\n" +
-                "1 1 5\n" +
-                "2 2 5";
-        System.setIn(new ByteArrayInputStream(test.getBytes()));
-    }
+            String test = "4 3\n" +
+                    "3 2 4\n" +
+                    "2 0 3\n" +
+                    "1 1 5\n" +
+                    "2 2 5";
+            System.setIn(new ByteArrayInputStream(test.getBytes()));
+        }
 
-    public static void main(String[] args) {
-       // fakeInput();
-        Scanner in = new Scanner(System.in);
-        int rows = in.nextInt();
-        int cols = in.nextInt();
+        public static void main(String[] args) {
+            // fakeInput();
+            Scanner in = new Scanner(System.in);
+            int rows = in.nextInt();
+            int cols = in.nextInt();
 
-        int row = 0;
-        int col = 0;
+            int row = 0;
+            int col = 0;
 
         int[] rowLRUD = {0, 0, -1, +1};
         int[] colLRUD = {-1, +1, 0, 0};
