@@ -36,16 +36,17 @@ public class ReverseLinkedList {
     static class Solution {
         public static ListNode reverseList(ListNode head) {
             ListNode prev = null;
-            ListNode result = head;
-            ListNode next = null;
+            ListNode current = head;
+            ListNode nextElem;
 
-
-            while (head != null){
-
+            while (current != null){
+                nextElem = current.next;
+                current.next = prev;
+                prev = current;
+                current = nextElem;
             }
 
-          // return result;
-           return result;
+           return prev;
         }
     }
 
