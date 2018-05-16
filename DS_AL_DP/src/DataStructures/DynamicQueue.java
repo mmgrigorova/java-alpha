@@ -1,3 +1,5 @@
+package DataStructures;
+
 public class DynamicQueue {
     private Node head;
     private Node tail;

@@ -1,3 +1,5 @@
+package DataStructures;
+
 import java.util.EmptyStackException;
 
 public class StaticQueue {

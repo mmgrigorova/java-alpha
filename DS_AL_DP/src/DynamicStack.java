@@ -1,3 +1,5 @@
+import DataStructures.Node;
+
 import java.util.EmptyStackException;
 
 public class DynamicStack {

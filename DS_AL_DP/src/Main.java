@@ -1,3 +1,5 @@
+import DataStructures.StaticQueue;
+
 public class Main {
     public static void main(String[] args) throws Exception {
 //        DynamicStack s = new DynamicStack();

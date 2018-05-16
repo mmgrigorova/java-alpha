@@ -1,3 +1,5 @@
+package DataStructures;
+
 import java.util.List;
 import java.util.Stack;
 
@@ -13,6 +15,10 @@ public class RotateList {
         ListNode head = new ListNode(0);
         head.next = new ListNode(1);
         head.next.next = new ListNode(2);
+        head.next.next.next = new ListNode(3);
+        head.next.next.next.next = new ListNode(4);
+        head.next.next.next.next.next = new ListNode(5);
+        head.next.next.next.next.next.next = new ListNode(6);
         int k = 4;
 
         ListNode result = Solution.rotateRight(head, k);
@@ -54,13 +60,16 @@ public class RotateList {
 
             k = size - (k % size);
 
-            for (int i = 1; i < k; i++) {
-                node = node.next;
-            }
-
             tail.next = head;
-            head = node.next;
-            node.next = null;
+
+//            for (int i = 0; i < k; i++) {
+//                tail = tail.next;
+//            }
+
+
+
+            head = tail.next;
+            tail.next = null;
 
             return head;
         }
