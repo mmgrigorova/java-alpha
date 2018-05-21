@@ -1,7 +1,7 @@
 package Algorithms;
 
 /**
- * Merge Sort Implementation
+ * Recursive Merge Sort Implementation
  */
 
 public class MergeSort {

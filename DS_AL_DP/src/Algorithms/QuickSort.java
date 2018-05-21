@@ -1,5 +1,9 @@
 package Algorithms;
 
+/**
+ * Recursive implementation of Quick Sort
+ */
+
 public class QuickSort {
     public static void main(String[] args) {
 //        int[] array = {6, 9, 2, 8, 0};
