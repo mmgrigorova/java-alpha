@@ -1,4 +1,4 @@
-package datastructures.Trees;
+package datastructures.trees;
 
 public class Node {
     public int value;
