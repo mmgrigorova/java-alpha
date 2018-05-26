@@ -1,4 +1,4 @@
-package datastructures;
+package datastructures.tasks;
 
 public class RotateList {
     public static void main(String[] args) {

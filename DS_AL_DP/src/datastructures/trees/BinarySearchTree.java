@@ -1,10 +1,105 @@
 package datastructures.trees;
 
-public class BinarySearchTree {
+import datastructures.TraversableBfs;
+import datastructures.TraversableDsf;
+
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.Stack;
+
+public class BinarySearchTree implements TraversableBfs, TraversableDsf {
     private Node root;
 
     public BinarySearchTree() {
         root = null;
+    }
+
+
+    public Node search(int x) {
+        return searchRecursive(x, root);
+    }
+
+    public void insert(int x) {
+        root = insertRecursive(root, x);
+    }
+
+    public void delete(int x) {
+        deleteRecursive(x, root);
+    }
+
+    public boolean isBinarySearchTree() {
+        return isBstTreeRecursive(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+
+    @Override
+    public void bfs() {
+        Queue<Node> queue = new ArrayDeque<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+            if (current == null) {
+                throw new AssertionError();
+            }
+            System.out.printf("%d ", current.value);
+            if (current.left != null) {
+                queue.add(current.left);
+            }
+            if (current.right != null) {
+                queue.add(current.right);
+            }
+        }
+    }
+
+    @Override
+    public void dfsInOrder() {
+        dfsInOrderUtil(root);
+    }
+
+
+    @Override
+    public void dfsPreOrder() {
+        if (root == null){
+            return;
+        }
+
+        Stack<Node> stack = new Stack<>();
+
+        stack.push(root);
+
+        while(!stack.empty()){
+            Node current = stack.pop();
+            System.out.printf("%d ", current.value);
+
+            if (current.right != null){
+                stack.push(current.right);
+            }
+
+            if (current.left != null){
+                stack.push(current.left);
+            }
+
+        }
+
+    }
+
+    @Override
+    public void dfsPostOrder() {
+        dfsPostOrderUtil(root);
+    }
+
+    private Node searchRecursive(int x, Node node) {
+        if (node.value == x) {
+            return node;
+        }
+
+        if (x < node.value) {
+            return searchRecursive(x, node.left);
+        } else if (x > node.value) {
+            return searchRecursive(x, node.right);
+        }
+
+        return null;
     }
 
     // when current node is null we have reached the place of insertion
@@ -24,27 +119,6 @@ public class BinarySearchTree {
         return current;
     }
 
-    public void insert(int x) {
-        root = insertRecursive(root, x);
-    }
-
-    private Node searchRecursive(int x, Node node) {
-        if (node.value == x) {
-            return node;
-        }
-
-        if (x < node.value) {
-            return searchRecursive(x, node.left);
-        } else if (x > node.value) {
-            return searchRecursive(x, node.right);
-        }
-
-        return null;
-    }
-
-    public Node search(int x) {
-        return searchRecursive(x, root);
-    }
 
     private Node deleteRecursive(int x, Node current) {
         if (current.value == x) {
@@ -73,9 +147,6 @@ public class BinarySearchTree {
         return current;
     }
 
-    public void delete(int x) {
-        deleteRecursive(x, root);
-    }
 
     private Node smallestNode(Node rightTree) {
         if (rightTree.left == null) {
@@ -85,8 +156,8 @@ public class BinarySearchTree {
         }
     }
 
-    private boolean isBstTreeRecursive(Node node, int minValue, int maxValue){
-        if (node == null){
+    private boolean isBstTreeRecursive(Node node, int minValue, int maxValue) {
+        if (node == null) {
             return true;
         }
 
@@ -95,9 +166,24 @@ public class BinarySearchTree {
                 && isBstTreeRecursive(node.right, node.value, maxValue);
     }
 
-    public boolean isBinarySearchTree(){
-        return isBstTreeRecursive(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    private void dfsInOrderUtil(Node current) {
+        if(current == null){
+            return;
+        }
+
+        dfsInOrderUtil(current.left);
+        System.out.printf("%d ", current.value);
+        dfsInOrderUtil(current.right);
     }
 
+    private void dfsPostOrderUtil(Node current) {
+        if(current == null){
+            return;
+        }
+
+        dfsInOrderUtil(current.left);
+        dfsInOrderUtil(current.right);
+        System.out.printf("%d ", current.value);
+    }
 
 }

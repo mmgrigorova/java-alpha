@@ -1,4 +1,4 @@
-package datastructures;//https://leetcode.com/problems/reverse-linked-list/description/
+package datastructures.tasks;//https://leetcode.com/problems/reverse-linked-list/description/
 
 public class ReverseLinkedList {
 

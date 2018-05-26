@@ -1,4 +1,4 @@
-package datastructures;
+package datastructures.tasks;
 
 /**
  * https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/

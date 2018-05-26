@@ -1,4 +1,4 @@
-package datastructures;
+package datastructures.tasks;
 
 import java.util.Scanner;
 import java.util.Stack;

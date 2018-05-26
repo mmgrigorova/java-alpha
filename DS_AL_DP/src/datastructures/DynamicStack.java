@@ -1,3 +1,5 @@
+package datastructures;
+
 import datastructures.Node;
 
 import java.util.EmptyStackException;
