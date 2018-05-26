@@ -1,4 +1,4 @@
-package algorithms;
+package algorithms.tasks;
 
 import java.util.Scanner;
 
