@@ -4,12 +4,12 @@ import java.util.*;
 
 @SuppressWarnings("unchecked")
 
-public class GraphAdjacentList <T>{
+public class GraphAdjacentList<T> {
     private List[] adjVertices;
     private Map<T, Integer> indexMap;
 
 
-    public  GraphAdjacentList(int vertices) {
+    public GraphAdjacentList(int vertices) {
         adjVertices = new List[vertices];
         for (int i = 0; i < vertices; i++) {
             adjVertices[i] = new ArrayList<T>();
@@ -20,7 +20,7 @@ public class GraphAdjacentList <T>{
     public void addEdge(int vertexIdx, T value) {
         adjVertices[vertexIdx].add(value);
         T node = (T) adjVertices[vertexIdx].get(0);
-        if(!indexMap.keySet().contains(node)) {
+        if (!indexMap.keySet().contains(node)) {
             indexMap.put(value, vertexIdx);
         }
     }
@@ -39,11 +39,10 @@ public class GraphAdjacentList <T>{
             // Find the adjacency list index of the current node:
             currentVertexIdx = getVertexIndex(node);
 
-            String printer = node.toString();
-            System.out.printf("%s ", printer);
+            printNode(node);
 
             for (Object t : adjVertices[currentVertexIdx]) {
-                if(!visited.contains(t)) {
+                if (!visited.contains(t)) {
                     queue.add((T) t);
                     visited.add((T) t);
                 }
@@ -56,7 +55,40 @@ public class GraphAdjacentList <T>{
         return indexMap.get(visitedElem);
     }
 
-    public void dfs(int vertexIndex){
-        boolean hasNext;
+    public void dfs(int vertexIndex, HashSet<T> visited) {
+        Stack<T> stack = new Stack<>();
+
+        T start = (T) adjVertices[vertexIndex].get(0);
+        stack.push(start);
+        visited.add(start);
+        printNode(start);
+        List<T> nodes;
+
+        while (!stack.empty()) {
+            vertexIndex = getVertexIndex(stack.peek());
+            boolean hasAdjacent = false;
+            nodes = adjVertices[vertexIndex];
+
+            for (int i = 0; i < nodes.size(); i++) {
+                T node = nodes.get(i);
+                if (!visited.contains(node)) {
+                    hasAdjacent = true;
+                    stack.push(node);
+                    visited.add(node);
+                    printNode(node);
+                    break;
+                }
+            }
+
+            if(!hasAdjacent) {
+                stack.pop();
+            }
+        }
+        System.out.println();
+    }
+
+    private void printNode(T node) {
+        String printer = node.toString();
+        System.out.printf("%s ", printer);
     }
 }

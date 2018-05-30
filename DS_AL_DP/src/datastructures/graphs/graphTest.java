@@ -1,7 +1,37 @@
 package datastructures.graphs;
 
-public class graphBfsTest {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+
+public class graphTest {
     public static void main(String[] args) {
+        int[][] graph = DijkstraV2.graph;
+
+        System.out.println("Graph used in algorithm: ");
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph.length; j++) {
+                String toPrint = String.valueOf(graph[i][j]);
+                if (toPrint.equals("-1")) {
+                    toPrint = " ";
+                }
+                System.out.printf("[%d][%d]%4s ",i, j, toPrint);
+            }
+            System.out.println();
+        }
+
+        int[][] matrix = DijkstraV2.dijkstraV2(0);
+        System.out.println("Dijkstra test start: ");
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                int elem =matrix[i][j];
+                System.out.printf("%d:%d ", j, elem);
+            }
+            System.out.println();
+        }
+        System.out.println("Dijkstra test end. ");
+
         GraphAdjacentList<Integer> graphAdj = new GraphAdjacentList<>(5);
 
         graphAdj.addEdge(0, 1);
@@ -22,6 +52,7 @@ public class graphBfsTest {
 
 
         graphAdj.bfs(0);
+        graphAdj.dfs(0, new HashSet<>());
 
         GraphAdjacentList<Double> graphDoubleAdj = new GraphAdjacentList<>(5);
 
