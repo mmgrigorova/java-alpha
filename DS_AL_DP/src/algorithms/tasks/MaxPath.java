@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  * Max Path
- * 
+ *
  * Find path with max sum of the nodes in a tree using DFS.
  * http://judge.telerikacademy.com/problem/04maxpath
  */
