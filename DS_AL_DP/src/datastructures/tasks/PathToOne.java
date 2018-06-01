@@ -1,5 +1,9 @@
 package datastructures.tasks;
 
+/**
+ * Path to one
+ * http://judge.telerikacademy.com/problem/01pathtoone
+ */
 
 import java.io.ByteArrayInputStream;
 import java.util.*;
