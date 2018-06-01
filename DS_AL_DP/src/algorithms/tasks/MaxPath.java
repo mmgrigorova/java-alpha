@@ -5,16 +5,15 @@ import java.util.*;
 
 /**
  * Max Path
- * <p>
- * Find path with max sum of the nodes in a tree
+ * 
+ * Find path with max sum of the nodes in a tree using DFS.
  * http://judge.telerikacademy.com/problem/04maxpath
  */
 
-
 public class MaxPath {
-    public static Set<Integer> visited = new HashSet<>();
     public static long maxSum = 0;
     public static int bestNode = 0;
+    public static Map<Integer, Set<Integer>> tree = new HashMap<>();
 
     public static void main(String[] args) {
         fakeInput();
@@ -23,37 +22,35 @@ public class MaxPath {
         Map<Integer, Set<Integer>> tree = readTree(in);
 
         print(tree);
+        int start  = 0;
+        for (Integer integer : tree.keySet()) {
+            start = integer;
+            break;
+        }
 
-        Random rand = new Random();
-        int start = rand.nextInt(tree.size());
-        dfs(start, 0, 0, tree);
-//        System.out.println(bestNode);
-//        System.out.println(maxSum);
-
+        dfs(start, 0, 0);
         maxSum = 0;
-        dfs(bestNode, 0, 0, tree);
+        dfs(bestNode, 0, 0);
 
-        System.out.println(bestNode);
         System.out.println(maxSum);
     }
 
-    public static void dfs(int node, int prev, long tempSum, Map<Integer, Set<Integer>> tree) {
+    public static void dfs(int node, int prev, long tempSum) {
         boolean hasNext = false;
         long nodeSum = tempSum + node;
         for (Integer child : tree.get(node)) {
             if (child != prev) {
                 hasNext = true;
-                dfs(child, node, nodeSum, tree);
+                dfs(child, node, nodeSum);
             }
         }
 
         if (!hasNext) {
-            if (tempSum > maxSum) {
-                maxSum = tempSum;
+            if (nodeSum > maxSum) {
+                maxSum = nodeSum;
                 bestNode = node;
             }
         }
-
     }
 
     private static Map<Integer, Set<Integer>> readTree(Scanner in) {
@@ -61,13 +58,13 @@ public class MaxPath {
         in.nextLine();
         int indexCounter = 0;
 
-        Map<Integer, Set<Integer>> tree = new HashMap<>();
         for (int i = 0; i < n - 1; i++) {
 
-            String[] edgesStrings = in.nextLine()
-                    .replaceAll("\\(", "")
-                    .replaceAll("\\)", "")
+            String input = in.nextLine();
+            String[] edgesStrings = input
+                    .substring(1, input.length()-1)
                     .split(" <- ");
+
             int parent = Integer.parseInt(edgesStrings[0]);
             int child = Integer.parseInt(edgesStrings[1]);
 
