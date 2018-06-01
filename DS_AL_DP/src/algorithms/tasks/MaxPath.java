@@ -22,28 +22,26 @@ public class MaxPath {
 
         Map<Integer, Set<Integer>> tree = readTree(in);
 
-//        print(tree);
+        print(tree);
 
-        int start = 1;
+        Random rand = new Random();
+        int start = rand.nextInt(tree.size());
         dfs(start, 0, 0, tree);
-        System.out.println(bestNode);
-        System.out.println(maxSum);
+//        System.out.println(bestNode);
+//        System.out.println(maxSum);
 
         maxSum = 0;
-//        dfs(bestNode, 0, 0, tree);
+        dfs(bestNode, 0, 0, tree);
 
         System.out.println(bestNode);
         System.out.println(maxSum);
     }
 
     public static void dfs(int node, int prev, long tempSum, Map<Integer, Set<Integer>> tree) {
-
-
         boolean hasNext = false;
-
+        long nodeSum = tempSum + node;
         for (Integer child : tree.get(node)) {
             if (child != prev) {
-                long nodeSum = tempSum + child;
                 hasNext = true;
                 dfs(child, node, nodeSum, tree);
             }
