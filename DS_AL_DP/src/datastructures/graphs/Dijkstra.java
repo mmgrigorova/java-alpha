@@ -1,90 +1,87 @@
 package datastructures.graphs;
 
+// Dijkstra's Shortest Path Algorithm
+
 public class Dijkstra {
-    private static final int GRAPH_SIZE = 8;
-    private static int[][] graph;
+    private static final int SIZE = 5;
+    public static int[][] graph;
 
-    /**
-     * @param x - start index
-     * @return int[] - Returns array which holds the distances from this node to
-     * // all others.
-     */
-
-
-    //bug
-    public static int[] dijkstra(int x) {
-        initGraph();
-        int[] result = new int[GRAPH_SIZE];
-        boolean[] used = new boolean[GRAPH_SIZE];
-
-        //initialize all best distances
-        for (int i : result) {
-            i = Integer.MAX_VALUE;
-        }
-        result[x] = 0;
-
-        for (int n = 0; n < GRAPH_SIZE; n++) {
-            int shortestPath = Integer.MAX_VALUE;
-            int shortestPathNodeIndex = -1;
-
-            for (int i = 0; i < GRAPH_SIZE; i++) {
-                if (!used[i] && result[i] < shortestPath) {
-                    shortestPath = result[i];
-                    shortestPathNodeIndex = i;
-                }
-            }
-
-            used[shortestPathNodeIndex] = true;
-            for (int i = 0; i < GRAPH_SIZE; i++) {
-                if (!used[i] && graph[shortestPathNodeIndex][i] > -1) {
-                    int newDIstance = shortestPath + graph[shortestPathNodeIndex][i];
-                    if (result[i] > newDIstance) {
-                        result[i] = newDIstance;
-                    }
-                }
-            }
-        }
-        return result;
-    }
-
-    private static void initGraph() {
-        graph = new int[GRAPH_SIZE][GRAPH_SIZE];
-        for (int i = 0; i < GRAPH_SIZE; i++) {
-            for (int j = 0; j < GRAPH_SIZE; j++) {
+    static {
+        graph = new int[SIZE][SIZE];
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
                 graph[i][j] = -1;
             }
         }
+        graph[0][0] = 0;
+        graph[0][1] = 6;
+        graph[0][3] = 1;
 
-        graph[0][1] = 4;
-        graph[0][2] = 4;
+        graph[1][0] = 6;
+        graph[1][2] = 5;
+        graph[1][3] = 2;
+        graph[1][4] = 2;
 
-        graph[1][0] = 4;
-        graph[1][2] = 2;
-        graph[1][3] = 6;
-        graph[1][6] = 5;
+        graph[2][1] = 5;
+        graph[2][4] = 5;
 
-        graph[2][0] = 4;
-        graph[2][1] = 2;
-        graph[2][6] = 3;
+        graph[3][0] = 1;
+        graph[3][1] = 2;
+        graph[3][4] = 1;
 
-        graph[3][1] = 6;
-        graph[3][5] = 1;
-        graph[3][7] = 9;
-
-        graph[4][7] = 4;
-
-        graph[5][3] = 1;
-        graph[5][6] = 6;
-        graph[5][7] = 5;
-
-        graph[6][1] = 5;
-        graph[6][2] = 3;
-        graph[6][5] = 6;
-
-        graph[7][3] = 9;
-        graph[7][4] = 4;
-        graph[7][5] = 5;
-
+        graph[4][1] = 2;
+        graph[4][2] = 5;
+        graph[4][3] = 1;
     }
 
+    /**
+     * @param sourceI - start node index
+     * @return int[][] - Returns array which holds the distances from this node to
+     * all others on the first row. Holds the previous node on the second row to help find the exact path.
+     */
+    public static int[][] dijkstraV2(int sourceI) {
+        int[][] result = new int[2][SIZE]; //result[0][i] -> shortest distance, result[1][i] - parent node
+
+
+        for (int i = 0; i < SIZE; i++) {
+            result[0][i] = Integer.MAX_VALUE;
+        }
+        result[0][0] = 0;
+
+        boolean[] visited = new boolean[SIZE];
+        boolean existUnvisited = true;
+        int currentVIndex = sourceI;
+
+
+        while (existUnvisited) {
+            int smallestKnownDistance = Integer.MAX_VALUE;
+
+            for (int vToVisit = 0; vToVisit < SIZE; vToVisit++) {
+                if (smallestKnownDistance > result[0][vToVisit]) {
+                    if (!visited[vToVisit]) {
+                        existUnvisited = true;
+                        smallestKnownDistance = result[0][vToVisit];
+                        currentVIndex = vToVisit;
+                    } else {
+                        existUnvisited = false;
+                    }
+
+                }
+            }
+            for (int neighbour = 0; neighbour < SIZE; neighbour++) {
+                if (graph[currentVIndex][neighbour] > -1) {
+                    int distToNeigh = graph[currentVIndex][neighbour];
+                    int newDistance = distToNeigh + result[0][currentVIndex];
+
+                    if (newDistance < result[0][neighbour]) {
+                        result[0][neighbour] = newDistance;
+                        result[1][neighbour] = currentVIndex;
+                    }
+                }
+            }
+            visited[currentVIndex] = true;
+        }
+
+        return result;
+    }
 }

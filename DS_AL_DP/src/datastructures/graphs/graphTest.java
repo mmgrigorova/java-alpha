@@ -1,17 +1,21 @@
 package datastructures.graphs;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 public class graphTest {
     public static void main(String[] args) {
-        int[][] graph = DijkstraV2.graph;
+        List<int[]> graphK = Kruskal.kruskal();
+
+        Kruskal.printList(graphK);
+
+        int[][] graphD = Dijkstra.graph;
+
 
         System.out.println("Graph used in algorithm: ");
-        for (int i = 0; i < graph.length; i++) {
-            for (int j = 0; j < graph.length; j++) {
-                String toPrint = String.valueOf(graph[i][j]);
+        for (int i = 0; i < graphD.length; i++) {
+            for (int j = 0; j < graphD.length; j++) {
+                String toPrint = String.valueOf(graphD[i][j]);
                 if (toPrint.equals("-1")) {
                     toPrint = " ";
                 }
@@ -20,7 +24,7 @@ public class graphTest {
             System.out.println();
         }
 
-        int[][] matrix = DijkstraV2.dijkstraV2(0);
+        int[][] matrix = Dijkstra.dijkstraV2(0);
         System.out.println("Dijkstra test start: ");
 
         for (int i = 0; i < matrix.length; i++) {

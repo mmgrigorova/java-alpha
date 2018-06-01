@@ -1,10 +1,8 @@
 package com.mmgrigorova;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -22,6 +20,7 @@ public class FakeMain {
 
     /**
      * Converts line read from Buffer into a number
+     *
      * @param s - string read from line
      * @return - integer
      */
@@ -64,7 +63,7 @@ public class FakeMain {
         /**
          * Initialize ArrayList with values through Stream. Much slower approach than using loops.
          */
-        List<Boolean> isPrime = Stream.generate(() -> true).limit(n+1).collect(Collectors.toList());
+        List<Boolean> isPrime = Stream.generate(() -> true).limit(n + 1).collect(Collectors.toList());
 
         /**
          * Navigate through a Matrix
@@ -75,4 +74,6 @@ public class FakeMain {
 
 
     }
+
 }
+
