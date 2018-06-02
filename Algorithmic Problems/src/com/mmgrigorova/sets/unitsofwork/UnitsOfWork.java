@@ -22,7 +22,6 @@ public class UnitsOfWork {
     }
 
 
-    // Todo try with HashSet<Type, Unit>
     public static void main(String[] args) throws IOException {
         fakeInput();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -74,29 +73,37 @@ public class UnitsOfWork {
         int limitNum = Integer.parseInt(limit);
 
         result.append(String.format("RESULT: "));
-        StringBuilder toPrint = new StringBuilder("");
-        String powerUnits = unitsOfWork.stream()
-                .limit(limitNum)
-                .map(Unit::toString)
-                .collect(Collectors.joining(", "));
-        result.append(powerUnits);
+        StringJoiner toPrint = new StringJoiner(", ");
+        int counter = 0;
+        for (Unit unit : unitsOfWork) {
+            toPrint.add(unit.toString());
+            counter++;
+            if (counter == limitNum) {
+                break;
+            }
+        }
+
         result.append(toPrint);
         result.append("\n");
     }
 
     private static void findUnitsOfType(String unitType) {
         result.append(String.format("RESULT: "));
-        StringBuilder toPrint = new StringBuilder("");
+        StringJoiner toPrint = new StringJoiner(", ");
         if (unitsOfType.containsKey(unitType)) {
-            String appendRes = unitsOfType.get(unitType).stream()
-                    .limit(10)
-                    .map(Unit::toString)
-                    .collect(Collectors.joining(", "));
-            toPrint.append(appendRes);
+            Set<Unit> unitTypes = unitsOfType.get(unitType);
+            int counter = 0;
+            for (Unit unit : unitTypes) {
+                toPrint.add(unit.toString());
+                counter++;
+                if (counter == 10) {
+                    break;
+                }
+            }
         }
         result.append(toPrint);
         result.append("\n");
-    }
+}
 
     private static void removeUnit(String unitToRemoveName) {
         Unit toRemove = null;
