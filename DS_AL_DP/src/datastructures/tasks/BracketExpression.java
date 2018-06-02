@@ -1,70 +1,61 @@
 package datastructures.tasks;
 
 /**
+ * TODO: Not working
  * Bracket Expressions
  * http://judge.telerikacademy.com/problem/04bracketexpressions
  */
 
 import java.io.ByteArrayInputStream;
-import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BracketExpression {
+
     public static void main(String[] args) {
         fakeInput();
         Scanner in = new Scanner(System.in);
         String input = in.nextLine();
 
-        StringBuilder expression = new StringBuilder("");
+//        String pattern = "(?=\\()([^\\]]+)(?=\\))";
+        String pattern = "(?=\\()([^\\)]+[^\\(])(?!\\))";
+
+        Pattern p = Pattern.compile(pattern);
+
         Stack<String> stack = new Stack<>();
-        int lBracketCounter = 0;
 
         while (true) {
-            boolean hasBrackets = false;
-            int pointer = 0;
-            for (int i = pointer; i < input.length(); i++) {
-                char c = input.charAt(i);
-                if (c == '(') {
-                    hasBrackets = true;
-                    lBracketCounter += 1;
-                }
-                if (lBracketCounter > 0) {
-                    expression.append(c);
-                }
-                if (c == ')') {
-                    lBracketCounter -= 1;
-                }
+            if (!stack.empty()) {
+                input = stack.peek();
+            }
+            Matcher m = p.matcher(input);
+            int count = m.groupCount();
 
-                if (lBracketCounter == 0) {
-                    if (expression.length() > 1) {
-                        stack.push(expression.toString());
-                        pointer = i;
-                        if (pointer == input.length() - 1) {
-                            input = expression.toString().substring(1, expression.length() - 1);
-                        }
-                        expression = new StringBuilder();
-                    } else {
-                        break;
-                    }
-                }
-
+            if (!m.find()) {
+                break;
+            }
+            for (int i = 1; i <= count; i++) {
+                stack.push(m.group(i));
             }
 
-            StringBuilder result = new StringBuilder();
-            while (!stack.empty()) {
-                result.append(stack.pop());
-
-            }
-            result.append("\n");
-
-            System.out.println(result);
         }
+
+        StringBuilder result = new StringBuilder();
+        while (!stack.empty()) {
+            result.append(stack.pop());
+            result.append("\n");
+        }
+
+
+        System.out.println(result);
     }
 
+
     private static void fakeInput() {
-        String test = "5 * (123 * (1 + 3) + ((4 - 3) / 6))";
-//        String test = "(1 + 3) + (4 - 3)";
+//        String test = "5 * (123 * (1 + 3) + ((4 - 3) / 6))";
+        String test = "(1 + 3) + (4 - 3)";
         System.setIn(new ByteArrayInputStream(test.getBytes()));
     }
 }
