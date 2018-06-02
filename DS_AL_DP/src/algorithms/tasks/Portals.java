@@ -34,18 +34,26 @@ public class Portals {
             }
         }
 
-
-        System.out.printf("Top Left: %d \n", codeCell(0, 0));
-        System.out.printf("Top Right: %d \n", codeCell(0, cols - 1));
-        System.out.printf("Left Bottom: %d \n", codeCell(rows - 1, 0));
-        System.out.printf("Right Bottom: %d \n", codeCell(rows - 1, cols - 1));
+//        int matrixVerify[][] = new int[rows][cols];
+//        for (int i = 0; i < rows; i++) {
+//            for (int j = 0; j < cols; j++) {
+//              matrixVerify[i][j] = i*cols + j;
+//                System.out.printf("%4d ", matrixVerify[i][j] );
+//            }
+//            System.out.println();
+//        }
+//
+//
+//        System.out.printf("Top Left: %d \n", codeCell(0, 0));
+//        System.out.printf("Top Right: %d \n", codeCell(0, cols - 1));
+//        System.out.printf("Left Bottom: %d \n", codeCell(rows - 1, 0));
+//        System.out.printf("Right Bottom: %d \n", codeCell(rows - 1, cols - 1));
 
         int maxPath = runLabyrinth(matrix, sr, sc);
         System.out.println(maxPath);
     }
 
     private static int runLabyrinth(int[][] matrix, int sr, int sc) {
-        int sum = 0;
         int maxSum = 0;
         int cols = matrix[0].length;
         Set<Integer> visited = new HashSet<>();
@@ -53,8 +61,10 @@ public class Portals {
 
         int currentCell = codeCell(sr, sc);
         stack.push(currentCell);
+        int sum = 0;
         visited.add(currentCell);
-
+        int power = 0;
+        //top , right, bottom, left
         int[] dRows = {-1, 0, +1, 0};
         int[] dCols = {0, +1, 0, -1};
 
@@ -62,27 +72,28 @@ public class Portals {
             boolean hasNext = false;
             currentCell = stack.peek();
             visited.add(currentCell);
-
-            int power = getPower(currentCell);
-            sum += power;
+            int p = getPower(currentCell);
+            System.out.printf("power of current %d : %d, sum: %d\n",currentCell, p, sum);
 
             for (int i = 0; i < 4; i++) {
-                int next = getTop(currentCell, power, dRows[i], dCols[i]);
+                int next = getNext(currentCell, p, dRows[i], dCols[i]);
                 if (!visited.contains(next) && next >= 0 && next < rows * cols && getPower(next) > -1) {
                     stack.push(next);
                     hasNext = true;
+                    sum += power;
+                    power = getPower(currentCell);
                 }
             }
 
             if (!hasNext) {
+                sum -= power;
+                System.out.printf("\nend of iteration: %d ,\n", sum);
                 maxSum = Math.max(maxSum, sum);
-                sum = 0;
+                System.out.printf("max %d \n", maxSum);
                 stack.pop();
             }
 
         }
-
-
         return maxSum;
     }
 
@@ -98,32 +109,15 @@ public class Portals {
         return cell % cols;
     }
 
-    private static int getTop(int codeCell, int power, int deltaR, int deltaC) {
+    private static int getNext(int codeCell, int power, int deltaR, int deltaC) {
         int r = decodeRow(codeCell);
         int c = decodeCol(codeCell);
 
-        return (r + (deltaR * power)) * cols + c + (deltaC * power);
-    }
+        r += power * deltaR;
+        c += power * deltaC;
 
-    private static int getRight(int codeCell, int power) {
-        int r = decodeRow(codeCell);
-        int c = decodeCol(codeCell);
-
-        return (r * cols) + c + power;
-    }
-
-    private static int getBottom(int codeCell, int power) {
-        int r = decodeRow(codeCell);
-        int c = decodeCol(codeCell);
-
-        return ((r + power) * cols) + c;
-    }
-
-    private static int getLeft(int codeCell, int power) {
-        int r = decodeRow(codeCell);
-        int c = decodeCol(codeCell);
-
-        return (r * cols) + c - power;
+        int next = r * cols + c;
+        return (r < 0 || c < 0 || r >= rows || c >= cols) ? -1 : next;
     }
 
     private static int getPower(int codeCell) {
