@@ -1,5 +1,10 @@
 package datastructures.tasks;
 
+/**
+ * Bracket Expressions
+ * http://judge.telerikacademy.com/problem/04bracketexpressions
+ */
+
 import java.io.ByteArrayInputStream;
 import java.util.Queue;
 import java.util.Scanner;
@@ -14,11 +19,11 @@ public class BracketExpression {
         StringBuilder expression = new StringBuilder("");
         Stack<String> stack = new Stack<>();
         int lBracketCounter = 0;
-        boolean[] visited = new boolean[input.length()];
 
         while (true) {
             boolean hasBrackets = false;
-            for (int i = 0; i < input.length(); i++) {
+            int pointer = 0;
+            for (int i = pointer; i < input.length(); i++) {
                 char c = input.charAt(i);
                 if (c == '(') {
                     hasBrackets = true;
@@ -31,27 +36,30 @@ public class BracketExpression {
                     lBracketCounter -= 1;
                 }
 
-
-                if (lBracketCounter == 0 && expression.length() > 1) {
-                    stack.push(expression.toString());
-                    expression = new StringBuilder();
-                    hasBrackets = false;
+                if (lBracketCounter == 0) {
+                    if (expression.length() > 1) {
+                        stack.push(expression.toString());
+                        pointer = i;
+                        if (pointer == input.length() - 1) {
+                            input = expression.toString().substring(1, expression.length() - 1);
+                        }
+                        expression = new StringBuilder();
+                    } else {
+                        break;
+                    }
                 }
 
             }
-            if (!hasBrackets) {
-                break;
+
+            StringBuilder result = new StringBuilder();
+            while (!stack.empty()) {
+                result.append(stack.pop());
+
             }
-
-        }
-
-        StringBuilder result = new StringBuilder();
-        while (!stack.empty()) {
-            result.append(stack.pop());
             result.append("\n");
-        }
 
-        System.out.println(result);
+            System.out.println(result);
+        }
     }
 
     private static void fakeInput() {
