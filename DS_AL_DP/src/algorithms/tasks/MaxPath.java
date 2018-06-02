@@ -19,7 +19,7 @@ public class MaxPath {
         fakeInput();
         Scanner in = new Scanner(System.in);
 
-        Map<Integer, Set<Integer>> tree = readTree(in);
+        tree = readTree(in);
 
         print(tree);
         int start  = 0;
