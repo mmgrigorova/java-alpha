@@ -70,7 +70,7 @@ public class FriendsInNeed {
 
         while (hasNext) {
             int shortestKnownDistance = Integer.MAX_VALUE;
-            int currentNode = 0;
+            int currentNode = -1;
             for (int j = 0; j < distances[0].length; j++) {
                 int cDist = distances[1][j];
                 if (cDist < shortestKnownDistance) {
@@ -79,9 +79,12 @@ public class FriendsInNeed {
                         currentNode = distances[0][j];
                         hasNext = true;
                     } else {
-                        hasNext = false;
+                        if (currentNode == -1) {
+                            hasNext = false;
+                        }
                     }
                 }
+
             }
             visited.add(currentNode);
 
@@ -92,7 +95,7 @@ public class FriendsInNeed {
             for (Integer neighbour : neighbours.keySet()) {
                 int neighIdx = indexMap.get(neighbour);
                 int currIdx = indexMap.get(currentNode);
-                int previousDistance = distances[1][currIdx] + distances[1][neighIdx];
+                int previousDistance = distances[1][neighIdx];
                 if ((previousDistance < 0)) {
                     previousDistance = Integer.MAX_VALUE;
                 }
@@ -127,16 +130,33 @@ public class FriendsInNeed {
     }
 
     private static void fakeInput() {
-        String test = "5 8 2\n" +
-                "1 2\n" +
-                "1 2 5\n" +
-                "4 1 2\n" +
-                "1 3 1\n" +
-                "3 4 4\n" +
+        String test = "10 25 5\n" +
+                "9 8 1 4 3\n" +
+                "1 2 6\n" +
+                "1 3 10\n" +
+                "1 4 7\n" +
+                "1 5 9\n" +
+                "1 6 5\n" +
+                "1 7 14\n" +
+                "1 8 7\n" +
+                "1 9 14\n" +
+                "1 10 2\n" +
+                "2 8 19\n" +
+                "2 5 12\n" +
+                "5 8 11\n" +
                 "4 5 1\n" +
-                "2 4 3\n" +
-                "5 2 1\n" +
-                "2 3 20";
+                "5 10 2\n" +
+                "8 10 14\n" +
+                "3 10 8\n" +
+                "4 10 13\n" +
+                "7 10 10\n" +
+                "5 7 19\n" +
+                "7 8 9\n" +
+                "6 7 7\n" +
+                "2 7 2\n" +
+                "2 3 12\n" +
+                "2 6 9\n" +
+                "3 6 7";
         System.setIn(new ByteArrayInputStream(test.getBytes()));
     }
 }
