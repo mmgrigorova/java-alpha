@@ -13,6 +13,8 @@ public class Portals {
     static int rows = 0;
     static int[][] matrix;
     static int maxSum = 0;
+    static int[] dRows = {-1, 0, +1, 0};
+    static int[] dCols = {0, +1, 0, -1};
 
     public static void main(String[] args) {
         fakeInput();
@@ -45,9 +47,6 @@ public class Portals {
 
     private static void runLabRecursive(int currentCell, int tempSum, Set<Integer> visited) {
         boolean hasNext = false;
-
-        int[] dRows = {-1, 0, +1, 0};
-        int[] dCols = {0, +1, 0, -1};
         int power = getPower(currentCell);
 
         if (!visited.contains(currentCell)) {
