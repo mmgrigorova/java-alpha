@@ -1,6 +1,5 @@
 package datastructures.tasks;
 
-import java.awt.geom.QuadCurve2D;
 import java.io.*;
 import java.util.*;
 
@@ -16,6 +15,7 @@ public class CokiSkoki {
     public static void main(String[] args) {
         fakeInput();
         InputReader in = new InputReader();
+        OutputWriter out = new OutputWriter();
 
         int n = in.readInt();
 
@@ -26,6 +26,7 @@ public class CokiSkoki {
             int[] bj = {b, 0};
             buildings.add(bj);
         }
+
 
         iLikeBigJumps();
 
@@ -39,32 +40,32 @@ public class CokiSkoki {
             result.append(" ");
         }
 
-        System.out.println(maxJumps);
-        System.out.println(result.toString());
+        out.printLine(maxJumps);
+        out.printLine(result.toString());
+        out.close();
     }
 
     private static void iLikeBigJumps() {
         Stack<int[]> stack = new Stack<>();
-        int iterator = buildings.size() - 1;
 
-        while (true) {
-            int[] build = buildings.get(iterator);
-
-            while (!stack.empty() && stack.peek()[0] <= build[0]) {
-                stack.pop()[1] += stack.size();
+        for (int i = buildings.size()-1; i >= 0; i--) {
+            int[] building = buildings.get(i);
+            while (!stack.empty() && building[0] >= stack.peek()[0]){
+                stack.pop()[1] = stack.size();
             }
-            stack.push(build);
+            stack.push(building);
+        }
 
-            iterator--;
-            if (iterator <= -1) {
-                break;
-            }
+        while (!stack.empty()){
+            stack.pop()[1] = stack.size();
         }
     }
 
     private static void fakeInput() {
         String test = "6\n" +
                 "1 4 2 6 3 4";
+        String test1 = "5\n" +
+                "1 1 1 1 1";
         System.setIn(new ByteArrayInputStream(test.getBytes()));
     }
 
