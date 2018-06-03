@@ -12,6 +12,7 @@ public class Portals {
     static int cols = 0;
     static int rows = 0;
     static int[][] matrix;
+    static int maxSum = 0;
 
     public static void main(String[] args) {
         fakeInput();
@@ -34,28 +35,62 @@ public class Portals {
 //        int matrixVerify[][] = new int[rows][cols];
 //        for (int i = 0; i < rows; i++) {
 //            for (int j = 0; j < cols; j++) {
-//              matrixVerify[i][j] = i*cols + j;
+//              matrixVerify[i][j] = codeCell(i,j);
 //                System.out.printf("%4d ", matrixVerify[i][j] );
 //            }
 //            System.out.println();
 //        }
 //
 //
-//        System.out.printf("Top Left: %d \n", codeCell(0, 0));
-//        System.out.printf("Top Right: %d \n", codeCell(0, cols - 1));
-//        System.out.printf("Left Bottom: %d \n", codeCell(rows - 1, 0));
-//        System.out.printf("Right Bottom: %d \n", codeCell(rows - 1, cols - 1));
+//        System.out.println();
+//        for (int i = 0; i < rows; i++) {
+//            for (int j = 0; j < cols; j++) {
+//                System.out.printf("%4d ", matrix[i][j] );
+//            }
+//            System.out.println();
+//        }
 
-        int maxPath = runLabyrinth(matrix, sr, sc);
-        System.out.println(maxPath);
+        runWrapper(sr, sc);
+        System.out.println(maxSum);
     }
 
-    private static int runLabyrinth(int[][] matrix, int sr, int sc) {
-
-        int maxSum = 0;
-        int cols = matrix[0].length;
-//        ArrayList<Integer> visited = new ArrayList<>();
+    public static void runWrapper(int sr, int sc) {
+        int currentCell = codeCell(sr, sc);
         Set<Integer> visited = new HashSet<>();
+        runLabRecursive(currentCell, 0, visited);
+    }
+
+
+    private static void runLabRecursive(int currentCell, int tempSum, Set<Integer> visited) {
+        boolean hasNext = false;
+
+        int[] dRows = {-1, 0, +1, 0};
+        int[] dCols = {0, +1, 0, -1};
+        int power = getPower(currentCell);
+
+        if (!visited.contains(currentCell)) {
+            int sum = tempSum + power;
+            for (int i = 0; i < 4; i++) {
+                int next = getNext(currentCell, power, dRows[i], dCols[i]);
+                if (next > -1 && getPower(next) > -1) {
+                    hasNext = true;
+                    visited.add(currentCell);
+                    runLabRecursive(next, sum, visited);
+                    visited.remove(currentCell);
+                }
+            }
+        }
+
+        if (!hasNext) {
+            maxSum = Math.max(tempSum, maxSum);
+        }
+    }
+
+    private static int runLabyrinth(int sr, int sc) {
+        int maxSum = 0;
+//        ArrayList<Integer> visited = new ArrayList<>();
+//        Set<Integer> visited = new HashSet<>();
+        Stack<Integer> visited = new Stack<>();
         Stack<Integer> stack = new Stack<>();
 
         int currentCell = codeCell(sr, sc);
@@ -68,30 +103,27 @@ public class Portals {
 
         while (!stack.empty()) {
             boolean hasNext = false;
-            currentCell = stack.peek();
+            currentCell = stack.pop();
             visited.add(currentCell);
             int power = getPower(currentCell);
-
+            sum += power;
             for (int i = 0; i < 4; i++) {
                 int next = getNext(currentCell, power, dRows[i], dCols[i]);
-                if (!visited.contains(next) && next >= 0 && next < rows * cols && getPower(next) > -1) {
+                if (!visited.contains(next)
+                        && next >= 0 && next < rows * cols && getPower(next) > -1 && next >= 0 && next < rows * cols) {
                     stack.push(next);
-//                    visited.add(next);
                     hasNext = true;
                 }
             }
 
             if (!hasNext) {
-                System.out.printf("\nend of iteration: %d ,\n", sum);
+                sum -= power;
                 maxSum = Math.max(maxSum, sum);
+                System.out.printf("\nend of iteration: %d ,\n", sum);
                 System.out.printf("max %d \n", maxSum);
-                stack.pop();
-                visited.remove(currentCell);
-                continue;
             }
 
-            sum += power;
-            System.out.printf("power of current %d : %d, sum: %d\n",currentCell, power, sum);
+            System.out.printf("power of current %d : %d, sum: %d\n", currentCell, power, sum);
 
         }
         return maxSum;
@@ -128,7 +160,7 @@ public class Portals {
     }
 
     private static void fakeInput() {
-        String test1 = "0 0\n" +
+        String test2 = "0 0\n" +
                 "5 6\n" +
                 "1 # 5 4 6 4\n" +
                 "0 2 # 2 6 2\n" +
@@ -142,6 +174,16 @@ public class Portals {
                 "9 1 7 6 3 1 \n" +
                 "8 2 7 3 8 6\n" +
                 "3 6 1 3 1 2";
+        String test1 = "1 3\n" +
+                "8 8\n" +
+                "6 6 1 3 7 2 6 2\n" +
+                "6 3 6 6 7 # # 2\n" +
+                "4 1 3 # # 4 1 1\n" +
+                "7 2 2 7 # 1 # 6\n" +
+                "6 # 5 2 # 7 6 6\n" +
+                "1 4 4 2 4 5 6 3\n" +
+                "7 4 4 7 4 3 3 2\n" +
+                "# 1 4 5 1 7 # #\n";
         System.setIn(new ByteArrayInputStream(test.getBytes()));
     }
 
