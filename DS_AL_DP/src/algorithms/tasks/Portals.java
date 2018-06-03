@@ -9,12 +9,12 @@ import java.util.*;
  */
 
 public class Portals {
-    static int cols = 0;
-    static int rows = 0;
-    static int[][] matrix;
-    static int maxSum = 0;
-    static int[] dRows = {-1, 0, +1, 0};
-    static int[] dCols = {0, +1, 0, -1};
+    private static int cols = 0;
+    private static int rows = 0;
+    private static int[][] matrix;
+    private static int maxSum = 0;
+    private static int[] dRows = {-1, 0, +1, 0};
+    private static int[] dCols = {0, +1, 0, -1};
 
     public static void main(String[] args) {
         fakeInput();
@@ -38,7 +38,7 @@ public class Portals {
         System.out.println(maxSum);
     }
 
-    public static void runWrapper(int sr, int sc) {
+    private static void runWrapper(int sr, int sc) {
         int currentCell = codeCell(sr, sc);
         Set<Integer> visited = new HashSet<>();
         runLabRecursive(currentCell, 0, visited);
