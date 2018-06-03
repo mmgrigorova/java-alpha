@@ -1,6 +1,8 @@
 package algorithms.tasks;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -18,19 +20,19 @@ public class Portals {
 
     public static void main(String[] args) {
         fakeInput();
-        Scanner in = new Scanner(System.in);
+//        Scanner in = new Scanner(System.in);
+        InputReader in = new InputReader();
 
-        int sr = in.nextInt();
-        int sc = in.nextInt();
-        rows = in.nextInt();
-        cols = in.nextInt();
-        in.nextLine();
+        int sr = in.readInt();
+        int sc = in.readInt();
+        rows = in.readInt();
+        cols = in.readInt();
         matrix = new int[rows][cols];
 
         for (int i = 0; i < rows; i++) {
-            String[] oneRow = in.nextLine().split(" ");
             for (int j = 0; j < cols; j++) {
-                matrix[i][j] = oneRow[j].equals("#") ? -1 : Integer.parseInt(oneRow[j]);
+                String nextEl = in.readLine();
+                matrix[i][j] = nextEl.equals("#") ? -1 : Integer.parseInt(nextEl);
             }
         }
 
@@ -107,5 +109,130 @@ public class Portals {
                 "3 6 1 3 1 2";
         System.setIn(new ByteArrayInputStream(test.getBytes()));
     }
+    static class InputReader {
+        private InputStream stream;
+        private byte[] buf = new byte[1024];
+        private int curChar;
+        private int numChars;
 
+        InputReader() {
+            this.stream = System.in;
+        }
+
+        int read() {
+            if (numChars == -1)
+                throw new InputMismatchException();
+            if (curChar >= numChars) {
+                curChar = 0;
+                try {
+                    numChars = stream.read(buf);
+                } catch (IOException e) {
+                    throw new InputMismatchException();
+                }
+                if (numChars <= 0)
+                    return -1;
+            }
+            return buf[curChar++];
+        }
+
+        int readInt() {
+            int c = read();
+            while (isSpaceChar(c)) {
+                c = read();
+            }
+            int sgn = 1;
+            if (c == '-') {
+                sgn = -1;
+                c = read();
+            }
+            int res = 0;
+            do {
+                if (c < '0' || c > '9') {
+                    throw new InputMismatchException();
+                }
+                res *= 10;
+                res += c - '0';
+                c = read();
+            } while (!isSpaceChar(c));
+            return res * sgn;
+        }
+
+        long readLong() {
+            int c = read();
+            while (isSpaceChar(c)) {
+                c = read();
+            }
+            int sgn = 1;
+            if (c == '-') {
+                sgn = -1;
+                c = read();
+            }
+            long res = 0;
+            do {
+                if (c < '0' || c > '9') {
+                    throw new InputMismatchException();
+                }
+                res *= 10;
+                res += c - '0';
+                c = read();
+            } while (!isSpaceChar(c));
+            return res * sgn;
+        }
+
+        double readDouble() {
+            int c = read();
+            while (isSpaceChar(c)) {
+                c = read();
+            }
+            int sgn = 1;
+            if (c == '-') {
+                sgn = -1;
+                c = read();
+            }
+            double res = 0;
+            while (!isSpaceChar(c) && c != '.' && c != ',') {
+                if (c == 'e' || c == 'E') {
+                    return res * Math.pow(10, readInt());
+                }
+                if (c < '0' || c > '9') {
+                    throw new InputMismatchException();
+                }
+                res *= 10;
+                res += c - '0';
+                c = read();
+            }
+            if (c == '.' || c == ',') {
+                c = read();
+                double m = 1;
+                while (!isSpaceChar(c)) {
+                    if (c == 'e' || c == 'E') {
+                        return res * Math.pow(10, readInt());
+                    }
+                    if (c < '0' || c > '9') {
+                        throw new InputMismatchException();
+                    }
+                    m /= 10;
+                    res += (c - '0') * m;
+                    c = read();
+                }
+            }
+            return res * sgn;
+        }
+
+        String readLine() {
+            int c = read();
+            while (isSpaceChar(c))
+                c = read();
+            StringBuilder res = new StringBuilder();
+            do {
+                res.appendCodePoint(c);
+                c = read();
+            } while (!isSpaceChar(c));
+            return res.toString();
+        }
+
+        boolean isSpaceChar(int c) {
+            return c == '\n' || c == '\r' || c == '\t' || c == -1 || c == ' ';
+        }
+    }
 }
