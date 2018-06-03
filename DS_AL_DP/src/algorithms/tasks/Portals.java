@@ -1,10 +1,7 @@
 package algorithms.tasks;
 
 import java.io.ByteArrayInputStream;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Portals
@@ -54,8 +51,10 @@ public class Portals {
     }
 
     private static int runLabyrinth(int[][] matrix, int sr, int sc) {
+
         int maxSum = 0;
         int cols = matrix[0].length;
+//        ArrayList<Integer> visited = new ArrayList<>();
         Set<Integer> visited = new HashSet<>();
         Stack<Integer> stack = new Stack<>();
 
@@ -63,7 +62,6 @@ public class Portals {
         stack.push(currentCell);
         int sum = 0;
         visited.add(currentCell);
-        int power = 0;
         //top , right, bottom, left
         int[] dRows = {-1, 0, +1, 0};
         int[] dCols = {0, +1, 0, -1};
@@ -72,26 +70,28 @@ public class Portals {
             boolean hasNext = false;
             currentCell = stack.peek();
             visited.add(currentCell);
-            int p = getPower(currentCell);
-            System.out.printf("power of current %d : %d, sum: %d\n",currentCell, p, sum);
+            int power = getPower(currentCell);
 
             for (int i = 0; i < 4; i++) {
-                int next = getNext(currentCell, p, dRows[i], dCols[i]);
+                int next = getNext(currentCell, power, dRows[i], dCols[i]);
                 if (!visited.contains(next) && next >= 0 && next < rows * cols && getPower(next) > -1) {
                     stack.push(next);
+//                    visited.add(next);
                     hasNext = true;
-                    sum += power;
-                    power = getPower(currentCell);
                 }
             }
 
             if (!hasNext) {
-                sum -= power;
                 System.out.printf("\nend of iteration: %d ,\n", sum);
                 maxSum = Math.max(maxSum, sum);
                 System.out.printf("max %d \n", maxSum);
                 stack.pop();
+                visited.remove(currentCell);
+                continue;
             }
+
+            sum += power;
+            System.out.printf("power of current %d : %d, sum: %d\n",currentCell, power, sum);
 
         }
         return maxSum;
@@ -128,6 +128,13 @@ public class Portals {
     }
 
     private static void fakeInput() {
+        String test1 = "0 0\n" +
+                "5 6\n" +
+                "1 # 5 4 6 4\n" +
+                "0 2 # 2 6 2\n" +
+                "9 1 7 6 3 1 \n" +
+                "8 2 7 3 8 6\n" +
+                "3 6 1 3 1 2";
         String test = "0 0\n" +
                 "5 6\n" +
                 "1 # 5 4 6 4\n" +
