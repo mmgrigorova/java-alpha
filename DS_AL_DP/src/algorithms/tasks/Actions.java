@@ -2,6 +2,7 @@ package algorithms.tasks;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Actions {
     private static Comparator<int[]> aiCompare = (o1, o2) -> {
@@ -9,8 +10,8 @@ public class Actions {
         int compareBySecond = o1[1] - o2[1];
         return compareByFirst == 0 ? compareBySecond : compareByFirst;
     };
-    private static TreeSet<int[]> actions = new TreeSet<>(aiCompare);
-
+    private static List<int[]> actions = new ArrayList<>();
+    private static Set<Integer> numbers = new HashSet<>();
 
     public static void main(String[] args) {
         fakeInput();
@@ -32,36 +33,105 @@ public class Actions {
             action[0] = Integer.parseInt(actionStrings[0]);
             action[1] = Integer.parseInt(actionStrings[1]);
             actions.add(action);
+
+//            numbers.add(action[0]);
+            numbers.add(action[1]);
         }
+
+        actions.sort(aiCompare);
+
 
         findSequence(sequence);
 
         StringBuilder result = new StringBuilder();
+        for (int i : sequence) {
+            result.append(i);
+            result.append("\n");
+        }
+
+        out.printLine(result);
         out.close();
     }
 
 
-    private static void findSequence(int[] sequence){
+    private static void findSequence(int[] sequence) {
         for (int i = 0; i < sequence.length; i++) {
-            sequence[i] = 0;
+            if (numbers.contains(i) && !existsBigger(i)) {
+                int iterator = 0;
+                while (!actions.isEmpty()) {
+                    int[] action = actions.get(iterator);
+                    int parent = action[0];
+                    int child = action[1];
 
-            while (!actions.isEmpty()){
-                int[] action = actions.pollFirst();
-                int parent = action[0];
-                int child = action[1];
+                    boolean hasParent = hasParent(parent);
+
+                    if (!isParent(child) && child > -1) {
+                        int[] childRow = {child, -1};
+                        actions.add(childRow);
+                    }
+
+                    if (!hasParent) {
+                        sequence[i] = parent;
+                        deleteAllChildren(parent);
+                        break;
+                    } else {
+                        iterator++;
+                    }
                 }
-
-
+            } else if (sequence[i] < 0) {
+                int[] action = new int[2];
+                action[0] = i;
+                action[1] = -1;
+                actions.add(action);
+                sequence[i] = i;
+            }
         }
     }
 
+    private static boolean existsBigger(int number) {
+        for (Integer integer : numbers) {
+            if (integer == number){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isParent(int child) {
+        for (int[] action : actions) {
+            if (child == action[0]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasParent(int parent) {
+        for (int[] action : actions) {
+            if (parent == action[1]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static void deleteAllChildren(int parent) {
+        actions = actions.stream()
+                .filter(x -> parent != x[0])
+                .collect(Collectors.toList());
+    }
+
     private static void fakeInput() {
-        String test = "5 5\n" +
-                "0 3\n" +
-                "2 1\n" +
-                "1 4\n" +
-                "1 3\n" +
-                "4 3";
+//        String test = "5 5\n" +
+//                "0 3\n" +
+//                "2 1\n" +
+//                "1 4\n" +
+//                "1 3\n" +
+//                "4 3";
+        String test = "8 3\n" +
+                "0 7\n" +
+                "0 4\n" +
+                "7 4";
         System.setIn(new ByteArrayInputStream(test.getBytes()));
     }
 
