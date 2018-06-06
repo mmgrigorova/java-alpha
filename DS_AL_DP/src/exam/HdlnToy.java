@@ -1,11 +1,13 @@
 package exam;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.InputMismatchException;
+import java.util.Queue;
+import java.util.Stack;
 
 public class HdlnToy {
-//    private static Queue<String> input = new ArrayDeque<>();
-    private static List<String> input = new ArrayList<>();
+    private static Queue<String> input = new ArrayDeque<>();
 
     public static void main(String[] args) {
         fakeInput();
@@ -34,48 +36,42 @@ public class HdlnToy {
         Stack<String> opened = new Stack<>();
         Stack<Integer> whiteStack = new Stack<>();
 
-        for (int i = 0; i < input.size(); i++) {
-            String tag = input.get(i);
+        for (String tag : input) {
             if (opened.empty()) {
                 opened.push(tag);
                 whiteStack.push(0);
                 String openingTag = openingTag(tag, 0);
                 result.append(openingTag);
                 result.append("\n");
+                continue;
+            }
+            while (!opened.isEmpty()) {
+                if (tagIndent(tag) > tagIndent(opened.peek()) || opened.isEmpty()) {
+                    int w = whiteStack.peek();
+                    opened.push(tag);
+                    String openingTag = openingTag(tag, w+1);
+                    result.append(openingTag);
+                    result.append("\n");
+                    whiteStack.push(w+1);
+                    break;
+                } else {
+                    int w = whiteStack.pop();
+                    String closedTag = opened.pop();
+                    String closingTag = closingTag(closedTag, w);
+                    result.append(closingTag);
+                    result.append("\n");
+                    if (closedTag.equals(tag)) break;
+                }
 
-            }else {
-                while (!opened.isEmpty()) {
-                    if (tagIndent(tag) >= tagIndent(opened.peek()) || opened.isEmpty()) {
-                        int w = whiteStack.peek();
-                        opened.push(tag);
-                        String openingTag = openingTag(tag, w + 1);
-                        result.append(openingTag);
-                        result.append("\n");
-                        whiteStack.push(w + 1);
-                        break;
-                    }
-                    if (tagIndent(tag) < tagIndent(opened.peek())) {
-                        int w = whiteStack.pop();
-                        String closedTag = opened.pop();
-                        String closingTag = closingTag(closedTag, w);
-                        result.append(closingTag);
-                        result.append("\n");
-                    }
-                    if(i == input.size()-1) {
-                        opened.push(tag);
-                        whiteStack.push(0);
-                    }
+                if (opened.empty()) {
+                    opened.push(tag);
+                    whiteStack.push(0);
+                    String openingTag = openingTag(tag, 0);
+                    result.append(openingTag);
+                    result.append("\n");
+                    continue;
                 }
             }
-        }
-
-        while (!opened.isEmpty()) {
-                String tag = opened.pop();
-                int w = whiteStack.pop();
-                String closingTag = closingTag(tag, w);
-                result.append(closingTag);
-                result.append("\n");
-
         }
 
         return result;
@@ -103,7 +99,7 @@ public class HdlnToy {
 
     private static void fakeInput() {
 
-        String test1 = "9\n" +
+        String test = "9\n" +
                 "a1\n" +
                 "b2\n" +
                 "c3\n" +
@@ -114,11 +110,6 @@ public class HdlnToy {
                 "h1\n" +
                 "i2";
 
-        String test = "4\n" +
-                "h1\n" +
-                "r5\n" +
-                "d2\n" +
-                "a0";
         System.setIn(new ByteArrayInputStream(test.getBytes()));
     }
 
