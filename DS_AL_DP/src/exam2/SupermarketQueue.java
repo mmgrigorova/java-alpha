@@ -6,7 +6,7 @@ import java.util.*;
 public class SupermarketQueue {
     private static final String OKAY = "OK\n";
     private static final String ERROR = "Error\n";
-    private static LinkedList<String> queue = new LinkedList<>();
+    private static List<String> queue = new ArrayList<>();
     private static Map<String, Integer> peopleCountByName = new HashMap<>();
     private static StringBuilder result = new StringBuilder();
 
@@ -53,7 +53,7 @@ public class SupermarketQueue {
             return;
         }
         for (int i = 0; i < count; i++) {
-            String served = queue.poll();
+            String served = queue.remove(0);
             result.append(served);
             result.append(" ");
             peopleCountByName.merge(served, -1, Integer::sum);
