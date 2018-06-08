@@ -20,6 +20,7 @@ public class BracketExpression {
         String input = in.nextLine();
 
 //        String pattern = "(?=\\()([^\\]]+)(?=\\))";
+//        String pattern = "(?=\\()([^\\)]+[^\\(])(?!\\))";
         String pattern = "(?=\\()([^\\)]+[^\\(])(?!\\))";
 
         Pattern p = Pattern.compile(pattern);
