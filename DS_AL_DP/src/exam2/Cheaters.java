@@ -11,6 +11,7 @@ public class Cheaters {
     private static long outputTime = 0;
     private static long readIn = 0;
     private static long putTime = 0;
+    private static long inMethodTime = 0;
 
 
     public static void main(String[] args) {
@@ -25,6 +26,7 @@ public class Cheaters {
 
 
         System.out.println("Input: " + inputTime);
+        System.out.println("Input Overhead: " + inMethodTime);
         System.out.println("Input In: " + readIn);
         System.out.println("Input Put: " + putTime);
         System.out.println("Output: " + outputTime);
@@ -82,9 +84,14 @@ public class Cheaters {
     }
 
     private static InputReader getInput() {
+
+        long startInM = System.currentTimeMillis();
+
         fakeInput();
         InputReader in = new InputReader();
-        OutputWriter out = new OutputWriter();
+//        OutputWriter out = new OutputWriter();
+        long endInM = System.currentTimeMillis();
+        inMethodTime += endInM - startInM;
 
         // Read data
         int n = in.readInt();
