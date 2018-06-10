@@ -53,11 +53,12 @@ public class SupermarketQueue {
             return;
         }
         for (int i = 0; i < count; i++) {
-            String served = queue.remove(0);
+            String served = queue.get(i);
             result.append(served);
             result.append(" ");
             peopleCountByName.merge(served, -1, Integer::sum);
         }
+        queue = new ArrayList<String>(queue.subList(count, queue.size()));
         result.append("\n");
     }
 

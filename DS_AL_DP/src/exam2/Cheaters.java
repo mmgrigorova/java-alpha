@@ -6,23 +6,103 @@ import java.util.*;
 
 public class Cheaters {
     private static Map<String, Map> dependenciesBySubject = new HashMap<>();
-    private static Stack<String> result = new Stack<>();
+    private static List<String> result = new ArrayList<>();
+    private static long inputTime = 0;
+    private static long outputTime = 0;
+    private static long readIn = 0;
+    private static long putTime = 0;
+
 
     public static void main(String[] args) {
+        long start = System.currentTimeMillis();
+
+        System.out.println("print");
+        for (int i = 0; i < 200000; i++) {
+            readData();
+        }
+
+        long end = System.currentTimeMillis();
+
+
+        System.out.println("Input: " + inputTime);
+        System.out.println("Input In: " + readIn);
+        System.out.println("Input Put: " + putTime);
+        System.out.println("Output: " + outputTime);
+        System.out.println("End - start: " + (end - start));
+    }
+
+    private static void readData() {
+        long start = System.currentTimeMillis();
+        InputReader in = getInput();
+        long end = System.currentTimeMillis();
+        inputTime += end - start;
+
+        start = System.currentTimeMillis();
+        outputResult(in);
+        end = System.currentTimeMillis();
+        outputTime += end - start;
+
+    }
+
+    private static void outputResult(InputReader in) {
+        // Read commands
+        int m = in.readInt();
+
+        for (int i = 0; i < m; i++) {
+            result.clear();
+            String command = in.readLine();
+            int space1Idx = command.indexOf(' ');
+            String personX = command.substring(0,space1Idx);
+            String subject = command.substring(space1Idx+1);
+
+            Map<String, Set> dependencyMapForSubject = dependenciesBySubject.get(subject);
+            result.add(personX);
+            findDependencies(personX, dependencyMapForSubject, new HashSet<>());
+
+            StringBuilder res = new StringBuilder();
+//            while (!result.empty()) {
+//                res.append(result.pop());
+//                if (result.size() > 0) {
+//                    res.append(", ");
+//                }
+//            }
+
+            for (int j = result.size() - 1; j >= 0; j--) {
+                res.append(result.get(j));
+
+                if (j == 0) {
+                    continue;
+                }
+                res.append(", ");
+            }
+//            out.printLine(res);
+//            System.out.println(res);
+        }
+//        out.close();
+    }
+
+    private static InputReader getInput() {
         fakeInput();
         InputReader in = new InputReader();
         OutputWriter out = new OutputWriter();
+
         // Read data
         int n = in.readInt();
         for (int i = 0; i < n; i++) {
-            String[] line = in.readLine().split(" ");
-            String personX = line[0];
-            String personY = line[1];
-            StringBuilder subjectB = new StringBuilder();
-            for (int j = 2; j < line.length; j++) {
-                subjectB.append(line[j]);
-            }
-            String subject = subjectB.toString();
+            long startIn = System.currentTimeMillis();
+//            String[] line = in.readLine().split(" ");
+            String line = in.readLine();
+            int space1Idx = line.indexOf(' ');
+            int space2Idx = line.indexOf(' ', space1Idx + 1);
+            String personX = line.substring(0,space1Idx);
+            String personY = line.substring(space1Idx+1, space2Idx);
+            String subject = line.substring(space2Idx+1);
+
+            long endIn = System.currentTimeMillis();
+            readIn += endIn - startIn;
+
+            long startPut = System.currentTimeMillis();
+
             if (!dependenciesBySubject.containsKey(subject)) {
                 Map<String, Set> dependBySubject = new HashMap<>();
                 dependenciesBySubject.put(subject, dependBySubject);
@@ -30,39 +110,26 @@ public class Cheaters {
 
             Map<String, Set> personDependencyBySubject = dependenciesBySubject.get(subject);
 
-            if (!personDependencyBySubject.containsKey(personX)) {
-                Set<String> prerequisitePeople = new TreeSet<>();
-                personDependencyBySubject.put(personX, prerequisitePeople);
-            }
+//            if (!personDependencyBySubject.containsKey(personX)) {
+//                Set<String> prerequisitePeople = new HashSet<>();
+//                personDependencyBySubject.put(personX, prerequisitePeople);
+//            }
+//
+//            personDependencyBySubject.get(personX).add(personY);
 
-            personDependencyBySubject.get(personX).add(personY);
+
+
+            Set<String> preqs = personDependencyBySubject.get(personX);
+            if(preqs == null){
+                preqs = new TreeSet<>();
+                personDependencyBySubject.put(personX, preqs);
+            }
+            preqs.add(personY);
+
+            long endPut = System.currentTimeMillis();
+            putTime += endPut - startPut;
         }
-
-        // Read commands
-        int m = in.readInt();
-
-        for (int i = 0; i < m; i++) {
-            String[] command = in.readLine().split(" ");
-            String personX = command[0];
-            StringBuilder subjectB = new StringBuilder();
-            for (int j = 1; j < command.length; j++) {
-                subjectB.append(command[j]);
-            }
-            String subject = subjectB.toString();
-            Map<String, Set> dependencyMapForSubject = dependenciesBySubject.get(subject);
-            result.push(personX);
-            findDependencies(personX, dependencyMapForSubject, new HashSet<>());
-
-            StringBuilder res = new StringBuilder();
-            while (!result.empty()) {
-                res.append(result.pop());
-                if (result.size() > 0) {
-                    res.append(", ");
-                }
-            }
-            out.printLine(res);
-        }
-        out.close();
+        return in;
     }
 
     private static void findDependencies(String personX,
@@ -76,13 +143,11 @@ public class Cheaters {
         for (String prerequisite : prerequisites) {
             if (!visited.contains(prerequisite)) {
                 visited.add(prerequisite);
-                result.push(prerequisite);
+                result.add(prerequisite);
                 findDependencies(prerequisite, dependencyMapForSubject, visited);
             }
         }
-
     }
-
 
     private static void fakeInput() {
         String test = "7\n" +
