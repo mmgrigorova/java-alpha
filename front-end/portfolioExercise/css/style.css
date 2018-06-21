@@ -1,0 +1,140 @@
+body {
+    /*background-color: #581845;*/
+    background: linear-gradient(rgba(192, 72, 72, .4), rgba(72, 0, 72, .4)), url("../images/night.jpg");
+    background-size: unset;
+    color: #d6ccd2;
+    padding: 0% 5% 0% 5%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0px 0px 0px 0px;
+    height: 100%;
+}
+
+h1 {
+    color: #fff;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+header {
+    height: 20%;
+    border-bottom: 1px solid #DAF7A6;
+    padding: 1% 0 2% 0;
+}
+
+header img {
+    border-radius: 60%;
+    width: 80px;
+}
+
+main {
+    height: 65%;
+    padding: 0% 0% 2% 0%;
+}
+
+/* main>section {
+    display: flex;
+    justify-content: space-between;
+} */
+
+.imageholder {
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: 100%;
+    min-height: 180px;
+    max-width: 100%;
+}
+
+.imageholder.diamond {
+    background-image: url("../images/02.jpg");
+}
+
+.imageholder.movies {
+    background-image: url("../images/03.jpg");
+}
+
+.imageholder.norys {
+    background-image: url("../images/07.png");
+}
+
+.imageholder.jobs {
+    background-image: url("../images/08.jpg");
+}
+
+.showcase {
+    /* display: inline-block; */
+    float: left;
+    width: 23%;
+    text-align: left;
+    vertical-align: top;
+    margin: 0% 5px 0% 5px;
+}
+
+a {
+    color: #FFC300;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FFC300;
+    text-decoration: underline;
+}
+
+.showcase img {
+    width: 100%;
+}
+
+.tags {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 0.5em;
+    text-transform: uppercase;
+    color: #FF5733;
+}
+
+footer {
+    height: 10%;
+    border-top: 1px solid #DAF7A6;
+    padding-top: 1%;
+    text-align: right;
+}
+
+footer p {
+    display: inline-block;
+    width: 20%;
+}
+
+ul {
+    width: 79%;
+    display: inline-block;
+    padding-left: 0px;
+    text-align: left;
+}
+
+li {
+    display: inline;
+    list-style-type: none;
+    min-width: 10%;
+}
+
+.center {
+    text-align: center;
+}
+
+.clearfix:after {
+    content: ' ';
+    clear: both;
+    display: block;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .showcase {
+        width: 48%;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .showcase {
+        width: 100%;
+        margin: 20px 0px;
+    }
+}

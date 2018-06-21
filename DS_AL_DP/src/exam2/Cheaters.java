@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.*;
 
 public class Cheaters {
-    private static Map<String, Map> dependenciesBySubject = new HashMap<>();
+    private static Map<String, Map<String, Set<String>>> dependenciesBySubject = new HashMap<>();
     private static List<String> result = new ArrayList<>();
     private static long inputTime = 0;
     private static long outputTime = 0;
@@ -15,22 +15,22 @@ public class Cheaters {
 
 
     public static void main(String[] args) {
-        long start = System.currentTimeMillis();
+//        long start = System.currentTimeMillis();
 
-        System.out.println("print");
-        for (int i = 0; i < 200000; i++) {
+//        System.out.println("print");
+//        for (int i = 0; i < 200000; i++) {
             readData();
-        }
+//        }
 
         long end = System.currentTimeMillis();
 
 
-        System.out.println("Input: " + inputTime);
-        System.out.println("Input Overhead: " + inMethodTime);
-        System.out.println("Input In: " + readIn);
-        System.out.println("Input Put: " + putTime);
-        System.out.println("Output: " + outputTime);
-        System.out.println("End - start: " + (end - start));
+//        System.out.println("Input: " + inputTime);
+//        System.out.println("Input Overhead: " + inMethodTime);
+//        System.out.println("Input In: " + readIn);
+//        System.out.println("Input Put: " + putTime);
+//        System.out.println("Output: " + outputTime);
+//        System.out.println("End - start: " + (end - start));
     }
 
     private static void readData() {
@@ -46,50 +46,12 @@ public class Cheaters {
 
     }
 
-    private static void outputResult(InputReader in) {
-        // Read commands
-        int m = in.readInt();
-
-        for (int i = 0; i < m; i++) {
-            result.clear();
-            String command = in.readLine();
-            int space1Idx = command.indexOf(' ');
-            String personX = command.substring(0,space1Idx);
-            String subject = command.substring(space1Idx+1);
-
-            Map<String, Set> dependencyMapForSubject = dependenciesBySubject.get(subject);
-            result.add(personX);
-            findDependencies(personX, dependencyMapForSubject, new HashSet<>());
-
-            StringBuilder res = new StringBuilder();
-//            while (!result.empty()) {
-//                res.append(result.pop());
-//                if (result.size() > 0) {
-//                    res.append(", ");
-//                }
-//            }
-
-            for (int j = result.size() - 1; j >= 0; j--) {
-                res.append(result.get(j));
-
-                if (j == 0) {
-                    continue;
-                }
-                res.append(", ");
-            }
-//            out.printLine(res);
-//            System.out.println(res);
-        }
-//        out.close();
-    }
-
     private static InputReader getInput() {
 
         long startInM = System.currentTimeMillis();
 
         fakeInput();
         InputReader in = new InputReader();
-//        OutputWriter out = new OutputWriter();
         long endInM = System.currentTimeMillis();
         inMethodTime += endInM - startInM;
 
@@ -97,7 +59,6 @@ public class Cheaters {
         int n = in.readInt();
         for (int i = 0; i < n; i++) {
             long startIn = System.currentTimeMillis();
-//            String[] line = in.readLine().split(" ");
             String line = in.readLine();
             int space1Idx = line.indexOf(' ');
             int space2Idx = line.indexOf(' ', space1Idx + 1);
@@ -111,11 +72,11 @@ public class Cheaters {
             long startPut = System.currentTimeMillis();
 
             if (!dependenciesBySubject.containsKey(subject)) {
-                Map<String, Set> dependBySubject = new HashMap<>();
+                Map<String, Set<String>> dependBySubject = new HashMap<>();
                 dependenciesBySubject.put(subject, dependBySubject);
             }
 
-            Map<String, Set> personDependencyBySubject = dependenciesBySubject.get(subject);
+            Map<String, Set<String>> personDependencyBySubject = dependenciesBySubject.get(subject);
 
 //            if (!personDependencyBySubject.containsKey(personX)) {
 //                Set<String> prerequisitePeople = new HashSet<>();
@@ -140,7 +101,7 @@ public class Cheaters {
     }
 
     private static void findDependencies(String personX,
-                                         Map<String, Set> dependencyMapForSubject,
+                                         Map<String, Set<String>> dependencyMapForSubject,
                                          Set<String> visited) {
         Set<String> prerequisites = dependencyMapForSubject.get(personX);
         visited.add(personX);
@@ -156,13 +117,54 @@ public class Cheaters {
         }
     }
 
+
+    private static void outputResult(InputReader in) {
+        OutputWriter out = new OutputWriter();
+
+        // Read commands
+        int m = in.readInt();
+
+        for (int i = 0; i < m; i++) {
+            result.clear();
+            String command = in.readLine();
+            int space1Idx = command.indexOf(' ');
+            String personX = command.substring(0,space1Idx);
+            String subject = command.substring(space1Idx+1);
+
+            Map<String, Set<String>> dependencyMapForSubject = dependenciesBySubject.get(subject);
+            result.add(personX);
+            findDependencies(personX, dependencyMapForSubject, new HashSet<>());
+
+            StringBuilder res = new StringBuilder();
+//            while (!result.empty()) {
+//                res.append(result.pop());
+//                if (result.size() > 0) {
+//                    res.append(", ");
+//                }
+//            }
+
+            for (int j = result.size() - 1; j >= 0; j--) {
+                res.append(result.get(j));
+
+                if (j == 0) {
+                    continue;
+                }
+                res.append(", ");
+            }
+            out.printLine(res);
+//            System.out.println(res);
+        }
+        out.close();
+    }
+
+
     private static void fakeInput() {
         String test = "7\n" +
                 "Coki Doncho Math\n" +
                 "Doncho Coki Graphs\n" +
                 "Doncho Yana Math\n" +
                 "Stamat Coki Graphs\n" +
-                "Doncho Stamat Math \n" +
+                "Doncho Stamat Math\n" +
                 "Doncho Coki Dynamic Programming\n" +
                 "Stamat Yana Math\n" +
                 "6\n" +

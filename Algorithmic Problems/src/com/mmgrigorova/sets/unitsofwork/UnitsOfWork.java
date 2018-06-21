@@ -1,18 +1,16 @@
 package com.mmgrigorova.sets.unitsofwork;
 
-import jdk.nashorn.api.tree.Tree;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class UnitsOfWork {
-    public static Set<Unit> unitsOfWork;
-    public static HashMap<String, Unit> unitNames;
-    public static HashMap<String, TreeSet<Unit>> unitsOfType;
+    private static Set<Unit> unitsOfWork;
+    private static HashMap<String, Unit> unitNames;
+    private static HashMap<String, TreeSet<Unit>> unitsOfType;
     private static StringBuilder result = new StringBuilder();
 
     static {

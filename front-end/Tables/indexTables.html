@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tables</title>
+    <style>
+        table {
+            font-weight: bold;
+        }
+
+        table,
+        td {
+
+            border: solid 1px gray;
+            border-collapse: collapse;
+        }
+
+        td:first-child {
+            min-width: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Registration form</h1>
+    <table>
+        <tr>
+            <td>Last Name</td>
+            <td colspan=3>
+                <form>
+                    <input type="text" name="lname">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td colspan=3>
+                <form>
+                    <input type="text" name="fname">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td colspan=3>
+                <form>
+                    <textarea name="address" cols="50" rows="5"></textarea>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td>
+                <form>
+                    <input type="text" name="city">
+                </form>
+            </td>
+            <td>
+                State
+            </td>
+            <td>
+                <form action="/">
+                    <input type="text" name="state">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Zip/Postal Code</td>
+            <td colspan=3>
+                <input type="number" name="ZIP">
+            </td>
+        </tr>
+        <tr>
+            <td>Country</td>
+            <td colspan=3>
+                <select name="Country">
+                    <option value="bulgaria">Bulgaria</option>
+                    <option value="usa">USA</option>
+                    <option value="austria">Austria</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Phone (contry code, area code, number)</td>
+            <td colspan=3>
+                <form action="/">
+                    <input type="tel" name="phone">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>E-mail</td>
+            <td colspan=3>
+                <input type="email" name="email" size="40" placeholder="john.smith@example.com">
+            </td>
+        </tr>
+        <tr>
+            <td>Birth Date</td>
+            <td colspan=3>
+                <form action="/">
+                    Month 
+                    <input type="text" size ="3"> 
+                    Day
+                    <input type="text" size ="3"> 
+                    Year
+                    <input type="text" size ="4" maxlength="4">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td colspan=3><select name="gender" id="">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select></td>
+        </tr>
+
+    </table>
+</body>
+
+</html>
