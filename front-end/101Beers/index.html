@@ -14,19 +14,19 @@
             var query = 'beers?page=1&per_page=20';
             var url = new URL(endPoint + query);
 
+            var beers;
             $.getJSON(url, function (data) {
-                var items = [];
-                console.log(data);
-                $.each(data, function(key, beer){
-                    items.push("<li id='" + beer.id + "'>" + beer.name + "</li>"
-                    );
+                    beers = data;
+                    $.each(data, function (i, item) {
+                        $('body')
+                            .append('Name: ' + item.name + "<br>")
+                            .append('Description: ' + item.description + "<br>");
+                    });
+                    console.log('success');
+                }, "json")
+                .done(function () {
+                    console.log('Beers: ' + beers.response);
                 });
-
-                $("<ul/>", {
-                    "class": "my-new-list",
-                    html: items.join("")
-                }).appendTo("body");
-            });
         });
     </script>
 </head>
