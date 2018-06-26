@@ -1,33 +1,83 @@
 body {
     /*background-color: #581845;*/
-    background: linear-gradient(rgba(192, 72, 72, .4), rgba(72, 0, 72, .4)), url("../images/night.jpg");
-    background-size: unset;
-    color: #d6ccd2;
-    padding: 0% 5% 0% 5%;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #ececec;
+    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+    font-family: 'Raleway', sans-serif;
+    font-size: 1em;
     margin: 0px 0px 0px 0px;
     height: 100%;
 }
 
-h1 {
-    color: #fff;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+header {
+    height: 100vh;
+    background: linear-gradient(rgba(192, 72, 72, .4), rgba(72, 0, 72, .4)), url("/Users/Maria/repos/java-alpha/front-end/portfolioExercise/images/night.jpg");
+    background-size: cover;
 }
 
-header {
+header h1, header h2, header h3{
+    font-size: 10em;
+    /* font-family: 'Abril Fatface', cursive; */
+    font-family: 'Poiret One', cursive;
+    color: white;
+    margin-top: 0px;
+    margin-bottom: 10%;
+    text-transform: uppercase;
+}
+header h1{
+    padding-top: 2%; 
+    padding-left: 5%;
+}
+
+header h2{
+    color: gray;
+    font-family: 'Abril Fatface', cursive;
+    /* font-family: 'Rock Salt', cursive; */
+    text-align: center;
+    text-transform: none;
+    font-size: 7em;
+}
+
+header h3{
+    padding-right: 5%;
+    text-align: right;
+}
+
+.arrow{
+    height: 20px;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    font-size: 1em;
+    font-family: 'Abril Fatface', cursive;
+}
+
+.intro {
     height: 20%;
     border-bottom: 1px solid #DAF7A6;
     padding: 1% 0 2% 0;
 }
 
-header img {
+.intro img {
     border-radius: 60%;
     width: 80px;
 }
 
+h1 {
+    color: #fff;
+    /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif */
+    font-family: 'Poiret One', cursive;
+
+}
+
 main {
+    /* background: linear-gradient(rgba(192, 72, 72, .4), rgba(72, 0, 72, .4)); */
+    background: linear-gradient(#141E30, #243B55);
     height: 65%;
-    padding: 0% 0% 2% 0%;
+    height: 100vh;
+}
+
+.padding {
+    padding: 5% 5%;
 }
 
 /* main>section {
@@ -39,8 +89,13 @@ main {
     background-repeat: no-repeat;
     background-position: top;
     background-size: 100%;
+    opacity: 70%;
     min-height: 180px;
     max-width: 100%;
+}
+
+.showcase:hover .imageholder{
+    opacity: 100%;
 }
 
 .imageholder.diamond {
@@ -69,12 +124,12 @@ main {
 }
 
 a {
-    color: #FFC300;
+    color: #14c2cc;
     text-decoration: none;
 }
 
 a:hover {
-    color: #FFC300;
+    color:  #14c2cc;
     text-decoration: underline;
 }
 
@@ -86,7 +141,7 @@ a:hover {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 0.5em;
     text-transform: uppercase;
-    color: #FF5733;
+    color: #00db97;
 }
 
 footer {
@@ -124,13 +179,11 @@ li {
     display: block;
 }
 
-
 @media screen and (max-width: 1024px) {
     .showcase {
         width: 48%;
     }
 }
-
 
 @media screen and (max-width: 768px) {
     .showcase {
