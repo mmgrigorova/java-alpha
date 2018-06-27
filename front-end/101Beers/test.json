@@ -1,122 +1,137 @@
-{
-    "id":1,
-    "name":"Buzz",
-    "tagline":"A Real Bitter Experience.",
-    "first_brewed":"09/2007",
-    "description":"A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.",
-    "image_url":"https://images.punkapi.com/v2/keg.png",
-    "abv":4.5,
-    "ibu":60,
-    "target_fg":1010,
-    "target_og":1044,
-    "ebc":20,
-    "srm":10,
-    "ph":4.4,
-    "attenuation_level":75,
-    "volume":{
-       "value":20,
-       "unit":"liters"
-    },
-    "boil_volume":{
-       "value":25,
-       "unit":"liters"
-    },
-    "method":{
-       "mash_temp":[
-          {
-             "temp":{
-                "value":64,
-                "unit":"celsius"
-             },
-             "duration":75
-          }
-       ],
-       "fermentation":{
-          "temp":{
-             "value":19,
-             "unit":"celsius"
-          }
+[
+    {
+       "id": 192,
+       "name": "Punk IPA 2007 - 2010",
+       "tagline": "Post Modern Classic. Spiky. Tropical. Hoppy.",
+       "first_brewed": "04/2007",
+       "description": "Our flagship beer that kick started the craft beer revolution. This is James and Martin's original take on an American IPA, subverted with punchy New Zealand hops. Layered with new world hops to create an all-out riot of grapefruit, pineapple and lychee before a spiky, mouth-puckering bitter finish.",
+       "image_url": "https://images.punkapi.com/v2/192.png",
+       "abv": 6,
+       "ibu": 60,
+       "target_fg": 1010,
+       "target_og": 1056,
+       "ebc": 17,
+       "srm": 8.5,
+       "ph": 4.4,
+       "attenuation_level": 82.14,
+       "volume": {
+          "value": 20,
+          "unit": "liters"
        },
-       "twist":null
-    },
-    "ingredients":{
-       "malt":[
-          {
-             "name":"Maris Otter Extra Pale",
-             "amount":{
-                "value":3.3,
-                "unit":"kilograms"
+       "boil_volume": {
+          "value": 25,
+          "unit": "liters"
+       },
+       "method": {
+          "mash_temp": [
+             {
+                "temp": {
+                   "value": 65,
+                   "unit": "celsius"
+                },
+                "duration": 75
+             }
+          ],
+          "fermentation": {
+             "temp": {
+                "value": 19,
+                "unit": "celsius"
              }
           },
-          {
-             "name":"Caramalt",
-             "amount":{
-                "value":0.2,
-                "unit":"kilograms"
+          "twist": null
+       },
+       "ingredients": {
+          "malt": [
+             {
+                "name": "Extra Pale",
+                "amount": {
+                   "value": 5.3,
+                   "unit": "kilograms"
+                }
              }
-          },
-          {
-             "name":"Munich",
-             "amount":{
-                "value":0.4,
-                "unit":"kilograms"
+          ],
+          "hops": [
+             {
+                "name": "Ahtanum",
+                "amount": {
+                   "value": 17.5,
+                   "unit": "grams"
+                },
+                "add": "start",
+                "attribute": "bitter"
+             },
+             {
+                "name": "Chinook",
+                "amount": {
+                   "value": 15,
+                   "unit": "grams"
+                },
+                "add": "start",
+                "attribute": "bitter"
+             },
+             {
+                "name": "Crystal",
+                "amount": {
+                   "value": 17.5,
+                   "unit": "grams"
+                },
+                "add": "middle",
+                "attribute": "flavour"
+             },
+             {
+                "name": "Chinook",
+                "amount": {
+                   "value": 17.5,
+                   "unit": "grams"
+                },
+                "add": "middle",
+                "attribute": "flavour"
+             },
+             {
+                "name": "Ahtanum",
+                "amount": {
+                   "value": 17.5,
+                   "unit": "grams"
+                },
+                "add": "end",
+                "attribute": "flavour"
+             },
+             {
+                "name": "Chinook",
+                "amount": {
+                   "value": 27.5,
+                   "unit": "grams"
+                },
+                "add": "end",
+                "attribute": "flavour"
+             },
+             {
+                "name": "Crystal",
+                "amount": {
+                   "value": 17.5,
+                   "unit": "grams"
+                },
+                "add": "end",
+                "attribute": "flavour"
+             },
+             {
+                "name": "Motueka",
+                "amount": {
+                   "value": 17.5,
+                   "unit": "grams"
+                },
+                "add": "end",
+                "attribute": "flavour"
              }
-          }
+          ],
+          "yeast": "Wyeast 1056 - American Ale™"
+       },
+       "food_pairing": [
+          "Spicy carne asada with a pico de gallo sauce",
+          "Shredded chicken tacos with a mango chilli lime salsa",
+          "Cheesecake with a passion fruit swirl sauce"
        ],
-       "hops":[
-          {
-             "name":"Fuggles",
-             "amount":{
-                "value":25,
-                "unit":"grams"
-             },
-             "add":"start",
-             "attribute":"bitter"
-          },
-          {
-             "name":"First Gold",
-             "amount":{
-                "value":25,
-                "unit":"grams"
-             },
-             "add":"start",
-             "attribute":"bitter"
-          },
-          {
-             "name":"Fuggles",
-             "amount":{
-                "value":37.5,
-                "unit":"grams"
-             },
-             "add":"middle",
-             "attribute":"flavour"
-          },
-          {
-             "name":"First Gold",
-             "amount":{
-                "value":37.5,
-                "unit":"grams"
-             },
-             "add":"middle",
-             "attribute":"flavour"
-          },
-          {
-             "name":"Cascade",
-             "amount":{
-                "value":37.5,
-                "unit":"grams"
-             },
-             "add":"end",
-             "attribute":"flavour"
-          }
-       ],
-       "yeast":"Wyeast 1056 - American Ale™"
-    },
-    "food_pairing":[
-       "Spicy chicken tikka masala",
-       "Grilled chicken quesadilla",
-       "Caramel toffee cake"
-    ],
-    "brewers_tips":"The earthy and floral aromas from the hops can be overpowering. Drop a little Cascade in at the end of the boil to lift the profile with a bit of citrus.",
-    "contributed_by":"Sam Mason <samjbmason>"
- }
+       "brewers_tips": "While it may surprise you, this version of Punk IPA isn't dry hopped but still packs a punch! To make the best of the aroma hops make sure they are fully submerged and add them just before knock out for an intense hop hit.",
+       "contributed_by": "Sam Mason <samjbmason>"
+    }
+ ]
