@@ -6,73 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>101 Beers on the Wall</title>
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function () {
-            var endPoint = 'https://api.punkapi.com/v2/';
-            var query = 'beers?page=1&per_page=20';
-            var url = new URL(endPoint + query);
-
-            var beers = [];
-            $.getJSON(url, function (data) {
-                beers.push(data);
-                console.log('success');
-                traverse(beers);
-            }, "jsonp");
-
-            var traverse = function (beers) {
-                if (beers) {
-                    console.log(beers);
-                    for (var i = 0; i < beers[0].length; i++) {
-                        var beer = beers[0][i];
-                        console.log(beer.name);
-                        $('#beers-container').append(
-                            '<article>' +
-                            '<img src="' + beer.image_url + '" class="beerImg">' +
-                            '<h2>' +
-                            beer.name +
-                            '</h2>' +
-                            '<p>' +
-                            beer.description +
-                            '</p>' +
-                            '</article>'
-                        );
-                    }
-                }
-            };
-
-
-
-        });
-    </script>
-    <style>
-        header img {
-            /* background: linear-gradient(rgba(192, 72, 72, .4), rgba(72, 0, 72, .4)), url("/Users/Maria/repos/java-alpha/front-end/portfolioExercise/images/night.jpg"); */
-            position: left top;
-            max-width: 60%;
-        }
-
-        header h1 {
-            font-size: 7em;
-            color: blue;
-            display: inline-block;
-        }
-
-        img {
-            max-width: 100px;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            right: 0;
-        }
-
-        .abv::after{
-            content: '% ';
-        }
-    </style>
+    <script src="js/script.js"></script>
+    <link rel="shortcut icon" href="css/resources/fav.png" type="image/x-icon">
 </head>
 
 <body>
@@ -95,15 +33,19 @@
 
     <main>
         <section id="beers-container">
-            <article class = "beer-box" id="192">
+            <article class="beer-box" id="192">
                 <h1>Punk IPA 2007 - 2010</h1>
-                <img src="https://images.punkapi.com/v2/192.pn" alt="Punk IPA 2007 - 2010">
+                <img src="https://images.punkapi.com/v2/192.png" alt="Punk IPA 2007 - 2010">
                 <h2>Post Modern Classic. Spiky. Tropical. Hoppy.</h2>
-                <div class = "abv">6</div>
-                <button class = "more-info">More info</button>
-                <div class = "details">
-                    <p class = "description">Our flagship beer that kick started the craft beer revolution. This is James and Martin's original take on an American IPA, subverted with punchy New Zealand hops. Layered with new world hops to create an all-out riot of grapefruit, pineapple and lychee before a spiky, mouth-puckering bitter finish.</p>
-                    <p class = "tips">While it may surprise you, this version of Punk IPA isn't dry hopped but still packs a punch! To make the best of the aroma hops make sure they are fully submerged and add them just before knock out for an intense hop hit.</p>
+                <div class="beer-abv">6</div>
+                <button class="more-info">More info</button>
+                <div class="beer-details">
+                    <p class="beer-description">Our flagship beer that kick started the craft beer revolution. This is James and Martin's original take
+                        on an American IPA, subverted with punchy New Zealand hops. Layered with new world hops to create
+                        an all-out riot of grapefruit, pineapple and lychee before a spiky, mouth-puckering bitter finish.</p>
+                    <p class="beer-tips">While it may surprise you, this version of Punk IPA isn't dry hopped but still packs a punch! To make
+                        the best of the aroma hops make sure they are fully submerged and add them just before knock out
+                        for an intense hop hit.</p>
                     <h3>Food Pairings</h3>
                     <p>This beer will go perfectly with:</p>
                     <ul>
