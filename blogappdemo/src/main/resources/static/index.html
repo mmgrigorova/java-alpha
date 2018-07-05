@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>The Blog Demo</h1>
+<form>
+</form>
+<script>
+    $.get("api/blogposts/", function (posts) {
+            posts.forEach(function (post) {
+                $("<div/>")
+                    .addClass("author")
+                    .html(post.author)
+                    .appendTo(document.body);
+                $("<div/>")
+                    .addClass("content")
+                    .html(post.content)
+                    .appendTo(document.body);
+            })
+        }
+    );
+    </script>
+</body>
+</html>
