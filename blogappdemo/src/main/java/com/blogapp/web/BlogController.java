@@ -1,25 +1,33 @@
 package com.blogapp.web;
 
 import com.blogapp.models.BlogPost;
+import com.blogapp.services.base.BlogPostsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("api/blogposts")
 public class BlogController {
-    private List<BlogPost> blogPosts;
+    private BlogPostsService blogPostsService;
 
-    public BlogController(){
-        blogPosts = new ArrayList<>();
+    @Autowired
+    public BlogController(BlogPostsService blogPostsService) {
+        this.blogPostsService = blogPostsService;
     }
 
     //create list seeText
 
     @RequestMapping("/")
-    public List<BlogPost> listPosts(){
-        return blogPosts;
+    public List<BlogPost> listPosts() {
+        try {
+            return blogPostsService.listAllBlogPosts();
+        } catch (NullPointerException e) {
+            System.out.println("No posts yet");
+            return null;
+        }
     }
 
 
@@ -27,26 +35,18 @@ public class BlogController {
             method = RequestMethod.POST,
             value = "/"
     )
-    public void createBlogPost(@RequestBody BlogPost post){
-        blogPosts.add(post);
+    public void createBlogPost(@RequestBody BlogPost post) {
+        blogPostsService.createBlogPost(post);
     }
 
-
-    private BlogPost findPostbyID( String idString){
-        int id = Integer.parseInt(idString);
-        return blogPosts.stream()
-                .filter(x -> x.getId() == id)
-                .findFirst()
-                .orElse(null);
-    }
-
+    // Question - There is some logic in the controller. How to avoid?
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/{id}"
     )
-    public BlogPost getPost(@PathVariable("id") String idString){
-        return findPostbyID(idString);
+    public BlogPost getPost(@PathVariable("id") String idString) {
+        int id = Integer.parseInt(idString);
+        return (BlogPost) blogPostsService.searchBlogPosts(x -> x.getId() == id);
 
     }
-
 }
