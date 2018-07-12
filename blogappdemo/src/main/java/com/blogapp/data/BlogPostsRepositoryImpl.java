@@ -27,13 +27,6 @@ public class BlogPostsRepositoryImpl implements GenericRepository<BlogPost> {
     }
 
     @Override
-    public BlogPost findById(int id) {
-        return modelStream().filter(x -> id == x.getId())
-                .findFirst()
-                .orElse(null);
-    }
-
-    @Override
     public BlogPost create(BlogPost model) {
         blogPosts.add(model);
         return model;
@@ -41,9 +34,13 @@ public class BlogPostsRepositoryImpl implements GenericRepository<BlogPost> {
 
     @Override
     public BlogPost update(int id, BlogPost newPost) {
-        BlogPost post = findById(id);
-        post = newPost;
-        return newPost;
+        for (BlogPost post: blogPosts) {
+            if(post.getId() == id){
+                post = newPost;
+                return post;
+            }
+        }
+        return null;
     }
 
     @Override

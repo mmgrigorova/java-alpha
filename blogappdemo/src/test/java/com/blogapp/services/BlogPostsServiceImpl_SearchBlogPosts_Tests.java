@@ -3,6 +3,7 @@ package com.blogapp.services;
 import com.blogapp.data.base.GenericRepository;
 import com.blogapp.models.BlogPost;
 import com.blogapp.services.base.BlogPostsService;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.anyChar;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -58,12 +61,37 @@ public class BlogPostsServiceImpl_SearchBlogPosts_Tests {
                 .findFirst()
                 .orElse(null));
 
-        Assert.assertEquals(resultBlogPosts.size(), 2);
+        int resultSize = resultBlogPosts.size();
+        int expectedSize = 2;
+        Assert.assertEquals(resultSize, expectedSize);
     }
 
     @Test
-    public void searchBlogPosts_WhenNoBlogPosts_ReturnEmptyList(){
-//        List<BlogPost>
+    public void searchBlogPosts_WhenNoBlogPosts_ReturnEmptyList() {
+        List<BlogPost> resultBlogPosts = service
+                .searchBlogPosts(blogPost -> true);
+        int resultSize = resultBlogPosts.size();
+        int expectedSize = 0;
+
+        Assert.assertEquals(resultSize, expectedSize);
+    }
+
+    @Test
+    public void searchBlogPosts_WhenNoMatch_ReturnEmptyList() {
+        blogPosts.add(new BlogPost("Author A", "Content A"));
+        blogPosts.add(new BlogPost("Author B", "Content B"));
+        blogPosts.add(new BlogPost("Author C", "Content C"));
+        blogPosts.add(new BlogPost("Author D", "Content D"));
+        blogPosts.add(new BlogPost("Author E", "Content E"));
+
+        List<BlogPost> resultBlogPosts = service
+                .searchBlogPosts(
+                        blogPost -> blogPost.getContent().contains("1")
+                );
+        int resultSize = resultBlogPosts.size();
+        int expectedSize = 0;
+
+        Assert.assertEquals(resultSize, expectedSize);
     }
 
 }

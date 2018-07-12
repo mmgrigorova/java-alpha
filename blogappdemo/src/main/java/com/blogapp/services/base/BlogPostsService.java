@@ -12,6 +12,9 @@ public interface BlogPostsService {
 
     BlogPost createBlogPost(BlogPost blogPost);
 
+    BlogPost findById(int id);
+
+
     BlogPost updateBlogPost(int id, BlogPost newPost);
 
     boolean deleteBlogPost(int id);

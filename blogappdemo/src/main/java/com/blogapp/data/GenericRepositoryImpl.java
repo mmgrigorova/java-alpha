@@ -24,11 +24,6 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T> {
     }
 
     @Override
-    public T findById(int id) {
-        return null;
-    }
-
-    @Override
     public T create(T model) {
         return null;
     }

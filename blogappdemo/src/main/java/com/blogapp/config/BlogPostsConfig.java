@@ -7,9 +7,13 @@ import com.blogapp.services.BlogPostsServiceImpl;
 import com.blogapp.services.base.BlogPostsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @Configuration
 public class BlogPostsConfig {
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
 //    private static GenericRepository<BlogPost> blogPostsRepository;
 //    @Bean
 //    public GenericRepository<BlogPost> genericRepository(){

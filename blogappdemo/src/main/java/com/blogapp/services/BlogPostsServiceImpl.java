@@ -13,13 +13,19 @@ import java.util.stream.Collectors;
 public class BlogPostsServiceImpl implements BlogPostsService {
     private GenericRepository<BlogPost> blogPostsRepository;
 
-    public BlogPostsServiceImpl(GenericRepository<BlogPost> blogPostRepository){
+    public BlogPostsServiceImpl(GenericRepository<BlogPost> blogPostRepository) {
         this.blogPostsRepository = blogPostRepository;
     }
 
     @Override
     public List<BlogPost> listAllBlogPosts() {
         return blogPostsRepository.list();
+    }
+
+    public BlogPost findById(int id) {
+        return blogPostsRepository.modelStream().filter(x -> id == x.getId())
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -33,7 +39,7 @@ public class BlogPostsServiceImpl implements BlogPostsService {
     public BlogPost createBlogPost(BlogPost blogPost) {
         try {
             blogPostsRepository.create(blogPost);
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("The blog post is null");
         }
 
