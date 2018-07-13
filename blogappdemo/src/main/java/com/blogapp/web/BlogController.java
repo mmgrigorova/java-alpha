@@ -18,8 +18,7 @@ public class BlogController {
         this.blogPostsService = blogPostsService;
     }
 
-    //create list seeText
-
+    // Run app with http://localhost:8080
     @RequestMapping("/")
     public List<BlogPost> listPosts() {
         try {

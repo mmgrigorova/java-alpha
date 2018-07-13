@@ -27,21 +27,27 @@ public class BlogPostsRepositoryImpl implements GenericRepository<BlogPost> {
     }
 
     @Override
-    public BlogPost create(BlogPost model) {
-        blogPosts.add(model);
-        return model;
-    }
-
-    @Override
-    public BlogPost update(int id, BlogPost newPost) {
+    public BlogPost getOne(int id) {
         for (BlogPost post: blogPosts) {
             if(post.getId() == id){
-                post = newPost;
                 return post;
             }
         }
         return null;
     }
+
+    @Override
+    public BlogPost add(BlogPost model) {
+        blogPosts.add(model);
+        return model;
+    }
+
+    @Override
+    public void update(int id, BlogPost newPost) {
+        BlogPost oldPost = getOne(id);
+        oldPost = newPost;
+        }
+
 
     @Override
     public boolean delete(int id) {

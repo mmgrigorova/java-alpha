@@ -8,9 +8,11 @@ public interface GenericRepository<T> {
 
     Stream<T> modelStream();
 
-    T create(T model);
+    T getOne(int id);
 
-    T update(int id, T newModel);
+    T add(T model);
+
+    void update(int id, T newModel);
 
     boolean delete(int id);
 

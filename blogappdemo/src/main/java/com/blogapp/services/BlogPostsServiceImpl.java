@@ -23,9 +23,13 @@ public class BlogPostsServiceImpl implements BlogPostsService {
     }
 
     public BlogPost findById(int id) {
-        return blogPostsRepository.modelStream().filter(x -> id == x.getId())
-                .findFirst()
-                .orElse(null);
+        try {
+            return blogPostsRepository.getOne(id);
+        } catch (NullPointerException e){
+            System.out.println("No such blog post.");
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -38,7 +42,7 @@ public class BlogPostsServiceImpl implements BlogPostsService {
     @Override
     public BlogPost createBlogPost(BlogPost blogPost) {
         try {
-            blogPostsRepository.create(blogPost);
+            blogPostsRepository.add(blogPost);
         } catch (NullPointerException e) {
             System.out.println("The blog post is null");
         }
@@ -47,8 +51,8 @@ public class BlogPostsServiceImpl implements BlogPostsService {
     }
 
     @Override
-    public BlogPost updateBlogPost(int id, BlogPost newPost) {
-        return blogPostsRepository.update(id, newPost);
+    public void updateBlogPost(int id, BlogPost newPost) {
+        blogPostsRepository.update(id, newPost);
     }
 
     @Override

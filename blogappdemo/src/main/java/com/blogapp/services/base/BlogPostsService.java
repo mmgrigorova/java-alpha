@@ -15,7 +15,7 @@ public interface BlogPostsService {
     BlogPost findById(int id);
 
 
-    BlogPost updateBlogPost(int id, BlogPost newPost);
+    void updateBlogPost(int id, BlogPost newPost);
 
     boolean deleteBlogPost(int id);
 
