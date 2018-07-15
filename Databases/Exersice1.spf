@@ -257,6 +257,7 @@ where CHAR_LENGTH(e.lastname) = 5;
 -- 14.	Write a SQL query to display the current date and time in the following format "`day.month.year hour:minutes:seconds:milliseconds`".
 select DATE_FORMAT(CURRENT_TIMESTAMP(5), '%d.%m.%Y %H:%i:%s:%f') ;
 
+
 -- 15.	Write a SQL query to display the average employee salary by department and job title.
 select avg(salary), s.name, e.jobtitle 
 from employees e 
@@ -285,14 +286,6 @@ select max(cnt)
 	) x 
 );
 
-select x.name, max(cnt) from
-	(select  count(*) as cnt, t.name as name
-	from employees e
-	join addresses a on e.employeeid = a.addressid
-	join towns t on t.townid
-	group by a.townid) as x;
-
-
 --  18.	Write a SQL query to display the number of managers from each town.
 select count(*), t.name 
 from employees m 
@@ -320,7 +313,7 @@ create table IF NOT EXISTS Users(
         `lastlogintime` DATETIME,
         PRIMARY KEY (`id`),
         INDEX `id` (`id` ASC),
---          CONSTRAINT password_lenght CHECK (LENGTH(password) &gt;= 5)
+		CONSTRAINT password_lenght CHECK DATALENGTH(`password`) &gt; 4
         );
       /*   
         ALTER TABLE Users DROP CONSTRAINT password_lenght ;
@@ -356,6 +349,18 @@ select REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname,  e.employeeid)), '
 
 -- 22.	Write a SQL statement that deletes all users without passwords (`NULL` password).
 -- delete from users where `password` is null;
+
+
+/* select * 
+from table1 1
+	/ (select * from ggg) x
+join table2 2
+where 1.something = 2.something
+group by 
+having 
+order by
+limit */
+
 </string>
 			<key>view</key>
 			<string>SP_VIEW_CUSTOMQUERY</string>
@@ -371,149 +376,57 @@ select REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname,  e.employeeid)), '
 	<array/>
 	<key>queryHistory</key>
 	<array>
-		<string>select * from users</string>
-		<string>delete from users where `password` is null</string>
-		<string>delete from users u where `password` is null</string>
-		<string>update users  set password = NULL where lastlogintime &lt; '2010-03-10' or  lastlogintime is null</string>
-		<string>select * from users u where lastlogintime &lt; '2010-03-10' or  lastlogintime is null</string>
-		<string>select * from users u where lastlogintime &lt; '2010-03-10'</string>
-		<string>INSERT INTO users (username, `password`, fullname)
-select REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname,  e.employeeid)), ' ', '') as username, 
-	CASE
-		WHEN 
-		LENGTH(REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') ) &lt; 5
-		THEN 
-			REPLACE(LOWER(CONCAT(e.firstname, e.lastname, e.employeeid)), ' ', '') 
-	ELSE
-		REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname, e.employeeid)), ' ', '')
-	END  as `password`,
-	CONCAT(e.firstname, " ", e.lastname) as fullname
-	from employees e</string>
-		<string>INSERT INTO users (username, `password`, fullname)
-select REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') as username, 
-	CASE
-		WHEN 
-		LENGTH(REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') ) &lt; 5
-		THEN 
-			REPLACE(LOWER(CONCAT(e.firstname, e.lastname, e.employeeid)), ' ', '') 
-	ELSE
-		REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname, e.employeeid)), ' ', '')
-	END  as `password`,
-	CONCAT(e.firstname, " ", e.lastname) as fullname
-	from employees e</string>
-		<string>select REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') as username, 
-	CASE
-		WHEN 
-		LENGTH(REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') ) &lt; 5
-		THEN 
-			REPLACE(LOWER(CONCAT(e.firstname, e.lastname, e.employeeid)), ' ', '') 
-	ELSE
-		REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname, e.employeeid)), ' ', '')
-	END  as `password`,
-	CONCAT(e.firstname, " ", e.lastname) as fullname
-	from employees e</string>
-		<string>select CONCAT(e.firstname, " ", e.lastname, e.employeeid) as username, 
-	CASE
-		WHEN 
-		LENGTH(REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') ) &lt; 5
-		THEN 
-			REPLACE(LOWER(CONCAT(e.firstname, e.lastname, e.employeeid)), ' ', '') 
-	ELSE
-		REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname, e.employeeid)), ' ', '')
-	END  as `password`,
-	CONCAT(e.firstname, " ", e.lastname) as fullname
-	from employees e</string>
-		<string>select CONCAT(e.firstname, " ", e.lastname, e.employeeid) as username, 
-	REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') as username,
-	CASE
-		WHEN 
-		LENGTH(REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') ) &lt; 5
-		THEN 
-			REPLACE(LOWER(CONCAT(e.firstname, e.lastname, e.employeeid)), ' ', '') 
-	ELSE
-		REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname, e.employeeid)), ' ', '')
-	END  as `password`
-	from employees e</string>
-		<string>INSERT INTO users (username, `password`, fullname)
-select CONCAT(e.firstname, " ", e.lastname, e.employeeid) as username, 
-	REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') as username,
-	CASE
-		WHEN 
-		LENGTH(REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') ) &lt; 5
-		THEN 
-			REPLACE(LOWER(CONCAT(e.firstname, e.lastname, e.employeeid)), ' ', '') 
-	ELSE
-		REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname, e.employeeid)), ' ', '')
-	END  as `password`
-	from employees e</string>
-		<string>select CONCAT(e.firstname, " ", e.lastname) as username, 
-	REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') as username,
-	CASE
-		WHEN 
-		LENGTH(REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') ) &lt; 5
-		THEN 
-			REPLACE(LOWER(CONCAT(e.firstname, e.lastname, e.employeeid)), ' ', '') 
-	ELSE
-		REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname, e.employeeid)), ' ', '')
-	END  as `password`
-	from employees e</string>
-		<string>INSERT INTO users (username, `password`, fullname)
-select CONCAT(e.firstname, " ", e.lastname) as username, 
-	REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') as username,
-	CASE
-		WHEN 
-		LENGTH(REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') ) &lt; 5
-		THEN 
-			REPLACE(LOWER(CONCAT(e.firstname, e.lastname, e.employeeid)), ' ', '') 
-	ELSE
-		REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname, e.employeeid)), ' ', '')
-	END  as `password`
--- 	,
--- 	LENGTH(	REPLACE(LOWER(CONCAT(e.firstname, e.lastname)), ' ', '') )
-	from employees e</string>
-		<string>INSERT INTO users (username, `password`, fullname)
-select CONCAT(e.firstname, " ", e.lastname) as username, 
-	REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') as username,
-	CASE
-		WHEN 
-		LENGTH(REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') ) &lt; 5
-		THEN 
-			REPLACE(LOWER(CONCAT(e.firstname, e.lastname, e.employeeid)), ' ', '') 
-	ELSE
-		REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '')
-	END  as `password`
--- 	,
--- 	LENGTH(	REPLACE(LOWER(CONCAT(e.firstname, e.lastname)), ' ', '') )
-	from employees e</string>
-		<string>INSERT INTO users (username, `password`, fullname)
-select CONCAT(e.firstname, " ", e.lastname) as username, 
-	REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') as username,
-	CASE
-		WHEN 
-		LENGTH(REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') ) &lt; 5
-		THEN 
-			REPLACE(LOWER(CONCAT(e.firstname, e.lastname, e.id)), ' ', '') 
-	ELSE
-		REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '')
-	END  as `password`
--- 	,
--- 	LENGTH(	REPLACE(LOWER(CONCAT(e.firstname, e.lastname)), ' ', '') )
-	from employees e</string>
-		<string>INSERT INTO users (username, `password`, fullname)
-select CONCAT(e.firstname, " ", e.lastname) as username, 
-	REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') as username,
-	CASE
-		WHEN 
-		LENGTH(REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '') ) &lt; 5
-		THEN 
-			REPLACE(LOWER(CONCAT(e.firstname, e.lastname)), ' ', '') 
-	ELSE
-		REPLACE(LOWER(CONCAT(LEFT(e.firstname, 1), e.lastname)), ' ', '')
-	END  as `password`
--- 	,
--- 	LENGTH(	REPLACE(LOWER(CONCAT(e.firstname, e.lastname)), ' ', '') )
-	from employees e</string>
-		<string>ALTER TABLE Users DROP CONSTRAINT password_lenght</string>
+		<string>select count(*), t.name 
+from employees m 
+join employees e on m.managerid = e.employeeid
+join addresses a on e.addressid = a.addressid 
+join towns t on a.townid = t.townid
+group by t.townid</string>
+		<string>select  count(*) as cnt, a.`TownID`
+	from employees e
+	join addresses a on e.employeeid = a.addressid
+	group by a.townid</string>
+		<string>select  count(*) as cnt, a.`TownID`
+	from employees e
+	join addresses a on e.employeeid = a.addressid
+	group by a.towni</string>
+		<string>select t.name, max(cnt) 
+from
+	(select  count(*) as cnt, t.`TownID`
+	from employees e
+	join addresses a on e.employeeid = a.addressid
+	join towns t on t.townid
+	group by a.townid) x
+join towns t on t.townid = x.townid
+where t.townid = x.townid</string>
+		<string>select t.name, max(cnt) 
+from
+	(select  count(*) as cnt, t.`TownID`
+	from employees e
+	join addresses a on e.employeeid = a.addressid
+	join towns t on t.townid
+	group by a.townid) x
+join towns t on t.townid = x.townid</string>
+		<string>select t.name, count(t.name) as cnt
+from employees e
+join addresses a on e.addressid = a.addressid
+join towns t on a.townid = t.townid
+group by a.townid
+having cnt = (
+select max(cnt)
+	from (
+		select count(*) as cnt from employees b 
+		join addresses ad on b.addressid = ad.addressid
+		group by ad.townid
+	) x 
+)</string>
+		<string>select x.name, max(cnt) from
+	(select  count(*) as cnt, t.name as name
+	from employees e
+	join addresses a on e.employeeid = a.addressid
+	join towns t on t.townid
+	group by a.townid) as x</string>
+		<string>select CURRENT_TIMESTAMP(5, '%d.%m.%Y %H:%i:%s:%f')</string>
 		<string>create table IF NOT EXISTS Users(
 		 `id` INT(11) NOT NULL AUTO_INCREMENT,
         `username` VARCHAR(255) UNIQUE NOT NULL, 
@@ -522,9 +435,55 @@ select CONCAT(e.firstname, " ", e.lastname) as username,
         `lastlogintime` DATETIME,
         PRIMARY KEY (`id`),
         INDEX `id` (`id` ASC),
-         CONSTRAINT password_lenght CHECK (LENGTH(password) &gt;= 5)
+		CONSTRAINT password_lenght CHECK DATALENGTH(`password`) &gt; 4
+        )</string>
+		<string>create table IF NOT EXISTS Users(
+		 `id` INT(11) NOT NULL AUTO_INCREMENT,
+        `username` VARCHAR(255) UNIQUE NOT NULL, 
+        `password` CHAR(40) UNIQUE NOT NULL,
+        `fullname` VARCHAR(255) NOT NULL,
+        `lastlogintime` DATETIME,
+        PRIMARY KEY (`id`),
+        INDEX `id` (`id` ASC),
+		CONSTRAINT PasswordMinLength CHECK DATALENGTH([password]) &gt; 4
+        )</string>
+		<string>create table IF NOT EXISTS Users(
+		 `id` INT(11) NOT NULL AUTO_INCREMENT,
+        `username` VARCHAR(255) UNIQUE NOT NULL, 
+        `password` CHAR(40) UNIQUE NOT NULL,
+        `fullname` VARCHAR(255) NOT NULL,
+        `lastlogintime` DATETIME,
+        PRIMARY KEY (`id`),
+        INDEX `id` (`id` ASC),
+		CONSTRAINT PasswordMinLength CHECK DATALENGTH(`password`) &gt; 4
+        )</string>
+		<string>create table IF NOT EXISTS Users(
+		 `id` INT(11) NOT NULL AUTO_INCREMENT,
+        `username` VARCHAR(255) UNIQUE NOT NULL, 
+        `password` CHAR(40) UNIQUE NOT NULL,
+        `fullname` VARCHAR(255) NOT NULL,
+        `lastlogintime` DATETIME,
+        PRIMARY KEY (`id`),
+        INDEX `id` (`id` ASC),
+		CONSTRAINT PasswordMinLength CHECK (DATALENGTH(`password`) &gt; 4)
+        )</string>
+		<string>create table IF NOT EXISTS Users(
+		 `id` INT(11) NOT NULL AUTO_INCREMENT,
+        `username` VARCHAR(255) UNIQUE NOT NULL, 
+        `password` CHAR(40) UNIQUE NOT NULL,
+        `fullname` VARCHAR(255) NOT NULL,
+        `lastlogintime` DATETIME,
+        PRIMARY KEY (`id`),
+        INDEX `id` (`id` ASC),
+		CONSTRAINT PasswordMinLength CHECK (DATALENGTH(`password`) &gt; 4
         )</string>
 		<string>drop table users</string>
+		<string>select * from users</string>
+		<string>delete from users where `password` is null</string>
+		<string>delete from users u where `password` is null</string>
+		<string>update users  set password = NULL where lastlogintime &lt; '2010-03-10' or  lastlogintime is null</string>
+		<string>select * from users u where lastlogintime &lt; '2010-03-10' or  lastlogintime is null</string>
+		<string>select * from users u where lastlogintime &lt; '2010-03-10'</string>
 	</array>
 	<key>rdbms_type</key>
 	<string>mysql</string>
