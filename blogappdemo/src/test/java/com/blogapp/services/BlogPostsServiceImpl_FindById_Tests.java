@@ -39,9 +39,9 @@ public class BlogPostsServiceImpl_FindById_Tests {
         Assert.assertEquals(postId, resultId);
 
     }
-
-    @Test
-    public void findById_WhenBlogPostIsNotPresent_ReturnNull(){
-
-    }
+//
+//    @Test
+//    public void findById_WhenBlogPostIsNotPresent_ReturnNull(){
+//
+//    }
 }

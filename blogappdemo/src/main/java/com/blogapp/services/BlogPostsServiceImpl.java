@@ -3,6 +3,7 @@ package com.blogapp.services;
 import com.blogapp.data.base.GenericRepository;
 import com.blogapp.models.BlogPost;
 import com.blogapp.services.base.BlogPostsService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
