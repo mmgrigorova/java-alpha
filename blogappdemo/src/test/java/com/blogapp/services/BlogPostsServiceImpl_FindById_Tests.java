@@ -4,7 +4,9 @@ import com.blogapp.data.BlogPostsRepositoryImpl;
 import com.blogapp.data.base.GenericRepository;
 import com.blogapp.models.BlogPost;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -19,29 +21,39 @@ public class BlogPostsServiceImpl_FindById_Tests {
     private BlogPostsServiceImpl service;
     private BlogPost blogPost;
 
-    @Test
-    public void fingById_WhenValidId_AndBlogPostIsPresent_ReturnBlogPost(){
-
+    @Before
+    public void beforeTests(){
         blogPost = new BlogPost("Author 1", "Test Content 1" );
 
         when(mockRepository.getOne(blogPost.getId()))
                 .thenReturn(blogPost);
-        when(mockRepository.getOne(5))
+        when(mockRepository.getOne(-1))
                 .thenReturn(null);
+        service = new BlogPostsServiceImpl(mockRepository);
+    }
+
+    @Test
+    public void fingById_WhenValidId_AndBlogPostIsPresent_ReturnBlogPost(){
 
         int postId = blogPost.getId();
-        mockRepository.add(blogPost);
-        service = new BlogPostsServiceImpl(mockRepository);
 
-        BlogPost result = service.findById(postId);
-        int resultId = result.getId();
+        BlogPost result = null;
+        String blogPostContent = "";
 
-        Assert.assertEquals(postId, resultId);
+        try {
+            result = service.findById(postId);
+            blogPostContent = blogPost.getContent();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        String actualPostContent = result.getContent();
+
+        Assert.assertEquals(blogPostContent, actualPostContent);
     }
-//
-//    @Test
-//    public void findById_WhenBlogPostIsNotPresent_ReturnNull(){
-//
-//    }
+
+    @Test (expected = Exception.class)
+    public void findById_WhenBlogPostIsNotPresent_ReturnNull() throws Exception{
+        service.findById(-1);
+    }
 }

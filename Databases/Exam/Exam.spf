@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>database</key>
+			<string>northwind</string>
+			<key>host</key>
+			<string>127.0.0.1</string>
+			<key>name</key>
+			<string>local</string>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>sslCACertFileLocation</key>
+			<string></string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocation</key>
+			<string></string>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocation</key>
+			<string></string>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPTCPIPConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>root</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>utf8mb4</string>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSelection</key>
+			<data>
+			YnBsaXN0MDDUAQIDBAUGNjdYJHZlcnNpb25YJG9iamVjdHNZJGFy
+			Y2hpdmVyVCR0b3ASAAGGoK0HCBUWFxgZHSQoLDA0VSRudWxs0wkK
+			CwwQFFdOUy5rZXlzWk5TLm9iamVjdHNWJGNsYXNzow0OD4ACgAOA
+			BKMREhOABYAGgAiADFR0eXBlVHJvd3NUa2V5c18QJlNlbGVjdGlv
+			bkRldGFpbFR5cGVQcmltYXJ5S2V5ZWREZXRhaWxz0wkKCxobHKCg
+			gAfSHh8gIVokY2xhc3NuYW1lWCRjbGFzc2VzXxATTlNNdXRhYmxl
+			RGljdGlvbmFyeaMgIiNcTlNEaWN0aW9uYXJ5WE5TT2JqZWN00goL
+			JSehJoAJgAvSCykqK1lOUy5zdHJpbmeACllTaGlwcGVySUTSHh8t
+			Ll8QD05TTXV0YWJsZVN0cmluZ6MtLyNYTlNTdHJpbmfSHh8xMl5O
+			U011dGFibGVBcnJheaMxMyNXTlNBcnJhedIeHyI1oiIjXxAPTlNL
+			ZXllZEFyY2hpdmVy0Tg5VGRhdGGAAQAIABEAGgAjAC0AMgA3AEUA
+			SwBSAFoAZQBsAHAAcgB0AHYAegB8AH4AgACCAIcAjACRALoAwQDC
+			AMMAxQDKANUA3gD0APgBBQEOARMBFQEXARkBHgEoASoBNAE5AUsB
+			TwFYAV0BbAFwAXgBfQGAAZIBlQGaAAAAAAAAAgEAAAAAAAAAOgAA
+			AAAAAAAAAAAAAAAAAZw=
+			</data>
+			<key>contentSortColIsAsc</key>
+			<true/>
+			<key>contentViewport</key>
+			<string>{{0, 0}, {1128, 721}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>queries</key>
+			<string>-- Write a SQL query to find the top 3 most expensive products. Display their product name and price.
+SELECT p.`ProductName`, FORMAT(p.`UnitPrice`, 2) as UnitPrice
+FROM products p
+ORDER BY p.`UnitPrice` DESC
+LIMIT 3;
+
+-- Write a SQL query to find the top 5 (ordered alphabetically by product name) products along with their supplier company name.
+SELECT p.`ProductName`, s.`CompanyName` 
+FROM products p
+JOIN suppliers s ON p.`SupplierID` = s.`SupplierID`
+ORDER BY p.`ProductName`
+LIMIT 5;
+
+-- Write a SQL query to find all managers that have more than 2 employees. Display their first name and last name.
+SELECT e.`FirstName`, e.`LastName`
+FROM employees m
+JOIN employees e ON m.`ReportsTo` = e.`EmployeeID`
+GROUP BY m.`ReportsTo`
+HAVING COUNT(*) &gt; 2
+ORDER BY e.`FirstName`;
+
+-- Write a SQL query to find the product name, unit price and category name of the products (ordered by unit price) that have the max unit price in their category. 
+SELECT p.`ProductName`, FORMAT(p.`UnitPrice`, 2) as UnitPrice, c.`CategoryName` 
+FROM (SELECT MAX(pr.`UnitPrice`) as maxPrice, pr.categoryid
+		FROM products pr
+		GROUP by pr.categoryID) x
+JOIN products p ON x.maxPrice = p.`UnitPrice` AND x.`CategoryID` = p.`CategoryID`
+JOIN categories c ON p.`CategoryID` = c.`CategoryID`
+ORDER BY p.`UnitPrice`;
+
+-- Write a SQL query to display the shipper's company name with minimum orders.
+-- Solution 1:
+SELECT s.`CompanyName`
+FROM  shippers s
+JOIN orders o ON s.`ShipperID` = o.`ShipVia`
+GROUP BY o.`ShipVia`
+HAVING count(*) = (SELECT MIN(cnt) 
+					FROM ( SELECT COUNT(*) as cnt
+						FROM orders ord
+						GROUP BY ord.`ShipVia`) x );
+
+</string>
+			<key>table</key>
+			<string>shippers</string>
+			<key>view</key>
+			<string>SP_VIEW_CUSTOMQUERY</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>214</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>-- Write a SQL query to display the shipper's company name with minimum orders.
+-- Solution 1:
+SELECT s.`CompanyName`
+FROM  shippers s
+JOIN orders o ON s.`ShipperID` = o.`ShipVia`
+GROUP BY o.`ShipVia`
+HAVING count(*) = (SELECT MIN(cnt) 
+					FROM ( SELECT COUNT(*) as cnt
+						FROM orders ord
+						GROUP BY ord.`ShipVia`) x )</string>
+		<string>-- Write a SQL query to find the product name, unit price and category name of the products (ordered by unit price) that have the max unit price in their category. 
+SELECT p.`ProductName`, FORMAT(p.`UnitPrice`, 2) as UnitPrice, c.`CategoryName` 
+FROM (SELECT MAX(pr.`UnitPrice`) as maxPrice, pr.categoryid
+		FROM products pr
+		GROUP by pr.categoryID) x
+JOIN products p ON x.maxPrice = p.`UnitPrice` AND x.`CategoryID` = p.`CategoryID`
+JOIN categories c ON p.`CategoryID` = c.`CategoryID`
+ORDER BY p.`UnitPrice`</string>
+		<string>-- Write a SQL query to find all managers that have more than 2 employees. Display their first name and last name.
+SELECT e.`FirstName`, e.`LastName`
+FROM employees m
+JOIN employees e ON m.`ReportsTo` = e.`EmployeeID`
+GROUP BY m.`ReportsTo`
+HAVING COUNT(*) &gt; 2
+ORDER BY e.`FirstName`</string>
+		<string>-- Write a SQL query to find the top 5 (ordered alphabetically by product name) products along with their supplier company name.
+SELECT p.`ProductName`, s.`CompanyName` 
+FROM products p
+JOIN suppliers s ON p.`SupplierID` = s.`SupplierID`
+ORDER BY p.`ProductName`
+LIMIT 5</string>
+		<string>-- Write a SQL query to find the top 3 most expensive products. Display their product name and price.
+SELECT p.`ProductName`, FORMAT(p.`UnitPrice`, 2) as UnitPrice
+FROM products p
+ORDER BY p.`UnitPrice` DESC
+LIMIT 3</string>
+		<string>-- Write a SQL query to find the product name, unit price and category name of the products (ordered by unit price) that have the max unit price in their category. 
+SELECT p.`ProductName`, FORMAT(p.`UnitPrice`, 2), c.`CategoryName` 
+FROM (SELECT MAX(pr.`UnitPrice`) as maxPrice, pr.categoryid
+		FROM products pr
+		GROUP by pr.categoryID) x
+JOIN products p ON x.maxPrice = p.`UnitPrice` AND x.`CategoryID` = p.`CategoryID`
+JOIN categories c ON p.`CategoryID` = c.`CategoryID`
+ORDER BY p.`UnitPrice`</string>
+		<string>-- Write a SQL query to find the top 3 most expensive products. Display their product name and price.
+SELECT p.`ProductName`, FORMAT(p.`UnitPrice`, 2)
+FROM products p
+ORDER BY p.`UnitPrice` DESC
+LIMIT 3</string>
+		<string>-- Write a SQL query to find the product name, unit price and category name of the products (ordered by unit price) that have the max unit price in their category. 
+SELECT p.`ProductName`, p.`UnitPrice`, c.`CategoryName` 
+FROM (SELECT MAX(pr.`UnitPrice`) as maxPrice, pr.categoryid
+		FROM products pr
+		GROUP by pr.categoryID) x
+JOIN products p ON x.maxPrice = p.`UnitPrice` AND x.`CategoryID` = p.`CategoryID`
+JOIN categories c ON p.`CategoryID` = c.`CategoryID`
+ORDER BY p.`UnitPrice`</string>
+		<string>-- Write a SQL query to find the top 3 most expensive products. Display their product name and price.
+SELECT p.`ProductName`, p.`UnitPrice` 
+FROM products p
+ORDER BY p.`UnitPrice` DESC
+LIMIT 3</string>
+		<string>-- Option 2
+SELECT s.companyname 
+FROM shippers s 
+JOIN orders o ON o.`ShipVia` = s.`ShipperID`
+GROUP BY o.`ShipVia`
+ORDER BY count(*)
+LIMIT 1</string>
+		<string>-- Option 2
+SELECT s.companyname 
+FROM shippers s 
+JOIN orders o ON o.`ShipVia` = s.`ShipperID`
+GROUP BY o.`ShipVia`
+ORDER BY count(*)</string>
+		<string>-- Write a SQL query to display the shipper's company name with minimum orders.
+SELECT s.`CompanyName`
+FROM  shippers s
+JOIN orders o ON s.`ShipperID` = o.`ShipVia`
+GROUP BY o.`ShipVia`
+HAVING count(*) = (SELECT MIN(cnt) 
+					FROM ( SELECT COUNT(*) as cnt
+						FROM orders ord
+						GROUP BY ord.`ShipVia`) x )</string>
+		<string>-- Write a SQL query to display the shipper's company name with minimum orders.
+SELECT s.`CompanyName`
+FROM  shippers s
+JOIN orders o ON s.`ShipperID` = o.`ShipVia`
+GROUP BY o.`ShipVia`
+HAVING count(*) = (SELECT MAX(cnt) 
+					FROM ( SELECT COUNT(*) as cnt
+						FROM orders ord
+						GROUP BY ord.`ShipVia`) x )</string>
+		<string>-- Write a SQL query to display the shipper's company name with minimum orders.
+SELECT s.`CompanyName`
+FROM  shippers s
+JOIN orders o ON s.`ShipperID` = o.`ShipVia`
+GROUP BY o.`ShipVia`
+HAVING count(*) = (SELECT MAX(cnt) 
+					FROM ( SELECT COUNT(*) as cnt
+						FROM orders ord
+						GROUP BY ord.`ShipVia`) y ) x</string>
+		<string>-- Write a SQL query to display the shipper's company name with minimum orders.
+SELECT s.`CompanyName`
+FROM  shippers s
+JOIN orders o ON s.`ShipperID` = o.`ShipVia`
+GROUP BY o.`ShipVia`
+HAVING count(*) = (SELECT MAX(cnt) 
+					FROM ( SELECT COUNT(*) as cnt
+						FROM orders ord
+						GROUP BY ord.`ShipVia`)) x</string>
+		<string>-- Write a SQL query to display the shipper's company name with minimum orders.
+SELECT s.`CompanyName`
+FROM  shippers s
+JOIN orders o ON s.`ShipperID` = o.`ShipVia`
+GROUP BY o.`ShipVia`
+HAVING count(*) = (SELECT MAX(cnt) 
+					FROM ( SELECT COUNT(*) as cnt
+						FROM orders ord
+						GROUP BY ord.`ShipVia`))x</string>
+		<string>-- Write a SQL query to display the shipper's company name with minimum orders.
+SELECT s.`CompanyName`
+FROM  shippers s
+JOIN orders o ON s.`ShipperID` = o.`ShipVia`
+GROUP BY o.`ShipVia`
+HAVING count(*) = (SELECT MAX(cnt) 
+					FROM ( SELECT COUNT(*) as cnt
+						FROM orders ord
+						GROUP BY ord.`ShipVia`)</string>
+		<string>-- Write a SQL query to display the shipper's company name with minimum orders.
+SELECT s.`CompanyName`
+FROM  shippers s
+JOIN orders o ON s.`ShipperID` = o.`ShipVia`
+GROUP BY o.`ShipVia`</string>
+		<string>-- Write a SQL query to display the shipper's company name with minimum orders.
+SELECT s.`CompanyName`
+FROM  shippers s
+JOIN orders o ON s.`ShipperID` = o.`ShipVia`
+GROUP BY o.`ShipVia`
+
+
+select t.name, count(t.name) as cnt
+from employees e
+join addresses a on e.addressid = a.addressid
+join towns t on a.townid = t.townid
+group by a.townid
+having cnt = (
+select max(cnt)
+	from (
+		select count(*) as cnt from employees b 
+		join addresses ad on b.addressid = ad.addressid
+		group by ad.townid
+	) x 
+)</string>
+		<string>-- Write a SQL query to display the shipper's company name with minimum orders.
+SELECT s.`CompanyName`
+FROM  (SELECT COUNT(*) ordCount, ord.`ShipVia`
+		FROM orders ord
+		GROUP BY ord.`ShipVia`) x
+JOIN shippers s ON x.`ShipVia` = s.`ShipperID`
+HAVING MIN(ordCount)</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>5.5.5-10.3.8-MariaDB</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>

@@ -23,14 +23,13 @@ public class BlogPostsServiceImpl implements BlogPostsService {
         return blogPostsRepository.list();
     }
 
-    public BlogPost findById(int id) {
-        try {
-            return blogPostsRepository.getOne(id);
-        } catch (NullPointerException e){
-            System.out.println("No such blog post.");
-            e.printStackTrace();
+    public BlogPost findById(int id) throws Exception{
+        BlogPost result = blogPostsRepository.getOne(id);
+
+        if (result == null){
+            throw new Exception("No such blog post");
         }
-        return null;
+        return result;
     }
 
     @Override

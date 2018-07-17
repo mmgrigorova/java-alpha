@@ -12,7 +12,7 @@ public interface BlogPostsService {
 
     BlogPost createBlogPost(BlogPost blogPost);
 
-    BlogPost findById(int id);
+    BlogPost findById(int id) throws Exception;
 
 
     void updateBlogPost(int id, BlogPost newPost);
