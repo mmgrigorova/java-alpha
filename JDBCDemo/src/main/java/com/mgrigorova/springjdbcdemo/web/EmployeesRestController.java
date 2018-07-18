@@ -2,12 +2,10 @@ package com.mgrigorova.springjdbcdemo.web;
 
 import java.util.*;
 
-import com.mgrigorova.springjdbcdemo.data.EmployeeRepository;
 import com.mgrigorova.springjdbcdemo.models.Employee;
 import com.mgrigorova.springjdbcdemo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -23,5 +21,10 @@ public class EmployeesRestController {
     @RequestMapping("/")
     public List<Employee> getAll() {
         return service.getAll();
+    }
+
+    @RequestMapping("/find/{name}")
+    List<Employee> findByName(@PathVariable("name") String name){
+        return service.findByName(name);
     }
 }

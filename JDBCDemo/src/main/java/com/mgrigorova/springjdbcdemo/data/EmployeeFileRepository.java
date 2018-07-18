@@ -11,4 +11,9 @@ public class EmployeeFileRepository implements EmployeeRepository {
         // read employee data from file
         return null;
     }
+
+    @Override
+    public List<Employee> findByName(String name) {
+        return null;
+    }
 }
