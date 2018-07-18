@@ -144,6 +144,12 @@ FROM (SELECT MAX(pr.`UnitPrice`) as maxPrice, pr.categoryid
 JOIN products p ON x.maxPrice = p.`UnitPrice` AND x.`CategoryID` = p.`CategoryID`
 JOIN categories c ON p.`CategoryID` = c.`CategoryID`
 ORDER BY p.`UnitPrice`</string>
+		<string>SELECT e.`FirstName`, e.`LastName`
+FROM employees m
+JOIN employees e ON m.`ReportsTo` = e.`EmployeeID`
+GROUP BY m.`ReportsTo`
+HAVING COUNT(*) &gt; 2
+ORDER BY e.`FirstName`</string>
 		<string>-- Write a SQL query to find all managers that have more than 2 employees. Display their first name and last name.
 SELECT e.`FirstName`, e.`LastName`
 FROM employees m
@@ -280,13 +286,6 @@ select max(cnt)
 		group by ad.townid
 	) x 
 )</string>
-		<string>-- Write a SQL query to display the shipper's company name with minimum orders.
-SELECT s.`CompanyName`
-FROM  (SELECT COUNT(*) ordCount, ord.`ShipVia`
-		FROM orders ord
-		GROUP BY ord.`ShipVia`) x
-JOIN shippers s ON x.`ShipVia` = s.`ShipperID`
-HAVING MIN(ordCount)</string>
 	</array>
 	<key>rdbms_type</key>
 	<string>mysql</string>

@@ -20,12 +20,7 @@ public class BlogController {
     // Run app with http://localhost:8080
     @RequestMapping("/")
     public List<BlogPost> listPosts() {
-        try {
-            return blogPostsService.listAllBlogPosts();
-        } catch (NullPointerException e) {
-            System.out.println("No posts yet");
-            return null;
-        }
+        return blogPostsService.listAllBlogPosts();
     }
 
 

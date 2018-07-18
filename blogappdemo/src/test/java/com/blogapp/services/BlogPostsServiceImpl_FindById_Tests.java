@@ -1,12 +1,10 @@
 package com.blogapp.services;
 
-import com.blogapp.data.BlogPostsRepositoryImpl;
 import com.blogapp.data.base.GenericRepository;
 import com.blogapp.models.BlogPost;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
