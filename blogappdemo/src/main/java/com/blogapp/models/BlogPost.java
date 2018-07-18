@@ -44,4 +44,9 @@ public class BlogPost {
     public static int getMaxID(){
         return maxID;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Post: %d by %s - %s " , id, author, content);
+    }
 }

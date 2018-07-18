@@ -20,13 +20,17 @@ public class BlogPostsServiceImpl implements BlogPostsService {
 
     @Override
     public List<BlogPost> listAllBlogPosts() {
+        for (BlogPost post : blogPostsRepository.list()) {
+            System.out.println(post);
+
+        }
         return blogPostsRepository.list();
     }
 
-    public BlogPost findById(int id) throws Exception{
+    public BlogPost findById(int id) throws Exception {
         BlogPost result = blogPostsRepository.getOne(id);
 
-        if (result == null){
+        if (result == null) {
             throw new Exception("No such blog post");
         }
         return result;

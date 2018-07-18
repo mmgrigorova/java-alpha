@@ -14,7 +14,7 @@
 <h1>The Blog Demo</h1>
 
 <script>
-    $.get("api/blogposts/", function (posts) {
+    $.get("/api/blogposts", function (posts) {
             posts.forEach(function (post) {
                 $("<div/>")
                     .addClass("author")

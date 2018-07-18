@@ -3,12 +3,13 @@ package com.blogapp.web;
 import com.blogapp.models.BlogPost;
 import com.blogapp.services.base.BlogPostsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/blogposts")
+@RequestMapping("/api/blogposts")
 public class BlogController {
     private BlogPostsService blogPostsService;
 
@@ -18,8 +19,10 @@ public class BlogController {
     }
 
     // Run app with http://localhost:8080
-    @RequestMapping("/")
+    // GET /api/blogposts
+    @RequestMapping
     public List<BlogPost> listPosts() {
+        System.out.println("Calling controller list");
         return blogPostsService.listAllBlogPosts();
     }
 
