@@ -13,25 +13,20 @@ import java.util.Properties;
 
 @Repository
 public class EmployeeSqlRepository implements EmployeeRepository {
+    private static final String CONFIG_FILE = "/Users/Maria/repos/java-alpha/JDBCDemo/src/main/resources/application.properties";
+    private String dbUrl;
+    private String dbUser;
+    private String dbPass;
+
+    public EmployeeSqlRepository() {
+        dbUrl = dbUser = dbPass = "";
+    }
+
 
     @Override
     public List<Employee> getAll() {
-        Properties dbConfig = new Properties();
 
-        String configFilePath = "/Users/Maria/repos/java-alpha/JDBCDemo/src/main/resources/application.properties";
-
-        try (FileInputStream fis = new FileInputStream(configFilePath)) {
-            dbConfig.load(fis);
-        } catch (FileNotFoundException f) {
-            System.out.println("Properties file not found");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Unable to read properties file");
-        }
-
-        String dbUrl = dbConfig.getProperty("dbUrl");
-        String dbUser = dbConfig.getProperty("dbUser");
-        String dbPass = dbConfig.getProperty("dbPass");
+        loadDbConfig();
 
         List<Employee> employeesList = new ArrayList<>();
 
@@ -42,15 +37,8 @@ public class EmployeeSqlRepository implements EmployeeRepository {
             System.out.println("Connection created.");
             String query = "select `FirstName`, `LastName`, `JobTitle` from employees;";
             ResultSet result = statement.executeQuery(query);
-            while (result.next()) {
-                Employee e = new Employee(
-                        result.getString("FirstName"),
-                        result.getString("LastName"),
-                        result.getString("JobTitle")
-                );
 
-                employeesList.add(e);
-            }
+            readEmployeesData(employeesList, result);
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Connection failed :( .");
@@ -59,25 +47,10 @@ public class EmployeeSqlRepository implements EmployeeRepository {
         return employeesList;
     }
 
+
     @Override
     public List<Employee> findByName(String name) {
-
-        Properties dbConfig = new Properties();
-
-        String configFilePath = "/Users/Maria/repos/java-alpha/JDBCDemo/src/main/resources/application.properties";
-
-        try (FileInputStream fis = new FileInputStream(configFilePath)) {
-            dbConfig.load(fis);
-        } catch (FileNotFoundException f) {
-            System.out.println("Properties file not found");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Unable to read properties file");
-        }
-
-        String dbUrl = dbConfig.getProperty("dbUrl");
-        String dbUser = dbConfig.getProperty("dbUser");
-        String dbPass = dbConfig.getProperty("dbPass");
+        loadDbConfig();
 
         String query = "select `FirstName`, `LastName`, `JobTitle` " +
                 "from employees " +
@@ -95,20 +68,42 @@ public class EmployeeSqlRepository implements EmployeeRepository {
             statement.setString(1, name);
 
             ResultSet result = statement.executeQuery();
-            while (result.next()) {
-                Employee e = new Employee(
-                        result.getString("FirstName"),
-                        result.getString("LastName"),
-                        result.getString("JobTitle")
-                );
-
-                employeesList.add(e);
-            }
+            readEmployeesData(employeesList, result);
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Connection failed :( .");
         }
 
         return employeesList;
+    }
+
+    private void loadDbConfig() {
+        Properties dbConfig = new Properties();
+
+        try (FileInputStream fis = new FileInputStream(CONFIG_FILE)) {
+            dbConfig.load(fis);
+        } catch (FileNotFoundException f) {
+            System.out.println("Properties file not found");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Unable to read properties file");
+        }
+
+        dbUrl = dbConfig.getProperty("dbUrl");
+        dbUser = dbConfig.getProperty("dbUser");
+        dbPass = dbConfig.getProperty("dbPass");
+    }
+
+
+    private void readEmployeesData(List<Employee> employeesList, ResultSet result) throws SQLException {
+        while (result.next()) {
+            Employee e = new Employee(
+                    result.getString("FirstName"),
+                    result.getString("LastName"),
+                    result.getString("JobTitle")
+            );
+
+            employeesList.add(e);
+        }
     }
 }
