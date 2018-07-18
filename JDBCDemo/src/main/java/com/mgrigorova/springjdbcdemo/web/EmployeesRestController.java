@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.mgrigorova.springjdbcdemo.data.EmployeeRepository;
 import com.mgrigorova.springjdbcdemo.models.Employee;
+import com.mgrigorova.springjdbcdemo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeesRestController {
-    private EmployeeRepository repository;
+    private EmployeeService service;
 
     @Autowired
-    public EmployeesRestController(EmployeeRepository repository) {
-        this.repository = repository;
+    public EmployeesRestController(EmployeeService service) {
+        this.service = service;
     }
 
     @RequestMapping("/")
     public List<Employee> getAll() {
-        return repository.getAll();
+        return service.getAll();
     }
 }
