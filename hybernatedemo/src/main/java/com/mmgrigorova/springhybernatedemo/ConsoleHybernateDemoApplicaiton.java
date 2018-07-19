@@ -76,6 +76,26 @@ public class ConsoleHybernateDemoApplicaiton {
 
         System.out.println(a.getEmployee());
 
+        Town t = session.get(Town.class, 32);
+        t.getAddresses().add(new Address("Alexander Malinov 31"));
+
+        session.save(t);
+
+        System.out.println(t);
+//
+//        for (Address address : t.getAddresses()) {
+//            System.out.println(address.getEmployee());
+//        }
+
+        Address a2 = session.get(Address.class, 292);
+
+        System.out.println(a2 + " " + a2.getTown());
+
+        Town t2 = session.get(Town.class, 32);
+        System.out.println(t2);
+        for (Address address : t2.getAddresses()) {
+            System.out.println(address);
+        }
 
         session.getTransaction().commit();
         session.close();

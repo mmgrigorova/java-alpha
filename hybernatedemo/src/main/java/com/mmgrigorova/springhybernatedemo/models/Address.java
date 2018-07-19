@@ -16,6 +16,10 @@ public class Address {
     @OneToOne(mappedBy = "address")
     private Employee employee;
 
+    @ManyToOne
+    @JoinColumn(name = "TownId")
+    private Town town;
+
     public Address() {
     }
 
@@ -45,6 +49,14 @@ public class Address {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public Town getTown() {
+        return town;
+    }
+
+    public void setTown(Town town) {
+        this.town = town;
     }
 
     @Override
