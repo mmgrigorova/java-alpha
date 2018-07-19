@@ -16,5 +16,22 @@ public class ConsoleHybernateDemoApplicaiton {
 
         System.out.println("App started!!!");
 
+        /* Adding employee
+        Employee newEmployee = new Employee("Petar", "Raykov", "Technical Trainer");
+
+        session.save(newEmployee);
+        session.getTransaction().commit();
+
+        session.close();
+        */
+
+        Employee employee = session.get(Employee.class, 1);
+        System.out.println(
+                employee.getId() + ": " +
+                        employee.getFirstName() + " " +
+                        employee.getLastName() + " - " +
+                        employee.getJobTitle()
+        );
+
     }
 }
