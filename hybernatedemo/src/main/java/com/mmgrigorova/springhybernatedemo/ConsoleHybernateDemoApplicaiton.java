@@ -2,12 +2,13 @@ package com.mmgrigorova.springhybernatedemo;
 
 import com.mmgrigorova.springhybernatedemo.models.Address;
 import com.mmgrigorova.springhybernatedemo.models.Employee;
+import com.mmgrigorova.springhybernatedemo.models.Project;
 import com.mmgrigorova.springhybernatedemo.models.Town;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.*;
 
-import java.util.List;
+
 
 public class ConsoleHybernateDemoApplicaiton {
     public static void main(String[] args) {
@@ -17,6 +18,7 @@ public class ConsoleHybernateDemoApplicaiton {
                 .addAnnotatedClass(Employee.class)
                 .addAnnotatedClass(Town.class)
                 .addAnnotatedClass(Address.class)
+                .addAnnotatedClass(Project.class)
                 // TODO research adding package
 //                .addPackage("com.mmgrigorova.springhybernatedemo.models")
                 .buildSessionFactory();
@@ -95,6 +97,23 @@ public class ConsoleHybernateDemoApplicaiton {
         System.out.println(t2);
         for (Address address : t2.getAddresses()) {
             System.out.println(address);
+        }
+
+
+        Employee emp = session.get(Employee.class, 3);
+
+        System.out.println(emp.getFirstName());
+        // Get projects by employee
+        for (Project project : emp.getProjects()) {
+            System.out.println(project);
+        }
+
+
+        //Get employees by project
+        Project p = session.get(Project.class, 2);
+        System.out.println(p);
+        for (Employee employee : p.getEmployees()) {
+            System.out.println(employee);
         }
 
         session.getTransaction().commit();

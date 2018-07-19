@@ -1,6 +1,7 @@
 package com.mmgrigorova.springhybernatedemo.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "employees")
@@ -23,7 +24,15 @@ public class Employee {
     @JoinColumn(name = "AddressId")
     private Address address;
 
-    public Employee(){
+    @ManyToMany
+    @JoinTable(
+            name = "employeesprojects",
+            joinColumns = @JoinColumn(name = "EmployeeId"),
+            inverseJoinColumns = @JoinColumn(name = "projectId")
+    )
+    private List<Project> projects;
+
+    public Employee() {
 
     }
 
@@ -71,6 +80,14 @@ public class Employee {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
     @Override
