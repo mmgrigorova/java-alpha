@@ -1,18 +1,23 @@
 package com.mmgrigorova.springhybernatedemo;
 
 import com.mmgrigorova.springhybernatedemo.models.Employee;
+import com.mmgrigorova.springhybernatedemo.models.Town;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.*;
+
+import java.util.List;
 
 public class ConsoleHybernateDemoApplicaiton {
     public static void main(String[] args) {
         SessionFactory factory = new Configuration()
                 .configure("hybernate.cfg.xml")
+                // Very important to add the entities in the setup
                 .addAnnotatedClass(Employee.class)
+                .addAnnotatedClass(Town.class)
                 .buildSessionFactory();
 
-        Session session = factory.openSession();
+
 
         System.out.println("App started!!!");
 
@@ -25,13 +30,40 @@ public class ConsoleHybernateDemoApplicaiton {
         session.close();
         */
 
-        Employee employee = session.get(Employee.class, 1);
-        System.out.println(
-                employee.getId() + ": " +
-                        employee.getFirstName() + " " +
-                        employee.getLastName() + " - " +
-                        employee.getJobTitle()
-        );
+        Session session = factory.openSession();
+//        Employee employee = session.get(Employee.class, 1);
+//        System.out.println(
+//                employee.getId() + ": " +
+//                        employee.getFirstName() + " " +
+//                        employee.getLastName() + " - " +
+//                        employee.getJobTitle()
+//        );
+//        session.close();
+
+        session = factory.openSession();
+        session.beginTransaction();
+
+        Town town = new Town("Pleven");
+
+//        session.save(town);
+
+        session.getTransaction().commit();
+
+        Town myTown = session.get(Town.class, 37);
+        Town toDelete = session.get(Town.class, 36);
+
+        System.out.println(myTown);
+
+        session.delete(toDelete);
+
+        List<Town> towns = session.createQuery("FROM Town").list();
+
+        for (Town town1 : towns) {
+            System.out.println(town1);
+        }
+
+        session.close();
+
 
     }
 }

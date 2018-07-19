@@ -60,4 +60,9 @@ public class Employee {
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%d %s %s", id, firstName, lastName);
+    }
 }
