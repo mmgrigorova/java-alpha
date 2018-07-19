@@ -5,6 +5,7 @@ import com.blogapp.BlogappApplication;
 import com.blogapp.models.BlogPost;
 import com.blogapp.services.base.BlogPostsService;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,21 +31,25 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = BlogappApplication.class)
 @AutoConfigureMockMvc
 public class BlogPostControllerGetAllTests {
+    private List<BlogPost> blogs;
     @MockBean
     BlogPostsService service;
 
     @Autowired
     MockMvc mockMvc;
 
-    @Test
-    public void getAll_whenRestaurants_shouldStatus200AndContainRestaurants() throws Exception {
-        List<BlogPost> blogs = Arrays.asList(
-                new BlogPost("Author 1", "Test Post 1"),
-                new BlogPost("Author 2", "Test Post 2")
-        );
+    @Before
+    public void setup(){
+        blogs = new ArrayList<>();
+        blogs.add(new BlogPost("Author 1", "Test Post 1"));
+        blogs.add(new BlogPost("Author 2", "Test Post 2"));
 
         when(service.listAllBlogPosts())
                 .thenReturn(blogs);
+    }
+
+    @Test
+    public void getAll_whenRestaurants_shouldStatus200AndContainRestaurants() throws Exception {
 
         ResultActions expect = mockMvc.perform(
                 get("/api/blogposts")
