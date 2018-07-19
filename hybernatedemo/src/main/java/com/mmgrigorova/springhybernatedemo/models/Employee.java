@@ -19,6 +19,10 @@ public class Employee {
     @Column(name = "JobTitle")
     private String jobTitle;
 
+    @OneToOne
+    @JoinColumn(name = "AddressId")
+    private Address address;
+
     public Employee(){
 
     }
@@ -61,8 +65,16 @@ public class Employee {
         this.jobTitle = jobTitle;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
-        return String.format("%d %s %s", id, firstName, lastName);
+        return String.format("Employee id %d: %s %s, address: %s", id, firstName, lastName, address);
     }
 }

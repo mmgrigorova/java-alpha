@@ -1,5 +1,6 @@
 package com.mmgrigorova.springhybernatedemo;
 
+import com.mmgrigorova.springhybernatedemo.models.Address;
 import com.mmgrigorova.springhybernatedemo.models.Employee;
 import com.mmgrigorova.springhybernatedemo.models.Town;
 import org.hibernate.Session;
@@ -15,6 +16,9 @@ public class ConsoleHybernateDemoApplicaiton {
                 // Very important to add the entities in the setup
                 .addAnnotatedClass(Employee.class)
                 .addAnnotatedClass(Town.class)
+                .addAnnotatedClass(Address.class)
+                // TODO research adding package
+//                .addPackage("com.mmgrigorova.springhybernatedemo.models")
                 .buildSessionFactory();
 
 
@@ -43,25 +47,37 @@ public class ConsoleHybernateDemoApplicaiton {
         session = factory.openSession();
         session.beginTransaction();
 
-        Town town = new Town("Pleven");
+//        Town town = new Town("Pleven");
+////
+//////        session.save(town);
+////
+////        session.getTransaction().commit();
+////
+////        Town myTown = session.get(Town.class, 37);
+////        Town toDelete = session.get(Town.class, 36);
+////
+////        System.out.println(myTown);
+////
+////        session.delete(toDelete);
+////
+////        List<Town> towns = session.createQuery("FROM Town").list();
+////
+////        for (Town town1 : towns) {
+////            System.out.println(town1);
+////        }
 
-//        session.save(town);
+        // Uni-directional one to one
+        Employee e = session.get(Employee.class, 2);
+
+        // Bi-directional one to one - just for test
+        Address a = session.get(Address.class, 6);
+
+        System.out.println(e);
+
+        System.out.println(a.getEmployee());
+
 
         session.getTransaction().commit();
-
-        Town myTown = session.get(Town.class, 37);
-        Town toDelete = session.get(Town.class, 36);
-
-        System.out.println(myTown);
-
-        session.delete(toDelete);
-
-        List<Town> towns = session.createQuery("FROM Town").list();
-
-        for (Town town1 : towns) {
-            System.out.println(town1);
-        }
-
         session.close();
 
 

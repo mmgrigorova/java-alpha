@@ -13,6 +13,9 @@ public class Address {
     @Column(name = "AddressText")
     private String text;
 
+    @OneToOne(mappedBy = "address")
+    private Employee employee;
+
     public Address() {
     }
 
@@ -34,6 +37,14 @@ public class Address {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @Override
