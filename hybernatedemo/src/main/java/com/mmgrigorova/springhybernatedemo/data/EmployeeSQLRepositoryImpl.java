@@ -21,9 +21,9 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
                 .configure("hibernate.cfg.xml")
                 // Very important to add the entities in the setup
                 .addAnnotatedClass(Employee.class)
-                .addAnnotatedClass(Town.class)
-                .addAnnotatedClass(Address.class)
-                .addAnnotatedClass(Project.class)
+//                .addAnnotatedClass(Town.class)
+//                .addAnnotatedClass(Address.class)
+//                .addAnnotatedClass(Project.class)
                 // TODO research adding package
 //                .addPackage("com.mmgrigorova.springhybernatedemo.models")
                 .buildSessionFactory();

@@ -3,6 +3,7 @@ package com.blogapp.services;
 import com.blogapp.data.base.GenericRepository;
 import com.blogapp.models.BlogPost;
 import com.blogapp.services.base.BlogPostsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 public class BlogPostsServiceImpl implements BlogPostsService {
     private GenericRepository<BlogPost> blogPostsRepository;
 
+    @Autowired
     public BlogPostsServiceImpl(GenericRepository<BlogPost> blogPostRepository) {
         this.blogPostsRepository = blogPostRepository;
     }

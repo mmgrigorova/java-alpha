@@ -20,17 +20,17 @@ public class Employee {
     @Column(name = "JobTitle")
     private String jobTitle;
 
-    @OneToOne
-    @JoinColumn(name = "AddressId")
-    private Address address;
-
-    @ManyToMany
-    @JoinTable(
-            name = "employeesprojects",
-            joinColumns = @JoinColumn(name = "EmployeeId"),
-            inverseJoinColumns = @JoinColumn(name = "projectId")
-    )
-    private List<Project> projects;
+//    @OneToOne
+//    @JoinColumn(name = "AddressId")
+//    private Address address;
+//
+//    @ManyToMany
+//    @JoinTable(
+//            name = "employeesprojects",
+//            joinColumns = @JoinColumn(name = "EmployeeId"),
+//            inverseJoinColumns = @JoinColumn(name = "projectId")
+//    )
+//    private List<Project> projects;
 
     public Employee() {
 
@@ -74,24 +74,24 @@ public class Employee {
         this.jobTitle = jobTitle;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
+//    public Address getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(Address address) {
+//        this.address = address;
+//    }
+//
+//    public List<Project> getProjects() {
+//        return projects;
+//    }
+//
+//    public void setProjects(List<Project> projects) {
+//        this.projects = projects;
+//    }
 
     @Override
     public String toString() {
-        return String.format("Employee id %d: %s %s, address: %s", id, firstName, lastName, address);
+        return String.format("Employee id %d: %s %s, address: %s", id, firstName, lastName /*, address*/);
     }
 }

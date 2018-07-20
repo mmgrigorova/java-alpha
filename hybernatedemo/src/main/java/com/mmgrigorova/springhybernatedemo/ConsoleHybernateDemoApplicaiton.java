@@ -93,11 +93,11 @@ public class ConsoleHybernateDemoApplicaiton {
 
         Employee emp = session.get(Employee.class, 3);
 
-        System.out.println(emp.getFirstName());
-        // Get projects by employee
-        for (Project project : emp.getProjects()) {
-            System.out.println(project);
-        }
+//        System.out.println(emp.getFirstName());
+//        // Get projects by employee
+//        for (Project project : emp.getProjects()) {
+//            System.out.println(project);
+//        }
 
         //Get employees by project
         Project p = session.get(Project.class, 2);
