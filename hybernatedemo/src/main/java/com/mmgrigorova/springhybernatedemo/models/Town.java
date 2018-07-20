@@ -16,9 +16,10 @@ public class Town {
     @Column(name = "Name")
     private String name;
 
-//    @OneToMany(cascade = CascadeType.ALL,
-//            mappedBy = "town")
-//    private List<Address> addresses;
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "town")
+    private List<Address> addresses;
 
     public Town() {
     }
@@ -43,13 +44,13 @@ public class Town {
         this.name = name;
     }
 
-//    public List<Address> getAddresses() {
-//        return addresses;
-//    }
-//
-//    public void setAddresses(List<Address> addresses) {
-//        this.addresses = addresses;
-//    }
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
 
     @Override
     public String toString() {
