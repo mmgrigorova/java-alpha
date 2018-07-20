@@ -13,12 +13,12 @@ public class Address {
     @Column(name = "AddressText")
     private String text;
 
-    @OneToOne(mappedBy = "address")
-    private Employee employee;
+//    @OneToOne(mappedBy = "address")
+//    private Employee employee;
 
-    @ManyToOne
-    @JoinColumn(name = "TownId")
-    private Town town;
+// @ManyToOne
+////    @JoinColumn(name = "TownId")
+////    private Town town;
 
     public Address() {
     }
@@ -43,21 +43,21 @@ public class Address {
         this.text = text;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
+//    public Employee getEmployee() {
+//        return employee;
+//    }
+//
+//    public void setEmployee(Employee employee) {
+//        this.employee = employee;
+//    }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Town getTown() {
-        return town;
-    }
-
-    public void setTown(Town town) {
-        this.town = town;
-    }
+//    public Town getTown() {
+//        return town;
+//    }
+//
+//    public void setTown(Town town) {
+//        this.town = town;
+//    }
 
     @Override
     public String toString() {
