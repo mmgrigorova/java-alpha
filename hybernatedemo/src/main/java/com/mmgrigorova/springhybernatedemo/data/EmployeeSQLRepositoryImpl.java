@@ -7,16 +7,18 @@ import com.mmgrigorova.springhybernatedemo.models.Town;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
     private static final SessionFactory factory;
 
     static {
         factory = new Configuration()
-                .configure("hybernate.cfg.xml")
+                .configure("hibernate.cfg.xml")
                 // Very important to add the entities in the setup
                 .addAnnotatedClass(Employee.class)
                 .addAnnotatedClass(Town.class)
