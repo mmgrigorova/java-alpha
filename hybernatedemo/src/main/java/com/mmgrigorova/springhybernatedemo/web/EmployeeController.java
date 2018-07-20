@@ -3,10 +3,9 @@ package com.mmgrigorova.springhybernatedemo.web;
 import com.mmgrigorova.springhybernatedemo.models.Employee;
 import com.mmgrigorova.springhybernatedemo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +28,12 @@ public class EmployeeController {
     @GetMapping("/")
     public List<Employee> getAll() {
         return employeeService.getAll();
+    }
+
+    @ExceptionHandler
+    ResponseEntity<EmployeeError> handlerException(Exception e) {
+        return new ResponseEntity<>(
+                new EmployeeError(HttpStatus.BAD_REQUEST.value(), "Unable to Parse Id"),
+                HttpStatus.BAD_REQUEST);
     }
 }
