@@ -12,18 +12,9 @@ import org.hibernate.cfg.*;
 
 public class ConsoleHybernateDemoApplicaiton {
     public static void main(String[] args) {
-        SessionFactory factory = new Configuration()
-                .configure("hybernate.cfg.xml")
-                // Very important to add the entities in the setup
-                .addAnnotatedClass(Employee.class)
-                .addAnnotatedClass(Town.class)
-                .addAnnotatedClass(Address.class)
-                .addAnnotatedClass(Project.class)
-                // TODO research adding package
-//                .addPackage("com.mmgrigorova.springhybernatedemo.models")
-                .buildSessionFactory();
 
 
+        SessionFactory factory = null;
 
         System.out.println("App started!!!");
 
@@ -107,7 +98,6 @@ public class ConsoleHybernateDemoApplicaiton {
         for (Project project : emp.getProjects()) {
             System.out.println(project);
         }
-
 
         //Get employees by project
         Project p = session.get(Project.class, 2);
