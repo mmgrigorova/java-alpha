@@ -16,9 +16,9 @@ public class Address {
 //    @OneToOne(mappedBy = "address")
 //    private Employee employee;
 
-// @ManyToOne
-////    @JoinColumn(name = "TownId")
-////    private Town town;
+    @ManyToOne
+    @JoinColumn(name = "TownId")
+    private Town town;
 
     public Address() {
     }
@@ -51,16 +51,16 @@ public class Address {
 //        this.employee = employee;
 //    }
 
-//    public Town getTown() {
-//        return town;
-//    }
-//
-//    public void setTown(Town town) {
-//        this.town = town;
-//    }
+    public Town getTown() {
+        return town;
+    }
+
+    public void setTown(Town town) {
+        this.town = town;
+    }
 
     @Override
     public String toString() {
-        return String.format("%d %s",id, text);
+        return String.format("%d %s in %s", id, text, town.getName());
     }
 }

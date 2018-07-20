@@ -1,6 +1,9 @@
 package com.mmgrigorova.springhybernatedemo.models;
 
+import com.sun.deploy.security.ValidationState;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,13 +27,13 @@ public class Employee {
     @JoinColumn(name = "AddressId")
     private Address address;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "employeesprojects",
-//            joinColumns = @JoinColumn(name = "EmployeeId"),
-//            inverseJoinColumns = @JoinColumn(name = "projectId")
-//    )
-//    private List<Project> projects;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "employeesprojects",
+            joinColumns = @JoinColumn(name = "EmployeeId"),
+            inverseJoinColumns = @JoinColumn(name = "ProjectId")
+    )
+    private List<Project> projects;
 
     public Employee() {
 
@@ -40,6 +43,7 @@ public class Employee {
         this.firstName = firstName;
         this.lastName = lastName;
         this.jobTitle = jobTitle;
+        projects = new ArrayList<>();
     }
 
     public int getId() {
@@ -82,13 +86,13 @@ public class Employee {
         this.address = address;
     }
 
-//    public List<Project> getProjects() {
-//        return projects;
-//    }
-//
-//    public void setProjects(List<Project> projects) {
-//        this.projects = projects;
-//    }
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
 
     @Override
     public String toString() {

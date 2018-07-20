@@ -1,6 +1,7 @@
 package com.mmgrigorova.springhybernatedemo.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,10 +24,12 @@ public class Project {
     private List<Employee> employees;
 
     public Project() {
+        employees = new ArrayList<>();
     }
 
     public Project(String description) {
         this.description = description;
+        employees = new ArrayList<>();
     }
 
     public int getId() {
@@ -45,13 +48,13 @@ public class Project {
         this.description = description;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
+//    public List<Employee> getEmployees() {
+//        return employees;
+//    }
+//
+//    public void setEmployees(List<Employee> employees) {
+//        this.employees = employees;
+//    }
 
     @Override
     public String toString() {

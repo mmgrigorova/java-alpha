@@ -7,6 +7,7 @@ import com.mmgrigorova.springhybernatedemo.models.Town;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -14,19 +15,11 @@ import java.util.List;
 
 @Repository
 public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
-    private static final SessionFactory factory;
+    private static SessionFactory factory;
 
-    static {
-        factory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                // Very important to add the entities in the setup
-                .addAnnotatedClass(Employee.class)
-                .addAnnotatedClass(Town.class)
-                .addAnnotatedClass(Address.class)
-//                .addAnnotatedClass(Project.class)
-                // TODO research adding package
-//                .addPackage("com.mmgrigorova.springhybernatedemo.models")
-                .buildSessionFactory();
+    @Autowired
+    public EmployeeSQLRepositoryImpl(SessionFactory factory) {
+        this.factory = factory;
     }
 
     @Override
@@ -57,4 +50,6 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
         }
         return employees;
     }
+
+
 }
