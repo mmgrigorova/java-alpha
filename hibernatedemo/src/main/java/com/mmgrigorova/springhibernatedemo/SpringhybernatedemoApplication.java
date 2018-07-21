@@ -1,15 +1,13 @@
-package com.mmgrigorova.springhybernatedemo;
+package com.mmgrigorova.springhibernatedemo;
 
-import com.mmgrigorova.springhybernatedemo.models.Address;
-import com.mmgrigorova.springhybernatedemo.models.Employee;
-import com.mmgrigorova.springhybernatedemo.models.Project;
-import com.mmgrigorova.springhybernatedemo.models.Town;
+import com.mmgrigorova.springhibernatedemo.models.*;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
+
 
 @org.springframework.context.annotation.Configuration
 @SpringBootApplication
@@ -32,4 +30,5 @@ public class SpringhybernatedemoApplication {
 //                .addPackage("com.mmgrigorova.springhybernatedemo.models")
                 .buildSessionFactory();
     }
+
 }

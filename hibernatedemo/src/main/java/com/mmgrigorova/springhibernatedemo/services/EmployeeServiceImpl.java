@@ -1,7 +1,7 @@
-package com.mmgrigorova.springhybernatedemo.services;
+package com.mmgrigorova.springhibernatedemo.services;
 
-import com.mmgrigorova.springhybernatedemo.data.EmployeeRepository;
-import com.mmgrigorova.springhybernatedemo.models.Employee;
+import com.mmgrigorova.springhibernatedemo.data.EmployeeRepository;
+import com.mmgrigorova.springhibernatedemo.models.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

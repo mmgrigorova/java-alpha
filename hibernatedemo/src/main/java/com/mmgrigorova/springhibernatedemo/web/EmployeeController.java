@@ -1,7 +1,7 @@
-package com.mmgrigorova.springhybernatedemo.web;
+package com.mmgrigorova.springhibernatedemo.web;
 
-import com.mmgrigorova.springhybernatedemo.models.Employee;
-import com.mmgrigorova.springhybernatedemo.services.EmployeeService;
+import com.mmgrigorova.springhibernatedemo.models.Employee;
+import com.mmgrigorova.springhibernatedemo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,10 +30,10 @@ public class EmployeeController {
         return employeeService.getAll();
     }
 
-//    @ExceptionHandler
-//    ResponseEntity<EmployeeError> handlerException(Exception e) {
-//        return new ResponseEntity<>(
-//                new EmployeeError(HttpStatus.BAD_REQUEST.value(), "Unable to Parse Id"),
-//                HttpStatus.BAD_REQUEST);
-//    }
+    @ExceptionHandler
+    ResponseEntity<EmployeeError> handlerException(Exception e) {
+        return new ResponseEntity<>(
+                new EmployeeError(HttpStatus.BAD_REQUEST.value(), "Unable to Parse Id"),
+                HttpStatus.BAD_REQUEST);
+    }
 }

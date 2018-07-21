@@ -1,6 +1,6 @@
-package com.mmgrigorova.springhybernatedemo.services;
+package com.mmgrigorova.springhibernatedemo.services;
 
-import com.mmgrigorova.springhybernatedemo.models.Employee;
+import com.mmgrigorova.springhibernatedemo.models.Employee;
 
 import java.util.List;
 

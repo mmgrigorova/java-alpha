@@ -1,12 +1,10 @@
-package com.mmgrigorova.springhybernatedemo;
+package com.mmgrigorova.springhibernatedemo;
 
-import com.mmgrigorova.springhybernatedemo.models.Address;
-import com.mmgrigorova.springhybernatedemo.models.Employee;
-import com.mmgrigorova.springhybernatedemo.models.Project;
-import com.mmgrigorova.springhybernatedemo.models.Town;
+import com.mmgrigorova.springhibernatedemo.models.Address;
+import com.mmgrigorova.springhibernatedemo.models.Employee;
+import com.mmgrigorova.springhibernatedemo.models.Town;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.*;
 
 import java.util.List;
 

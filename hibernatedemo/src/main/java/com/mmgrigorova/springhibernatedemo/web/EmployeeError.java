@@ -1,4 +1,4 @@
-package com.mmgrigorova.springhybernatedemo.web;
+package com.mmgrigorova.springhibernatedemo.web;
 
 public class EmployeeError {
     private int statusCode;

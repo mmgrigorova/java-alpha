@@ -1,9 +1,7 @@
-package com.mmgrigorova.springhybernatedemo.data;
+package com.mmgrigorova.springhibernatedemo.data;
 
-import com.mmgrigorova.springhybernatedemo.models.Address;
-import com.mmgrigorova.springhybernatedemo.models.Employee;
-import com.mmgrigorova.springhybernatedemo.models.Project;
-import com.mmgrigorova.springhybernatedemo.models.Town;
+import com.mmgrigorova.springhibernatedemo.models.*;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +46,21 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
             e.printStackTrace();
         }
         return employees;
+    }
+
+    @Override
+    public Employee addEmployee(Employee employee) {
+        return null;
+    }
+
+    @Override
+    public void updateEmployee(int id) {
+
+    }
+
+    @Override
+    public void deleteEmployee(int id) {
+
     }
 
 

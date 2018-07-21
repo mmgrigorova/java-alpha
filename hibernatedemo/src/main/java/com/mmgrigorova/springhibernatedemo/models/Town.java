@@ -1,8 +1,9 @@
-package com.mmgrigorova.springhybernatedemo.models;
+package com.mmgrigorova.springhibernatedemo.models;
 
 import com.sun.tools.javah.Gen;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,7 @@ public class Town {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             mappedBy = "town")
-    private List<Address> addresses;
+    private List<Address> addresses = new ArrayList<>();
 
     public Town() {
     }
@@ -44,13 +45,13 @@ public class Town {
         this.name = name;
     }
 
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
-    }
+//    public List<Address> getAddresses() {
+//        return addresses;
+//    }
+//
+//    public void setAddresses(List<Address> addresses) {
+//        this.addresses = addresses;
+//    }
 
     @Override
     public String toString() {

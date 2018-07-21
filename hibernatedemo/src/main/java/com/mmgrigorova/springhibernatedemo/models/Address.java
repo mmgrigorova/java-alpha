@@ -1,4 +1,4 @@
-package com.mmgrigorova.springhybernatedemo.models;
+package com.mmgrigorova.springhibernatedemo.models;
 
 import javax.persistence.*;
 
@@ -13,8 +13,8 @@ public class Address {
     @Column(name = "AddressText")
     private String text;
 
-//    @OneToOne(mappedBy = "address")
-//    private Employee employee;
+    @OneToOne(mappedBy = "address")
+    private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "TownId")
@@ -51,13 +51,13 @@ public class Address {
 //        this.employee = employee;
 //    }
 
-    public Town getTown() {
-        return town;
-    }
-
-    public void setTown(Town town) {
-        this.town = town;
-    }
+//    public Town getTown() {
+//        return town;
+//    }
+//
+//    public void setTown(Town town) {
+//        this.town = town;
+//    }
 
     @Override
     public String toString() {

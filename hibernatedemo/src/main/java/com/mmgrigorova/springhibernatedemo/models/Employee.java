@@ -1,4 +1,4 @@
-package com.mmgrigorova.springhybernatedemo.models;
+package com.mmgrigorova.springhibernatedemo.models;
 
 import com.sun.deploy.security.ValidationState;
 
