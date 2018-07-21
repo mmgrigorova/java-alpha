@@ -1,6 +1,7 @@
 package com.mmgrigorova.springhibernatedemo.web;
 
 import com.mmgrigorova.springhibernatedemo.models.Employee;
+import com.mmgrigorova.springhibernatedemo.models.Town;
 import com.mmgrigorova.springhibernatedemo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,11 @@ public class EmployeeController {
     @PostMapping("/add/")
     public void addEmployee(@RequestBody Employee employee){
         employeeService.addEmployee(employee);
+    }
+
+    @PostMapping("/town/")
+    public void addTown(Town town){
+        employeeService.addTown(town);
     }
 
 //    @ExceptionHandler

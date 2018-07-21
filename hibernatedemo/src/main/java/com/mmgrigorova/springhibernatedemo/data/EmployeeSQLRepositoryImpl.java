@@ -26,6 +26,7 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
         try (Session session = factory.openSession()) {
             session.beginTransaction();
             employee = session.get(Employee.class, id);
+            employee.getProjects().size();
             session.getTransaction().commit();
         } catch (Exception e){
             e.printStackTrace();
@@ -70,6 +71,19 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
     @Override
     public void deleteEmployee(int id) {
 
+    }
+
+    @Override
+    public boolean addTown(Town town) {
+        try (Session session = factory.openSession()){
+            session.beginTransaction();
+            session.save(town);
+            session.getTransaction().commit();
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
 
