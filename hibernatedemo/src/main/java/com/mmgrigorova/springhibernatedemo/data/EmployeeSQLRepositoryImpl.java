@@ -48,9 +48,18 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
         return employees;
     }
 
+    // TODO Fix adding employee
     @Override
-    public Employee addEmployee(Employee employee) {
-        return null;
+    public boolean addEmployee(Employee employee) {
+        try(Session session = factory.openSession()) {
+            session.beginTransaction();
+            session.save(employee);
+            session.getTransaction().commit();
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

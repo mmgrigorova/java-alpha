@@ -15,7 +15,7 @@ public class Project {
     @Column(name = "Description")
     private String description;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "employeesprojects",
             joinColumns = @JoinColumn(name = "ProjectId"),

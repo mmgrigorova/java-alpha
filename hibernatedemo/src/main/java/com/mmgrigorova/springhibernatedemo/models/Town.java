@@ -18,7 +18,7 @@ public class Town {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             mappedBy = "town")
     private List<Address> addresses = new ArrayList<>();
 
@@ -44,14 +44,6 @@ public class Town {
     public void setName(String name) {
         this.name = name;
     }
-
-//    public List<Address> getAddresses() {
-//        return addresses;
-//    }
-//
-//    public void setAddresses(List<Address> addresses) {
-//        this.addresses = addresses;
-//    }
 
     @Override
     public String toString() {

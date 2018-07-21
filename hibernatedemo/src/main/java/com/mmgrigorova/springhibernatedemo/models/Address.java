@@ -16,7 +16,7 @@ public class Address {
     @OneToOne(mappedBy = "address")
     private Employee employee;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "TownId")
     private Town town;
 

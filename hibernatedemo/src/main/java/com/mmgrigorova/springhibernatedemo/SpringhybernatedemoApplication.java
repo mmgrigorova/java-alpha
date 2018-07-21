@@ -1,5 +1,7 @@
 package com.mmgrigorova.springhibernatedemo;
 
+import com.fasterxml.jackson.databind.Module;
+import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
 import com.mmgrigorova.springhibernatedemo.models.*;
 
 import org.hibernate.SessionFactory;
@@ -31,4 +33,8 @@ public class SpringhybernatedemoApplication {
                 .buildSessionFactory();
     }
 
+    @Bean
+    public Module datatypeHibernateModule() {
+        return new Hibernate4Module();
+    }
 }

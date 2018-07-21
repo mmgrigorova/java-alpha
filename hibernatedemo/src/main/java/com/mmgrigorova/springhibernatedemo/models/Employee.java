@@ -3,13 +3,14 @@ package com.mmgrigorova.springhibernatedemo.models;
 import com.sun.deploy.security.ValidationState;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("ALL")
 @Entity
 @Table(name = "employees")
-public class Employee {
+public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EmployeeID")
@@ -28,13 +29,13 @@ public class Employee {
     @JoinColumn(name = "AddressId")
     private Address address;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "employeesprojects",
             joinColumns = @JoinColumn(name = "EmployeeId"),
             inverseJoinColumns = @JoinColumn(name = "ProjectId")
     )
-    private List<Project> projects;
+    private List<Project> projects = new ArrayList<>();;
 
     public Employee() {
 
@@ -44,7 +45,6 @@ public class Employee {
         this.firstName = firstName;
         this.lastName = lastName;
         this.jobTitle = jobTitle;
-        projects = new ArrayList<>();
     }
 
     public int getId() {

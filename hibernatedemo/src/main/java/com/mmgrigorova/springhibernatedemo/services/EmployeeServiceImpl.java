@@ -25,4 +25,20 @@ public class EmployeeServiceImpl implements EmployeeService{
     public List<Employee> getAll() {
         return employeeRepository.getAll();
     }
+
+    // TODO Fix Adding employee
+    @Override
+    public boolean addEmployee(Employee employee) {
+        return employeeRepository.addEmployee(employee);
+    }
+
+    @Override
+    public void updateEmployee(int id) {
+
+    }
+
+    @Override
+    public void deleteEmployee(int id) {
+
+    }
 }

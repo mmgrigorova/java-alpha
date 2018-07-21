@@ -30,10 +30,16 @@ public class EmployeeController {
         return employeeService.getAll();
     }
 
-    @ExceptionHandler
-    ResponseEntity<EmployeeError> handlerException(Exception e) {
-        return new ResponseEntity<>(
-                new EmployeeError(HttpStatus.BAD_REQUEST.value(), "Unable to Parse Id"),
-                HttpStatus.BAD_REQUEST);
+    // TODO Fix Adding employee
+    @PostMapping("/add/")
+    public void addEmployee(@RequestBody Employee employee){
+        employeeService.addEmployee(employee);
     }
+
+//    @ExceptionHandler
+//    ResponseEntity<EmployeeError> handlerException(Exception e) {
+//        return new ResponseEntity<>(
+//                new EmployeeError(HttpStatus.BAD_REQUEST.value(), "Unable to Parse Id"),
+//                HttpStatus.BAD_REQUEST);
+//    }
 }
