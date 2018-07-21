@@ -28,7 +28,7 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
             employee = session.get(Employee.class, id);
             employee.getProjects().size();
             session.getTransaction().commit();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
         }
@@ -39,11 +39,13 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
     public List<Employee> getAll() {
         List<Employee> employees = new ArrayList<>();
 
-        try(Session session = factory.openSession()){
+        try (Session session = factory.openSession()) {
             session.beginTransaction();
             employees = session.createQuery("FROM Employee AS e").list();
+            employees.stream()
+                    .forEach(employee -> employee.getProjects().size());
             session.getTransaction().commit();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return employees;
@@ -52,12 +54,12 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
     // TODO Fix adding employee
     @Override
     public boolean addEmployee(Employee employee) {
-        try(Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
             session.beginTransaction();
             session.save(employee);
             session.getTransaction().commit();
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -75,12 +77,12 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
 
     @Override
     public boolean addTown(Town town) {
-        try (Session session = factory.openSession()){
+        try (Session session = factory.openSession()) {
             session.beginTransaction();
             session.save(town);
             session.getTransaction().commit();
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;

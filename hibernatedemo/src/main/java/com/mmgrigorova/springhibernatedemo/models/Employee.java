@@ -25,7 +25,7 @@ public class Employee implements Serializable {
     @Column(name = "JobTitle")
     private String jobTitle;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "AddressId")
     private Address address;
 

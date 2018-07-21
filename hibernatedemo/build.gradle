@@ -35,4 +35,8 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.3.2.Final'
 
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.4.4'
+
+    // https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1
+    compile group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16'
+
 }

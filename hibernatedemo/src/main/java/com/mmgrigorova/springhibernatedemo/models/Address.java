@@ -1,6 +1,8 @@
 package com.mmgrigorova.springhibernatedemo.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "addresses")
@@ -13,8 +15,8 @@ public class Address {
     @Column(name = "AddressText")
     private String text;
 
-    @OneToOne(mappedBy = "address")
-    private Employee employee;
+    @OneToMany(mappedBy = "address")
+    private List<Employee> employees = new ArrayList<>();
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "TownId")
