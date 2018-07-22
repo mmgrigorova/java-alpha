@@ -78,7 +78,14 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
 
     @Override
     public void deleteEmployee(int id) {
-
+        try(Session session = factory.openSession()){
+            session.beginTransaction();
+            Employee employee = session.get(Employee.class, id);
+            session.delete(employee);
+            session.getTransaction().commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -93,6 +100,7 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
         }
         return false;
     }
+
 
 
 }

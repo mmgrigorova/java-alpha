@@ -4,8 +4,6 @@ import com.mmgrigorova.springhibernatedemo.models.Employee;
 import com.mmgrigorova.springhibernatedemo.models.Town;
 import com.mmgrigorova.springhibernatedemo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,6 +40,12 @@ public class EmployeeController {
     public void updateEmployee(@PathVariable("id") String idString, @RequestBody Employee employee){
         int id = Integer.parseInt(idString);
         employeeService.updateEmployee(id, employee);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteEmployee(@PathVariable("id") String idString){
+        int id = Integer.parseInt(idString);
+        employeeService.deleteEmployee(id);
     }
 
     @PostMapping("/town/")

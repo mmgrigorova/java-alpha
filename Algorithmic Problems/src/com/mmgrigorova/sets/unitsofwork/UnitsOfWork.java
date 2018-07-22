@@ -39,7 +39,7 @@ public class UnitsOfWork {
                     break;
                 case "remove":
                     removeUnit(c[1]);
-                    break;q
+                    break;
                 case "power":
                     powerUnit(c[1]);
                     break;
