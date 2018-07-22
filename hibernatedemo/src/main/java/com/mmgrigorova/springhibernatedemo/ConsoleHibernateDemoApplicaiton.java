@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory;
 import java.util.List;
 
 
-public class ConsoleHybernateDemoApplicaiton {
+public class ConsoleHibernateDemoApplicaiton {
     public static void mainDeprecated(String[] args) {
 
 

@@ -42,8 +42,7 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
         try (Session session = factory.openSession()) {
             session.beginTransaction();
             employees = session.createQuery("FROM Employee AS e").list();
-            employees.stream()
-                    .forEach(employee -> employee.getProjects().size());
+            employees.forEach(employee -> employee.getProjects().size());
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,8 +65,15 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
-    public void updateEmployee(int id) {
-
+    public void updateEmployee(int id, Employee employeeForNewData) {
+        try(Session session = factory.openSession()){
+            session.beginTransaction();
+            Employee employeeToUpdate = session.get(Employee.class, id);
+            employeeToUpdate.mergeEmployeeData(employeeForNewData);
+            session.getTransaction().commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

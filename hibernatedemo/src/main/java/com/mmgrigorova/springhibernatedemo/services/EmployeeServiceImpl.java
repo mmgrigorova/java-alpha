@@ -34,8 +34,8 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public void updateEmployee(int id) {
-
+    public void updateEmployee(int id, Employee employee) {
+        employeeRepository.updateEmployee(id, employee);
     }
 
     @Override

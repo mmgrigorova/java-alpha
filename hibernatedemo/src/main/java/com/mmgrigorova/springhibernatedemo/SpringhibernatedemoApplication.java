@@ -13,10 +13,10 @@ import org.springframework.context.annotation.Bean;
 
 @org.springframework.context.annotation.Configuration
 @SpringBootApplication
-public class SpringhybernatedemoApplication {
+public class SpringhibernatedemoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringhybernatedemoApplication.class, args);
+        SpringApplication.run(SpringhibernatedemoApplication.class, args);
     }
 
     @Bean
@@ -29,7 +29,7 @@ public class SpringhybernatedemoApplication {
                 .addAnnotatedClass(Address.class)
                 .addAnnotatedClass(Project.class)
                 // TODO research adding package
-//                .addPackage("com.mmgrigorova.springhybernatedemo.models")
+//                .addPackage("com.mmgrigorova.springhibernatedemo.models")
                 .buildSessionFactory();
     }
 

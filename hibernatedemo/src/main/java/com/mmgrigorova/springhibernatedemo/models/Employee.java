@@ -35,7 +35,8 @@ public class Employee implements Serializable {
             joinColumns = @JoinColumn(name = "EmployeeId"),
             inverseJoinColumns = @JoinColumn(name = "ProjectId")
     )
-    private List<Project> projects = new ArrayList<>();;
+    private List<Project> projects = new ArrayList<>();
+    ;
 
     public Employee() {
 
@@ -95,8 +96,26 @@ public class Employee implements Serializable {
         this.projects = projects;
     }
 
+    public void mergeEmployeeData(Employee employee) {
+        if (employee.firstName != null && !employee.firstName.equals("")) {
+            setFirstName(employee.firstName);
+        }
+        if (employee.lastName != null && !employee.lastName.equals("")) {
+            setLastName(employee.lastName);
+        }
+
+        if (employee.jobTitle != null && !employee.jobTitle.equals("")) {
+            setJobTitle(employee.jobTitle);
+        }
+
+        if (employee.address != null) {
+            setAddress(employee.address);
+        }
+    }
+
+
     @Override
     public String toString() {
-        return String.format("Employee id %d: %s %s, address: %s", id, firstName, lastName , address);
+        return String.format("Employee id %d: %s %s, address: %s", id, firstName, lastName, address);
     }
 }
