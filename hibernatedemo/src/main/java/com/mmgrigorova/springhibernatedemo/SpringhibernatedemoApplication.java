@@ -19,22 +19,5 @@ public class SpringhibernatedemoApplication {
         SpringApplication.run(SpringhibernatedemoApplication.class, args);
     }
 
-    @Bean
-    public SessionFactory createSessionFactory() {
-        return new Configuration()
-                .configure("hibernate.cfg.xml")
-                // Very important to add the entities in the setup
-                .addAnnotatedClass(Employee.class)
-                .addAnnotatedClass(Town.class)
-                .addAnnotatedClass(Address.class)
-                .addAnnotatedClass(Project.class)
-                // TODO research adding package
-//                .addPackage("com.mmgrigorova.springhibernatedemo.models")
-                .buildSessionFactory();
-    }
 
-    @Bean
-    public Module datatypeHibernateModule() {
-        return new Hibernate4Module();
-    }
 }
