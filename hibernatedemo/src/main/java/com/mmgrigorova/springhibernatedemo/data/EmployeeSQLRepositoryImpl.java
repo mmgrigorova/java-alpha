@@ -101,6 +101,44 @@ public class EmployeeSQLRepositoryImpl implements EmployeeRepository {
         return false;
     }
 
+    @Override
+    public List<Address> getAllAddresses() {
+        List<Address> addresses = new ArrayList<>();
+
+        try(Session session = factory.openSession()){
+            session.beginTransaction();
+            addresses = session.createQuery("FROM Address").list();
+            session.getTransaction().commit();
+        }
+
+        return addresses;
+    }
 
 
+    @Override
+    public void addAddress(Address address){
+        try(Session session = factory.openSession()){
+            session.beginTransaction();
+            session.save(address);
+            session.getTransaction().commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public List<Project> getAllProjects() {
+        List<Project> projects = new ArrayList<>();
+
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            projects = session.createQuery("FROM Project AS p").list();
+            projects.forEach(project -> project.getEmployees().size());
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return projects;
+    }
 }

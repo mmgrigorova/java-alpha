@@ -18,7 +18,7 @@ public class Address {
     @OneToMany(mappedBy = "address")
     private List<Employee> employees = new ArrayList<>();
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name = "TownId")
     private Town town;
 
@@ -53,13 +53,13 @@ public class Address {
 //        this.employee = employee;
 //    }
 
-//    public Town getTown() {
-//        return town;
-//    }
-//
-//    public void setTown(Town town) {
-//        this.town = town;
-//    }
+    public Town getTown() {
+        return town;
+    }
+
+    public void setTown(Town town) {
+        this.town = town;
+    }
 
     @Override
     public String toString() {

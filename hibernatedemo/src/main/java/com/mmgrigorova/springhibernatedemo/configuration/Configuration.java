@@ -2,10 +2,7 @@ package com.mmgrigorova.springhibernatedemo.configuration;
 
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
-import com.mmgrigorova.springhibernatedemo.models.Address;
-import com.mmgrigorova.springhibernatedemo.models.Employee;
-import com.mmgrigorova.springhibernatedemo.models.Project;
-import com.mmgrigorova.springhibernatedemo.models.Town;
+import com.mmgrigorova.springhibernatedemo.models.*;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 
@@ -20,6 +17,7 @@ public class Configuration {
                 .addAnnotatedClass(Town.class)
                 .addAnnotatedClass(Address.class)
                 .addAnnotatedClass(Project.class)
+                .addAnnotatedClass(Department.class)
                 // TODO research adding package
 //                .addPackage("com.mmgrigorova.springhibernatedemo.models")
                 .buildSessionFactory();
@@ -29,4 +27,5 @@ public class Configuration {
     public Module datatypeHibernateModule() {
         return new Hibernate4Module();
     }
+
 }

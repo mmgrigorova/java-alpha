@@ -1,6 +1,8 @@
 package com.mmgrigorova.springhibernatedemo.services;
 
+import com.mmgrigorova.springhibernatedemo.models.Address;
 import com.mmgrigorova.springhibernatedemo.models.Employee;
+import com.mmgrigorova.springhibernatedemo.models.Project;
 import com.mmgrigorova.springhibernatedemo.models.Town;
 
 import java.util.List;
@@ -13,4 +15,8 @@ public interface EmployeeService {
     void deleteEmployee(int id);
 
     boolean addTown(Town town);
+    void addAddress(Address address);
+    List<Address> getAllAddresses();
+
+    List<Project> getAllProjects();
 }

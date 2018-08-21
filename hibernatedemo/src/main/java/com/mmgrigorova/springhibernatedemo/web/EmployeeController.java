@@ -1,6 +1,8 @@
 package com.mmgrigorova.springhibernatedemo.web;
 
+import com.mmgrigorova.springhibernatedemo.models.Address;
 import com.mmgrigorova.springhibernatedemo.models.Employee;
+import com.mmgrigorova.springhibernatedemo.models.Project;
 import com.mmgrigorova.springhibernatedemo.models.Town;
 import com.mmgrigorova.springhibernatedemo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,10 +55,25 @@ public class EmployeeController {
         employeeService.addTown(town);
     }
 
+    @PostMapping("/address/")
+    public void addAddress(@RequestBody Address address){
+         employeeService.addAddress(address);
+    }
+
+    @GetMapping("/address/")
+    public List<Address> getAllAddresses(){
+        return employeeService.getAllAddresses();
+    }
+
 //    @ExceptionHandler
 //    ResponseEntity<EmployeeError> handlerException(Exception e) {
 //        return new ResponseEntity<>(
 //                new EmployeeError(HttpStatus.BAD_REQUEST.value(), "Unable to Parse Id"),
 //                HttpStatus.BAD_REQUEST);
 //    }
+
+    @GetMapping("/project")
+    public List<Project> getProjects(){
+        return employeeService.getAllProjects();
+    }
 }

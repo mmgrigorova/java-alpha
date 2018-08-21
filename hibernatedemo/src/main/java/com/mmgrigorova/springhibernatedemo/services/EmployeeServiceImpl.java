@@ -1,7 +1,9 @@
 package com.mmgrigorova.springhibernatedemo.services;
 
 import com.mmgrigorova.springhibernatedemo.data.EmployeeRepository;
+import com.mmgrigorova.springhibernatedemo.models.Address;
 import com.mmgrigorova.springhibernatedemo.models.Employee;
+import com.mmgrigorova.springhibernatedemo.models.Project;
 import com.mmgrigorova.springhibernatedemo.models.Town;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,4 +49,20 @@ public class EmployeeServiceImpl implements EmployeeService{
     public boolean addTown(Town town) {
         return employeeRepository.addTown(town);
     }
+
+    @Override
+    public void addAddress(Address address) {
+        employeeRepository.addAddress(address);
+    }
+
+    @Override
+    public List<Address> getAllAddresses() {
+        return employeeRepository.getAllAddresses();
+    }
+
+    @Override
+    public List<Project> getAllProjects(){
+        return employeeRepository.getAllProjects();
+    }
+
 }

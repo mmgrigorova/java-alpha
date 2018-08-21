@@ -1,5 +1,7 @@
 package com.mmgrigorova.springhibernatedemo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +17,16 @@ public class Project {
     @Column(name = "Description")
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "employeesprojects",
             joinColumns = @JoinColumn(name = "ProjectId"),
             inverseJoinColumns = @JoinColumn(name = "EmployeeId")
     )
-    private List<Employee> employees;
+    @JsonBackReference
+    private List<Employee> employees = new ArrayList<>();
 
     public Project() {
-        employees = new ArrayList<>();
     }
 
     public Project(String description) {
@@ -48,13 +50,13 @@ public class Project {
         this.description = description;
     }
 
-//    public List<Employee> getEmployees() {
-//        return employees;
-//    }
-//
-//    public void setEmployees(List<Employee> employees) {
-//        this.employees = employees;
-//    }
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
 
     @Override
     public String toString() {

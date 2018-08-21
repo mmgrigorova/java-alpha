@@ -1,5 +1,6 @@
 package com.mmgrigorova.springhibernatedemo.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.deploy.security.ValidationState;
 
 import javax.persistence.*;
@@ -26,6 +27,13 @@ public class Employee implements Serializable {
     private String jobTitle;
 
     @ManyToOne
+    @JoinColumn(name = "DepartmentId")
+    private Department department;
+
+    @OneToMany(mappedBy = "departmentManager")
+    private List<Department> managedDepartment;
+
+    @ManyToOne
     @JoinColumn(name = "AddressId")
     private Address address;
 
@@ -35,8 +43,9 @@ public class Employee implements Serializable {
             joinColumns = @JoinColumn(name = "EmployeeId"),
             inverseJoinColumns = @JoinColumn(name = "ProjectId")
     )
+    @JsonManagedReference
     private List<Project> projects = new ArrayList<>();
-    ;
+
 
     public Employee() {
 
@@ -113,6 +122,21 @@ public class Employee implements Serializable {
         }
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public List<Department> getManagedDepartment() {
+        return managedDepartment;
+    }
+
+    public void setManagedDepartment(List<Department> managedDepartment) {
+        this.managedDepartment = managedDepartment;
+    }
 
     @Override
     public String toString() {
